@@ -27,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="193" column="10" selection-start-line="193" selection-start-column="10" selection-end-line="193" selection-end-column="10" />
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
               <folding>
                 <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                 <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -48,12 +48,8 @@
         </entry>
       </file>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Runtime/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/workermanchat/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -121,9 +117,9 @@
         <option value="$PROJECT_DIR$/Application/Home/Controller/FinanceController.class.php" />
         <option value="$PROJECT_DIR$/Application/Admin/Controller/FinanceController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php" />
-        <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Runtime/.gitignore" />
+        <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
       </list>
     </option>
   </component>
@@ -144,8 +140,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="591" />
-    <option name="y" value="36" />
+    <option name="x" value="708" />
+    <option name="y" value="17" />
     <option name="width" value="1775" />
     <option name="height" value="993" />
   </component>
@@ -165,64 +161,7 @@
             <path>
               <item name="otc" type="b2602c69:ProjectViewProjectNode" />
               <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Application" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Application" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Application" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Application" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Application" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="Newad" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="Runtime" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
               <item name="workermanchat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="workermanchat" type="462c0819:PsiDirectoryNode" />
-              <item name="Applications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="workermanchat" type="462c0819:PsiDirectoryNode" />
-              <item name="Applications" type="462c0819:PsiDirectoryNode" />
-              <item name="Chat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="otc" type="462c0819:PsiDirectoryNode" />
-              <item name="workermanchat" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -235,6 +174,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\software\phpstudy\PHPTutorial\WWW\ds\otc" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -266,16 +210,15 @@
       <workItem from="1534906049212" duration="4057000" />
       <workItem from="1534996679147" duration="11000" />
       <workItem from="1535357315018" duration="8704000" />
-      <workItem from="1535508086281" duration="2678000" />
+      <workItem from="1535508086281" duration="3309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51884000" />
+    <option name="totallyTimeSpent" value="52515000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="850" y="38" width="1775" height="993" extended-state="0" />
-    <editor active="true" />
+    <frame x="708" y="17" width="1775" height="993" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18476407" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -305,9 +248,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Runtime/Temp/xYTwfbglvr6fd8820db2aa5ca550c1474e93cde9ab.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -596,10 +536,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="193" column="10" selection-start-line="193" selection-start-column="10" selection-end-line="193" selection-end-column="10" />
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
           <folding>
             <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -618,12 +565,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Runtime/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/workermanchat/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
