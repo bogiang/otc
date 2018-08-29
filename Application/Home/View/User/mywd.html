@@ -1,0 +1,99 @@
+<include file="Public:header_new"/>
+<style>
+.thetr-0{background:#eee;}
+.thetr-0-1{background:#ddd;}
+.thetr-0-1-2{background:#ccc;}
+.thetr-0-1-2-3{background:#bbb;}
+.thetr-0-1-2-3-4{background:#aaa;}
+.thetr-0-1-2-3-4-5{background:#999;}
+.thetr-0-1-2-3-4-5-6{background:#888;}
+.thetr-0-1-2-3-4-5-6-7{background:#777;}
+</style>
+<div class="usernewout">
+	<include file="User:top"/>
+	<div class="usncont">
+		<!--左侧菜单-->
+		<include file="User:left" />
+		<!--右侧内容-->
+		<div class="usnc_right">
+			<h1>我的推荐</h1>
+			<div class="recharge_list">
+				<table>
+					<thead>
+						<tr>
+							<th width="50"></th>
+							<th width="250" id="">用户名</th>
+							<th width="250" id="">电子邮箱</th>
+							<th width="250" id="">注册时间</th>
+							<th width="100" id="">状态</th>
+						</tr>
+					</thead>
+					<tbody>
+					<notempty name="list">
+						<volist name="list" id="v">
+							<tr id="{$v.id}" data="0" class="thetr">
+								<td>
+									<if condition="$v['below'] gt 0">
+										<a href="javascript:void(0);" class="extend-plus" data="{$v.id}">+</a>
+									<else />
+										-
+									</if>
+								</td>
+								<td>{$v.enname}</td>
+								<td>{$v.email}</td>
+								<td>{$v.addtime|addtime}</td>
+								<td>
+									<if condition="$v['status'] eq 0">
+										<font class="buy">禁止</font>
+									<else />
+										<font class="sell">正常</font>
+									</if>
+								</td>
+							</tr>
+						</volist>
+					<else />
+						<tr><td colspan="5" style="padding: 10px 0;text-align: center;text-indent: 0;">暂无推荐会员</td></tr>
+					</notempty>
+					</tbody>
+				</table>
+				<div class="pages">{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("body").on("click",".extend-plus",function(){
+		var userid = $(this).attr("data");
+		var level = $("#"+userid).attr("data");
+		var clas = $("#"+userid).attr("class");
+		$.post("{:U('User/follower')}",{userid:userid},function(data){
+			if(data){
+				var str = "";
+				for(var i=0;i<data.length;i++){
+					str += "<tr id='"+data[i].id+"' data='"+(parseInt(level)+1)+"' class='"+clas+"-"+level+"'>";
+
+					if(data[i].below>0){
+						str += "<td><a href='javascript:void(0);' class='extend-plus' data='"+data[i].id+"'>+</a></td>";
+					}else{
+						str += "<td>-</td>";
+					}
+					str +="<td>"+data[i].enname+"</td><td>"+data[i].email+"</td><td>"+data[i].addtime+"</td>";
+					if(data[i].status==0){
+						str += "<td><font class='buy'>禁止</font></td></tr>";
+					}else{
+						str += "<td><font class='sell'>正常</font></td></tr>";
+					}
+				}
+				$("#"+userid).after(str);
+			}
+		},'json');
+		$(this).attr("class","extend-minus");
+		$(this).html("-");
+	});
+});
+//菜单高亮
+$('#user_box').addClass('on');
+$('#user_mywd').addClass('on');
+</script>
+<include file="Public:footer_new"/>

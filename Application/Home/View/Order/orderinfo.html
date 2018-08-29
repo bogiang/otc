@@ -1,0 +1,887 @@
+<include file="Public:header_new"/>
+<style>
+.usernewout .usncont .usnc_right{width:1140px;padding: 0 30px 20px 30px;}
+.ad_left{width:100%;}
+.ad_left .user_info{width:100%;text-align: center;padding-top: 20px;}
+.ul_add{display: inline-block;margin:0 auto;overflow: hidden;}
+.ul_add li{float: left;width:33px;font-size: 16px;color:rgba(0,0,0,0.7);text-align: center;}
+.ul_add .li_new{width:150px;height: 100px;}
+.ul_add .li_new1{line-height:60px;font-weight: bold;color:rgba(0,0,0,0.4);font-size: 20px;}
+.ul_add .li_new img{width: 60px;}
+.p_container{font-size: 16px;color:rgba(0,0,0,0.7);text-align: left;}
+.table_div{background: #eff3f6;font-size: 16px;border-left: 3px solid #108ee9;margin:40px 0 20px;color:rgba(0,0,0,0.7);border-radius: 4px;line-height: 65px;}
+.table_div span{display: inline-block;padding:0 10px;}
+.p_new{color:rgba(0,0,0,0.7);font-size: 14px;line-height: 22px;margin:10px 0 20px;}
+.span_new{font-size: 16px;color: #0d1212;}
+.button1{outline: none;height: 30px;line-height: 30px;text-align: center;background: #3d3d3d;color: #f5bc00;border-radius:4px;border:none;padding:0 10px;cursor:pointer;font-size: 14px;}
+.button2{background: gray;}
+</style>
+<div class="usernewout">
+	<div class="usncont">
+		<div class="usnc_right" style="border:none;margin-top: 10px;">
+			<div class="usnc_order">
+				<div class="ad_left">
+				 	<div class="user_info">
+				 		<if condition="$orderinfo['status'] eq 0">
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk1.png" alt="">
+									<br/>待付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh1.png" alt="">
+									<br/>待放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt="">
+									<br/>待评价</li>
+								</ul>
+								<p class="p_container"><span style="font-size: 20px;">已拍下&nbsp;&nbsp;|&nbsp;&nbsp;</span>订单将在托管中保存{$sytime}分钟，逾期未付款将自动取消</p>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 1" />
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk.png" alt="">
+									<br/>已付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh1.png" alt="">
+									<br/>待放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt="">
+									<br/>待评价</li>
+								</ul>
+								<if condition="($Think.session.userId eq $orderinfo['buy_id'])">
+									<p class="p_container"><span style="font-size: 20px;">已付款&nbsp;&nbsp;|&nbsp;&nbsp;</span>请主动联系对方确认款项，对方确认后将放行{$coin['coin']|strtoupper}</p>
+							    <else />
+							    	<p class="p_container"><span style="font-size: 20px;">待放行&nbsp;&nbsp;|&nbsp;&nbsp;</span>对方已付款，请确认后放行{$coin['coin']|strtoupper}</p>
+							    </if>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 2"/>
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk1.png" alt="">
+									<br/>待付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh1.png" alt="">
+									<br/>待放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt="">
+									<br/>待评价</li>
+								</ul>
+							</div>
+				 		<elseif condition="($orderinfo['status'] eq 3)  and ($Think.session.userId eq $orderinfo['buy_id'])"/>
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk.png" alt="">
+									<br/>已付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh.png" alt="">
+									<br/>已放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<eq name="orderinfo['buy_pj']" value="0">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt=""><br/>
+										待评价
+									<else />
+									<img src="__PUBLIC__/Home/news/images/pj.png" alt=""><br/>
+										已评价
+									</eq>
+									</li>
+								</ul>
+								<eq name="orderinfo['buy_pj']" value="0">
+									<p class="p_container"><span style="font-size: 20px;">已放行&nbsp;&nbsp;|&nbsp;&nbsp;</span>请对交易进行评价</p>
+								</eq>
+							</div>
+				 		<elseif condition="($orderinfo['status'] eq 3)  and ($Think.session.userId eq $orderinfo['sell_id'])"/>
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk.png" alt="">
+									<br/>已付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh.png" alt="">
+									<br/>已放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<eq name="orderinfo['sell_pj']" value="0">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt="">
+									<br/>
+										待评价
+									<else />
+									<img src="__PUBLIC__/Home/news/images/pj.png" alt="">
+									<br/>
+										已评价
+									</eq>
+									</li>
+								</ul>
+								<eq name="orderinfo['sell_pj']" value="0">
+									<p class="p_container"><span style="font-size: 20px;">待评价&nbsp;&nbsp;|&nbsp;&nbsp;</span>请对交易进行评价</p>
+								</eq>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 4 and ($Think.session.userId eq $orderinfo['buy_id'])" />
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk.png" alt="">
+									<br/>已付款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh.png" alt="">
+									<br/>已放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj.png" alt="">
+									<br/>已完成</li>
+								</ul>
+								<p class="p_container"><span style="font-size: 20px;">已完成&nbsp;&nbsp;|&nbsp;&nbsp;</span>交易已完成</p>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 4 and ($Think.session.userId eq $orderinfo['sell_id'])" />
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/fk.png" alt="">
+									<br/>已收款</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/sh.png" alt="">
+									<br/>已放行</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj.png" alt="">
+									<br/>已完成</li>
+								</ul>
+								<p class="p_container"><span style="font-size: 20px;">已完成&nbsp;&nbsp;|&nbsp;&nbsp;</span>交易已完成</p>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 6 " />
+							<div>
+								<ul class="ul_add">
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+									<br/>
+									已拍下</li>
+									<li class="li_new1">⟶</li>
+									<li class="li_new">
+									<img src="__PUBLIC__/Home/news/images/pj1.png" alt="">
+									<br/>申诉中</li>
+								</ul>
+							</div>
+				 		<elseif condition="$orderinfo['status'] eq 5"/>
+				 		<div>
+							<ul class="ul_add">
+								<li class="li_new">
+								<img src="__PUBLIC__/Home/news/images/px.png" alt="">
+								<br/>
+								已拍下</li>
+								<li class="li_new1">⟶</li>
+								<li class="li_new">
+								<img src="__PUBLIC__/Home/news/images/pj.png" alt="">
+								<br/>已关闭</li>
+							</ul>
+				 		</div>
+				 		<p class="p_container">
+							<span style="font-size: 20px;">已关闭&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+							<if condition="$orderinfo['cancle_op'] eq 0">
+								<eq name="orderinfo['su_type']" value="0">
+									交易已被取消
+								<else/>
+									管理员取消了交易
+								</eq>
+							<else/>
+								<eq name="orderinfo['buy_id']" value="$Think.session.userId">
+									此交易已关闭，因为未及时将付款标记为完成。如果您已付款，请要求卖家重新打开交易。
+								</eq>
+								<eq name="orderinfo['sell_id']" value="$Think.session.userId">
+									此交易已关闭，因为买家未及时将付款标记为完成。如果买家已付款，您可以重启此交易。
+									<button class="button1" onclick="chongqi()">重启</button>
+								</eq>
+							</if>
+						</p>
+						</if>
+				 	</div>
+				 	<div class="table_div">
+						<span style="font-weight: bold;color:#108ee9;">订单信息</span>
+						<span>交易价格:&nbsp;&nbsp; {$orderinfo['deal_price']}{$coin['short_name']} </span>
+						<span>交易数量: &nbsp;&nbsp;{$orderinfo['deal_num']}{$coin['coin']|strtoupper} </span>
+						<span>交易金额:&nbsp;&nbsp; {$orderinfo['deal_amount']}{$coin['short_name']}</span>
+				 	</div>
+				 	<!-- 新加左边区域开始 -->
+				 	<div style="width: 780px;float:left;height: 500px;border:1px solid #d9d9d9;padding-bottom: 10px;position:relative;">
+						<div id="chat_content" style="width: 780px;height: 465px; overflow-y:scroll;overflow-x:hidden;">
+						<volist name="list" id="vv">
+							<if condition="$vv.touid eq $myid">
+							   <div style="margin-top: 10px;width:735px;overflow: hidden;margin-left: 15px;">
+							   <div style="float: left;width:45px;height:45px;margin-right:5px" class="left">
+							    <span style="display:block;width:100%;height:35px;position:relative;">
+							        <span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">
+							    	{$vv['fromuid']|Isheadimg}
+							    	</span>
+									<img src="{$vv['fromuid']|headimg=###}" style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;"/>
+								</span>
+								</div>
+								<div style="float: left;width:auto;border-radius: 0 4px 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top: 5px;" class="left"> 
+									{$vv['content']}
+									<notempty name="vv['addon']">
+										<img src="{$vv['addon']}"/>
+									</notempty>
+								</div>
+								</div>
+							<else/>
+							<div style="margin-top: 10px;width:735px;overflow: hidden;">
+								<div style="float: right;width:45px;height:45px;margin-left: 5px;" class="right">
+									<span style="display:block;width:100%;height:35px;position:relative;">
+                                    <span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">
+									{$vv['fromuid']|Isheadimg}
+									</span>
+								<img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="{$vv['fromuid']|headimg=###}">
+
+                                </span>
+								</div>
+								<div style="float: right;width:auto;border-radius: 4px 0 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top: 5px" class="right">
+									{$vv['content']}
+									<notempty name="vv['addon']">
+										<img src="{$vv['addon']}"/>
+									</notempty>
+								</div>
+								</div>
+							</if>
+						</volist>
+						</div>
+						<div style="width: 750px;overflow: hidden;position: absolute;bottom:0;margin-top: 10px;background: #fff;z-index: 99;padding-right: 30px;border-top:1px solid #e9e9e9;">
+								<div class="uploadpic" style="width:40px;padding-left:10px;float:left;">
+									<iframe style="width:40px;height:40px;border:none;overflow:hidden;" src="/Order/inupload.html?status={$orderinfo['status']}&orderid={$orderinfo['id']}&ordertype={$type}"></iframe>
+								</div>
+								<div class="contactcontent" style="width:600px;float:left;">
+									<input type="text" id="saycontent" placeholder="说点什么吧..."  style="width:590px;height:32px;line-height:32px;outline:none;font-size:14px;border:none;margin-top: 7px;" onkeydown='if(event.keyCode==13){upChat();}'/>
+								</div>
+								<input type="hidden" id="chat_num" value="{$chatnum}" />
+								<div class="chatsubmit" onclick="upChat();" style="width:60px;text-align:center;float:right;">
+									<img src="/Public/Home/news/images/fs.png" alt="" width="35" style="margin-top: 5px;" />
+								</div>
+						</div>
+					</div>
+				 	<!-- 新加左边区域结束 -->
+				 	<!-- 右边边区域-->
+				<div class="ad_right">
+      				<div class="form-title pt-30">
+       					 <span class="form-name">交易操作</span>
+      				</div>
+      				<div class="line mt-20 mb-20"></div>
+      					<p class="p_new">
+							<span class="span_new">订单编号</span>
+							{$orderinfo['order_no']}
+      					</p>
+      					<p class="p_new">
+							<if condition='$type eq 1'>
+								<span class="span_new">支付方式<br/></span>
+							<else/>
+								<span class="span_new">支付方式<br/></span>
+							</if>
+							{$payd}
+						</p>
+						<p class="p_new">
+							<if condition="$type eq 1">
+								<span class="span_new">买家留言<br/></span>
+							<else />
+								<span class="span_new">卖家留言<br/></span>
+							</if>
+							<empty name="orderinfo['lmessage']">
+							    暂无
+							<else />
+								{$orderinfo['lmessage']}
+							</empty>
+							
+						</p>
+      					<p class="p_new"><span class="span_new">交易条款</span><br/>{$adinfo['message']}</p>
+						<div>
+							<!-- 交易订单单子只有买家可以付款取消 -->
+							<if condition=" $orderinfo['status'] eq 0">
+								<if condition="($Think.session.userId eq $orderinfo['buy_id'])">
+									<p class="p_new">
+										<span class="span_new">交易提醒</span><br/>
+										1.对方的币已经被托管锁定，您需要在规定时间内完成付款并点击“标记已付款完成”，否则交易将被自动取消。<br/>
+										2.转账时请在留言里面附上订单编号，否则对方可能无法识别您的付款。<br/>
+										3.若您已经付款，如果对方未响应，不确认或者交易条款发生纠纷，您可以申诉此交易，申诉期内，币将有平台托管。
+									</p>
+									<button onclick="uptrade()" class="button1">标记已付款 </button>
+									<button onclick="cancle()" class="button1 button2">取消交易</button>
+
+								</if>
+							</if>
+
+							<!-- 我是买家已经付款了 但是卖家不释放比特币 我要投诉 -->
+							<if condition=" $orderinfo['status'] eq 1 and ($Think.session.userId eq $orderinfo['buy_id'])">
+								<p class="p_new">
+									<span class="span_new">交易遇到问题？</span><br/>
+									如果对方未响应，不确认或者对交易条款发生纠纷，您可以申诉此交易，申诉期内，币将由平台托管。
+									<br/>
+									<button id="shensu" class="button1" style="margin-top: 20px;">申诉</button>
+									<button id="bjcancle" class="button1" onclick="bjcancle()" style="margin-top: 20px;">取消交易</button>
+								</p>
+								<div id="reason" style="display:none;font-size: 14px;color:rgba(0,0,0,0.7);line-height: 22px;">
+									<form action="" enctype="multipart/form-data" method="POST" name="form"  onsubmit="return false;">
+										<input type="hidden" name="id" value="{$orderinfo['id']}">
+										<input type="hidden" name="type" value="{$type}">
+										 申诉原因：
+										 <select id="sutype" name="sutype" style="width: 293px;border-radius: 4px;border-color: #d9d9d9;">
+											<option value="1">我已付款，但卖家没有放行</option>
+											<option value="2">卖家未遵守交易广告条款</option>
+										 </select>
+										 <div style="margin-top: 10px">申诉内容：</div>
+										 <textarea  name="content" id="content" style="height: 100px;width:293px;border-color:#d9d9d9;
+										 border-radius: 4px;margin-bottom: 10px;" ></textarea>
+										 <br/>
+										 附件：
+										 <input type="file" name="sutp" id="sutp" style="height:30px;padding:5px 10px 5px 0;"/>
+										 <br/>
+										 <button onclick="tijiaoreason()" class="button1" style="margin-top:20px;">提交申诉</button>
+									</form>
+								</div>
+							</if>
+							<!-- 我是卖家 对方已经打款我需要释放比特币 -->
+							<if condition="($orderinfo['status'] egt 1) and ($orderinfo['status'] lt 3) and($Think.session.userId eq $orderinfo['sell_id']) ">
+								<p class="p_new">
+									<span class="span_new">交易提醒</span><br/>
+									1. 当托管启用时,只有买家和平台工作人员可以取消这笔交易。
+									<br/>
+									2. 请及时主动联系对方确认款项,收款后请及时放行。
+									<br/>
+									3. 如果有人请求您将币直接转到另一个地址，请考虑其中的风险,请不要把您的信息告诉您不熟悉的交易者。
+								</p>
+								<button onclick="sfbtc()" class="button1">放行</button>
+								<neq name="orderinfo.adminhandle" value="1">
+									<br /><br />
+									<p class="p_new">如果对方长时间不付款或存在故意欺骗等行为，您可以申请管理员介入，如果在您提交申请到管理员介入之前问题已经解决，请点击“放行”继续交易即可。
+									</p>
+									<button onclick="toadmin()" class="button1">申请管理员介入</button>
+								</neq>
+								<eq name="orderinfo.adminhandle" value="1">
+									<br /><br />
+									<p class="p_new">您已经申请管理员介入解决交易纠纷，如果在管理员联系您之前您已经自行妥善解决，可以点击“放行”继续交易。</p>
+								</eq>
+							</if>
+							<!-- 相互评价区域 -->
+							<if condition="($orderinfo['status'] eq 3)">
+								<if condition="($Think.session.userId eq $orderinfo['sell_id'] )">
+									<eq name="orderinfo['sell_pj']" value="0">
+										<p style="font-size: 16px;color:#0d1212;">
+											对用户
+											{$buyname}
+											留下评论？
+										</p>
+										<div style="font-size: 14px;color:rgba(0,0,0,0.7);">
+											<input name="comment" type="radio" value="1" style="margin-right: 5px;vertical-align: middle;" />好评
+											<input name="comment" type="radio" value="2"  style="margin-right: 5px;vertical-align: middle;"/>中评
+											<input name="comment" type="radio" value="3"  style="margin-right: 5px;vertical-align: middle;"/>差评
+										</div>
+										<div class="plxr">
+											<button onclick="tijiaopj()" class="button1" style="margin-top: 20px;float:left;margin-right:20px;">提交评论</button>
+											<eq name="iftrust" value="0">
+												<button onclick="xrdf()" class="button1" style="margin-top: 20px;float:left;margin-right:20px;">信任此用户</button>
+											</eq>
+										</div>
+									</eq>
+								<elseif condition="($Think.session.userId eq $orderinfo['buy_id'] )" />
+									<eq name="orderinfo['buy_pj']" value="0">
+										<p style="font-size: 16px;color:#0d1212;">
+											对用户
+											{$sellname}
+											留下评论？
+										</p>
+										<div style="font-size: 14px;color:rgba(0,0,0,0.7);">
+											<input name="comment" type="radio" value="1" style="margin-right: 5px;vertical-align: middle;"/>好评
+											<input name="comment" type="radio" value="2" style="margin-right: 5px;vertical-align: middle;"/>中评
+											<input name="comment" type="radio" value="3" style="margin-right: 5px;vertical-align: middle;"/>差评
+										</div>
+										<div class="plxr">
+											<button onclick="tijiaopj()" class="button1" style="margin-top: 20px;float:left;margin-right:20px;">提交评论</button>
+											<eq name="iftrust" value="0">
+												<button onclick="xrdf()" class="button1" style="margin-top: 20px;float:left;margin-right:20px;">信任此用户</button>
+											</eq>
+										</div>
+									</eq>
+								</if>
+							</if>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/web_socket.js"></script>
+<script type="text/javascript">
+	//提交聊天
+	var chatordertoken = "{$chatorder_token}";
+	function upChat(){
+		var content = $("#saycontent").val();
+		if(content==""||content==null){
+			layer.alert("发送内容不能为空！");
+		}
+		var ordertype = "{$type}";
+		var orderid = "{$orderinfo['id']}";
+		var status = 0;
+		$.post("{:U('Order/upChat')}", {content: content, chatpic: "", ordertype: ordertype, orderid: orderid, token: chatordertoken, status: status}, function (data) {
+			if (data.status == 1) {
+				$("#saycontent").val('');
+				chatordertoken=data.url;
+			} else {
+				layer.msg(data.info, {icon: 2});
+				chatordertoken=data.url;
+			}
+		}, "json");
+	}
+	//获取聊天记录
+	var userid="{$Think.session.userId}";
+	var t;
+	function getChat(){
+		var chatnum = $("#chat_num").val();
+		var orderid = "{$orderinfo['id']}";
+		var ordertype = "{$type}";
+		var status = 0;
+		$.getJSON("/Ajax/orderChat?orderid="+orderid+"&ordertype="+ordertype+"&chatnum="+chatnum+"&status="+status+"&t="+Math.random(),function(data){
+			if(data){
+				var chatcontent="";
+				for(var i=0;i<data.length;i++){
+					if(data[i].touid==userid){
+						//addon代表图片
+						if(data[i].addon){
+							// chatcontent += '<div style="margin-top: 10px;width:735px;overflow: hidden;margin-left:15px;"><div style="float:left;width:50px;" class="left"><span style="display:block;width:100%;height:35px;position:relative;"><img style="height:27px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:27px;border-radius: 50%;" src="<empty name='vo.hinfo.headimg'>__PUBLIC__/Home/images/hportrait/head_portrait60.png<else/>{$vo.hinfo.headimg}</empty>"><empty name='vo.hinfo.headimg'><span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:17px;left:19px;text-align: center;">{$vo['hinfo']['enname']|strbig}</span></empty>{$vo['hinfo']['enname']}</span></div><div style="float: left;width:auto;border-radius: 0 4px 4px 4px;;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;" class="left">'+data[i].content+'<img src="'+data[i].addon+'"/></div></div>';
+								chatcontent += '<div style="margin-top: 10px;width:735px;overflow: hidden;margin-left:15px;"><div style="float:left;width:50px;" class="left"><span style="display:block;width:100%;height:35px;position:relative;"><span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">'+data[i].tousername+'</span><img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="'+data[i].fromuser+'"></span></div><div style="float: left;width:auto;border-radius: 0 4px 4px 4px;;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;" class="left">'+data[i].content+'<img src="'+data[i].addon+'"/></div></div>';
+						}else{
+							chatcontent += '<div style="margin-top: 10px;width:735px;overflow: hidden;margin-left:15px;"><div style="float:left;width:45px;height:45px;margin-right:5px;" class="left"><span style="display:block;width:100%;height:35px;position:relative;"><span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">'+data[i].fromusername+'</span><img src="'+data[i].fromuser+'" style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;"/></span></div><div style="float: left;width:auto;border-radius: 0 4px 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top:5px;" class="left">'+data[i].content+'</div></div>';
+						}
+						chatnum++;
+					}else{
+						if(data[i].addon){
+
+							chatcontent += '<div id="chat_content" style="width: 735px;"><div style="margin-top: 10px;width:735px;overflow: hidden;"><div style="float: right;width:50px;" class="right"><span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">'+data[i].fromusername+'</span><img src="'+data[i].fromuser+'" style="float: right;width:auto;border-radius: 4px 0 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top:5px;"/></div><div style="float: right;width:auto;border-radius: 4px 0 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top:5px;" class="right">'+data[i].content+'<img src="'+data[i].addon+'"/></div></div></div>';
+						}else{
+							chatcontent += '<div style="margin-top: 10px;width:735px;overflow: hidden;"><div style="float: right;width:35px;margin-left:5px;" class="right"><span style="display:block;width:100%;height:35px;position:relative;"><span style="position: absolute;top:11px;left:11px;width:20px;text-align: center;color:#fff;font-size:14px;">'+data[i].fromusername+'</span><img src="'+data[i].fromuser+'" style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;"/></span></div><div style="float: right;width:auto;border-radius: 4px 0 4px 4px;background: #108ee9;color:#fff;font-size: 12px;line-height: 35px;text-align: right;padding:0 10px;margin-top:5px;" class="right">'+data[i].content+'</div></div>';
+						}
+						chatnum++;
+					}
+				}
+				$("#chat_num").val(chatnum);
+				$("#chat_content").append(chatcontent);
+			}
+		});
+		t = setTimeout(function(){getChat()},2000);
+	}
+
+	$(document).ready(function(){
+		getChat();
+		markread();
+	});
+	//标记已读
+	function markread(){
+		$.post("{:U('Order/markRead')}", {
+			orderid: "{$orderinfo['id']}",
+			ordertype: "{$type}",
+			status: 0
+		}, function (data) {
+
+		}, "json");
+		setTimeout(function(){markread()},3000);
+	}
+
+	var type={$type};
+	var id={$orderinfo['id']};
+	var xdctoken='{$myxdc_token}';
+	var bjtoken='{$mybj_token}';
+	var sfbtoken='{$mysfb_token}';
+	var ddsstoken='{$ddss_token}';
+	var pjtoken = '{$pj_token}';
+	//取消交易
+	function cancle(){
+  		$.post("{:U('Order/ordercancle_ajax')}", {
+            type: type,
+            id: id,
+            token:xdctoken
+        }, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("qxjy");
+				layer.alert("取消成功！", function(index){
+					self.location.reload();
+				});
+			} else {
+				xdctoken = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+       	 }, "json");
+  	}
+	//标记已付款后取消交易
+ 	function bjcancle(){
+  		$.post("{:U('Order/orderbjcancle_ajax')}", {
+            type: type,
+            id: id,
+            token:xdctoken
+        }, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("bjhqxjy");
+				layer.alert("取消成功！", function(index){
+					self.location.reload();
+				});
+			} else {
+				xdctoken = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+       	}, "json");
+  	}
+
+	//标记已付款
+	function uptrade(){
+		$.post("{:U('Order/uptrade_ajax')}", {
+			type: type,
+			id: id,
+			token:bjtoken
+		}, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("bjyfk");
+				layer.alert("操作成功", function(index){
+					self.location.reload();
+				});
+			} else {
+				bjtoken = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	//放行
+	function sfbtc(){
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: '输入交易密码，并确认',
+				formType: 1
+			}, function (val) {
+				if (val) {
+					$.post("{:U('Order/sfbtc_ajax')}", {
+						type: type,
+						id: id,
+						token:sfbtoken,
+						paypassword: val
+					}, function (data) {
+						layer.closeAll('loading');
+							if (data.status == 1) {
+								sendMessage("fx");
+								layer.alert("放行成功！", function(index){
+									self.location.reload();
+								});
+							} else {
+								sfbtoken = data.url;
+								layer.msg(data.info, {icon: 2});
+							}
+					}, "json");
+				}
+			});
+		});
+	}
+	//申请管理员介入
+	function toadmin(){
+		layer.load(2);
+		$.post("{:U('Order/toadmin')}", {
+			type: type,
+			id: id,
+		}, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("shqglyjr");
+				layer.alert(data.info, function(index){
+					self.location.reload();
+				});
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+
+	//重启交易
+	function chongqi(){
+		$.post("{:U('Order/chongqi_ajax')}", {
+			type: type,
+			id: id,
+			token:bjtoken
+		}, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("chqjy");
+				layer.alert(data.info, function(index){
+					self.location.reload();
+				});
+			} else {
+				bjtoken = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	//提交评论
+	function tijiaopj(){
+		var pj=$("input[type='radio']:checked").val();
+		
+		if(!pj){
+			layer.alert("请选择评价类型");
+			return;
+		}
+		
+		if(pj!=1 && pj!=2 && pj!=3){
+			layer.alert("评价类型只能选择好评、中评、差评");
+			return;
+		}
+
+		$.post("{:U('Order/comment_ajax')}", {
+			type: type,
+			id: id,
+			pj:pj,
+			token:pjtoken
+		}, function (data) {
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage("tjpl");
+				layer.alert(data.info, function(index){
+					self.location.reload();
+				});
+			} else {
+				layer.msg(data.info, {icon: 2});
+				pjtoken=data.url;
+			}
+		}, "json");
+	}
+	$("#shensu").click(function(){
+		if($(this).html()=="申诉"){
+			$("#shensu").html("收起");
+			$("#reason").show();
+		}else if($(this).html()=="收起"){
+			$("#shensu").html("申诉");
+			$("#reason").hide();
+		}
+	});
+	//提交申诉
+	function tijiaoreason(){
+		var sutype = $('#sutype').val();
+		var cont = $('#content').val();
+		var sutp = $("#sutp").val();
+		if(cont==''){
+			layer.alert('请输入申诉内容');
+			return ;
+		}
+		var formData = new FormData($( "form" )[0]);
+		formData.append("token",ddsstoken);
+		$.ajax({
+		   url: "{:U('Order/shensu_ajax')}" ,
+		   type: 'POST',
+		   data: formData,
+		   dataType:'json',
+		   async: false,
+		   cache: false,
+		   contentType: false,
+		   processData: false,
+		   success: function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					sendMessage("tjshs");
+					layer.alert(data.info, function(index){
+						self.location.reload();
+					});
+				} else {
+					ddsstoken = data.url;
+					layer.msg(data.info, {icon: 2});
+				}
+		   }
+		});
+	}
+	var truban_token = "{$truban_token}";
+	var otherid = "{$otherid}";
+	function xrdf(){
+		layer.load(0, {shade: [0.5,'#8F8F8F']});
+        $.post("{:U('Newad/truban')}",{id:parseInt(otherid), token:truban_token, act:"信任此用户"},function(data){
+            truban_token = data.url;
+            setTimeout(function(){layer.closeAll();},4000);
+            if(data.status==1){
+                window.location.href = window.location.href;
+            }else{
+                layer.msg(data.info,{icon : 2 });
+            }
+        });
+	}
+ 
+	if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    // 如果浏览器不支持websocket，会使用这个flash自动模拟websocket协议，此过程对开发者透明
+    WEB_SOCKET_SWF_LOCATION = "/Public/Home/js/WebSocketMain.swf";
+    // 开启flash的websocket debug
+    WEB_SOCKET_DEBUG = true;
+    var ws, name, client_list={};
+	var myname = "{$myname}";
+	var othername = "{$othername}";
+
+    // 连接服务端
+    function connect() {
+       // 创建websocket
+       ws = new WebSocket("ws://"+document.domain+":45101");
+       // 当socket连接打开时，输入用户名
+       ws.onopen = onopen;
+       // 当有消息时根据消息类型显示不同信息
+       ws.onmessage = onmessage; 
+       ws.onclose = function() {
+    	  console.log("连接关闭，定时重连");
+          connect();
+       };
+       ws.onerror = function() {
+     	  console.log("出现错误");
+       };
+    }
+	
+	// 连接建立时发送登录信息
+    function onopen()
+    {
+        // 登录
+        var login_data = '{"type":"login","client_name":"'+myname+'","room_id":"1"}';
+        ws.send(login_data);
+    }
+	
+	// 服务端发来消息时
+    function onmessage(e)
+    {
+        var data = JSON.parse(e.data);
+        switch(data['type']){
+            // 服务端ping客户端
+            case 'ping':
+                ws.send('{"type":"pong"}');
+                break;
+            // 登录 更新用户列表
+            case 'login':
+                break;
+            // 发言
+            case 'say':
+				showsay(data['content']);
+                break;
+            // 用户退出 更新用户列表
+            case 'logout':
+				break;
+        }
+    }
+	//提交对话
+	function sendMessage(action) {
+		var content = id+"-"+type+"-"+action;
+		ws.send('{"type":"say","to_client_name":"'+othername+'","content":"'+content+'"}');
+    }
+	
+	function showsay(content){
+		var arr = content.split("-");
+		switch(arr[2]){
+			case 'qxjy':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已取消交易", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'bjhqxjy':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已取消交易", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'bjyfk':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已付款", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'fx':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已放行", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'shqglyjr':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已申请管理员介入", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'chqjy':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已重启交易", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'tjpl':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已提交评论", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'tjshs':
+				if(arr[0] == id && arr[1] == type){
+					layer.msg(othername+"已提交申诉", {icon: 1});
+					pagereload();
+				}
+			break;
+			case 'neworder':
+				$("#jytscontent").html("您有新的订单。<a href='/Order/orderinfo?type="+arr[1]+"&id="+arr[0]+"'>点击这里</a>查看");
+				$("#jyts").show();
+				setTimeout(function(){$("#jyts").hide('slow');},10000);
+			break;
+		}
+	}
+	
+	function pagereload(){
+		setTimeout(function(){window.location.href=window.location.href},2000);
+	}
+	
+	window.onload=function(){
+		connect();
+	}
+</script>
+
+<include file="Public:footer"/>

@@ -1,0 +1,555 @@
+<include file="Public:header_new"/>
+<style>
+    .top_h3{line-height: 60px;width:100%;background: #3d3d3d;color: #f5bc00;text-align: center;vertical-align: middle;font-size: 16px;}
+    .top_h3 img{margin-right: 10px;vertical-align: middle;}
+    .ul_new{overflow: hidden;width:278px;float:left;margin-right: 26px;}
+    .ul_new:last-child{float: right;margin-right: 0;visibility: visible; animation-duration: 2s; animation-delay: 0s; animation-name: fadeInRight;}
+    .ul_new:nth-of-type(1){float:left;visibility: visible; animation-duration: 2s; animation-delay: 0s; animation-name: fadeInLeft;}
+    .ul_new:nth-of-type(2){float:left;visibility: visible; animation-duration: 2s; animation-delay: 0s; animation-name: fadeInLeft;}
+    .ul_new:nth-of-type(3){float:left;visibility: visible; animation-duration: 2s; animation-delay:0s; animation-name: fadeInRight;}
+    .ul_new li{text-align: center;vertical-align: middle;width: 100%;}
+    .div_li{height: 95px;width:258px;margin:0 auto;position: relative;}
+    .span1{display: inline-block;height:62px;text-align: left;margin-left: 10px;vertical-align: middle;color:#7f7f7f;font-size: 12px;}
+    .span2{color:#333;font-size: 16px;display: inline-block;margin-top: 15px;margin-bottom: 5px;}
+    .div_li1{width:258px;margin:0 auto;overflow: hidden;}
+    .div_li2{width:258px;margin:15px auto 0;overflow: hidden;font-size: 12px;color:#7f7f7f;text-align: left;}
+    .div_li2 p{line-height: 30px;}
+    .div_li3{width:258px;margin:15px auto 15px;text-align: center;font-size: 14px;}
+    .btn_a{display:inline-block;width:70px;height:26px;color:#f5bc00;border-radius: 4px;line-height: 26px;border:1px solid #3d3d3d;background-color: #3d3d3d}
+    @-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    -ms-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+@-webkit-keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+</style>
+<div class="banner">
+	<div class="bd">
+		<ul>
+			<volist name="indexAdver" id="vo">
+				<if condition="$vo['url'] neq ''">
+					<li onclick="window.open('{$vo['url']}')" style="background: url({$vo.img}) top center no-repeat;"></li>
+				<else />
+					<li style="background: url({$vo.img}) top center no-repeat;"></li>
+				</if>
+			</volist>
+		</ul>
+	</div>
+	<div class="hd">
+		<ul>
+			<volist name="indexAdver" id="vo">
+				<li></li>
+			</volist>
+		</ul>
+	</div>
+	<script>
+	jQuery(".banner").slide({mainCell:".bd ul",autoPlay:true,effect:"fold"});
+	</script>
+	       <!-- <div class="dnwbox">
+                <div class="indnw">
+                    <div class="indleft">
+                        <ul>
+                            <li>
+                                <a href="/Article/detail/id/{$notice_info['id']}">{$notice_info['title']|msubstr=0,22,'utf-8'}</a>
+                                <span class="date">{$notice_info['addtime']|date="Y-m-d",###}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="indright" href="/Article/index/id/{$type1['id']}">
+                        更多 >
+                    </a>
+                </div>
+            </div> -->
+            <!-- 广告轮播开始 -->
+            <style>
+            .scroll-box {
+	width:100%;
+	height:35px;
+	margin:0px auto;
+	overflow:hidden;
+	background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+.scroll-ul{width: 1200px;margin: 0 auto;overflow: hidden;}
+.scroll-ul a{color:white;}
+.scroll-ul .indright{float: right;font-size: 14px;color:#fff;line-height: 35px;}
+.scroll-box ul {
+	list-style:none;
+	width:600px;
+	height:100%;
+	float: left;
+}
+.scroll-box ul li {
+	width:100%;
+	height:35px;
+	box-sizing:border-box;
+	line-height:35px;
+	text-align:left;
+	color:#fff;
+	font-size: 14px;
+	vertical-align: middle;
+}
+</style>
+  <div class="scroll-box">
+  <div class="scroll-ul">
+ <img src="__PUBLIC__/Home/images/newicon.png" alt="" style="vertical-align: middle;margin-right: 10px;display: inline-block;float: left;margin-top: 8px;">
+ <ul>
+ <volist name="news_list1" id="vo">
+	<li><a href="/Article/detail/id/{$vo['id']}">{$vo.title}</a></li>
+ </volist>
+  
+  <!-- <li>好消息！</li>
+  <li>好消息！</li>
+  <li>好消息！</li> -->
+ </ul>
+ <a class="indright" href="/Article/index/id/{$type1['id']}">
+                        更多 >
+ </a>
+ </div>
+</div>
+<script>
+$(function() {
+    //获得当前<ul>
+    var $uList = $(".scroll-box ul");
+    var timer = null;
+    //触摸清空定时器
+    $uList.hover(function() {
+        clearInterval(timer);
+    },
+    function() { //离开启动定时器
+        timer = setInterval(function() {
+            scrollList($uList);
+        },
+      5000);
+    }).trigger("mouseleave"); //自动触发触摸事件
+    //滚动动画
+    function scrollList(obj) {
+        //获得当前<li>的高度
+        var scrollHeight = $("ul li:first").height();
+
+        //滚动出一个<li>的高度
+        $uList.stop().animate({
+            marginTop: -scrollHeight/2
+        },
+       600,
+        function() {
+            //动画结束后，将当前<ul>marginTop置为初始值0状态，再将第一个<li>拼接到末尾。
+            $uList.css({
+                marginTop: 0
+            }).find("li:first").appendTo($uList);
+        });
+    }
+});
+</script>
+            <!-- 广告轮播结束 -->
+</div>
+<!-- <div class="trustbox" style="background:#F8FAFB;">
+	<div style="width:1200px;margin:0 auto;">
+		<div class="truinner">
+			<h1 style="color:#333;font-weight: normal;font-size: 24px;margin-bottom: 10px;">双向交易 买卖自由 安全可靠</h1>
+			<h5 style="color:#8b8b8b;font-size:14px;text-align: center;font-weight: normal;">我们的故事，从{:C('web_title')}开始。<a href="{:U('Trade/index')}" style="color:#108ee9;text-decoration: underline;"> 查看更多广告 →</a></h5>
+			<div style="float: left;width:745px;">
+				<div class="trubot">
+					<volist name="trad_ad_sell" id="vo">
+						<div>
+							<ul style="overflow: hidden;width:100%;">
+								<li class="topimg1" style="width: 70px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+								<empty name="vo.headimg">
+									<img src="__PUBLIC__/Home/images/touxiang.png" style="width:62px;height: 62px;border-radius: 50%;overflow: hidden;vertical-align: middle;">
+
+								<else />
+									<img src="{$vo.headimg}" style="width:62px;height: 62px;border-radius: 50%;overflow: hidden;vertical-align: middle;">
+								</empty>
+								</li>
+								<empty name="vo.headimg">
+									<li>{$vo.enname|strbig}</li>
+								</empty>
+								<li style="width:110px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">{$vo.enname}</li>
+								<li style="width:220px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">交易 {$vo.transact} | 好评度 {$vo.goodcomm}% | 信任 {$vo.trust}</li>
+								<li class="desc" style="width:90px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									{$vo.coin|strtoupper}
+								</li>
+								<li class="desc" style="width:180px;height:93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									<div style="color: #92b33d;font-size: 16px;font-weight: bold;line-height: 50px;">{$vo.price}{$vo.currency}</div>
+									<div>{$vo.min_limit}~{$vo.max_limit}{$vo.currency}</div>
+								</li>
+								<li class="desc" style="width: 75px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									<a href="{:U('Newad/advdetail')}?type=1&id={$vo['id']}" style="display:inline-block;width:52px;height:32px;background: #92b33d;color:#fff;border-radius: 4px;line-height: 32px;">
+									   购买
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div style="clear:both;"></div>
+					</volist>
+				</div>
+				<div class="trubot">
+					<volist name="trad_ad_buy" id="vo">
+						<div>
+							<ul style="overflow: hidden;width:100%;">
+								<li class="topimg1" style="width: 70px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+								<empty name="vo.headimg">
+									<img src="__PUBLIC__/Home/images/touxiang.png" style="width:62px;height: 62px;border-radius: 50%;overflow: hidden;vertical-align: middle;">
+
+								<else />
+									<img src="{$vo.headimg}" style="width:62px;height: 62px;border-radius: 50%;overflow: hidden;vertical-align: middle;">
+								</empty>
+								</li>
+								<empty name="vo.headimg">
+									<li>{$vo.enname|strbig}</li>
+								</empty>
+								<li style="width:110px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">{$vo.enname}</li>
+								<li style="width:220px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">交易 {$vo.transact} | 好评度 {$vo.goodcomm}% | 信任 {$vo.trust}</li>
+								<li class="desc" style="width:90px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									{$vo.coin|strtoupper}
+								</li>
+								<li class="desc" style="width:180px;height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									<div style="color: #92b33d;font-size: 16px;font-weight: bold;line-height: 50px;">{$vo.price}{$vo.currency}</div>
+									<div>{$vo.min_limit}~{$vo.max_limit}{$vo.currency}</div>
+								</li>
+								<li class="desc" style="width: 75px;height:93px;line-height: 93px;text-align: center;border-bottom: 1px solid #e9e9e9;">
+									<a href="{:U('Newad/advdetail')}?type=0&id={$vo['id']}" style="display:inline-block;width:52px;height:32px;background:#eb6558;color:#fff;border-radius: 4px;line-height: 32px;">
+									出售
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div style="clear:both;"></div>
+					</volist>
+				</div>
+			</div>
+			<div style="width: 368px;min-height:400px;float:right;">
+				<div class="nwbright" style="width: 368px;float:right;border:1px solid #e9e9e9;border-radius: 4px;font-size: 16px;margin-top: 30px;">
+					<div style="height: 30px;border-bottom: 1px solid #e9e9e9;padding:10px;line-height: 30px;">
+					<h1 style="font-size: 16px;font-weight: bold;padding-left: 15px;border-left: 5px solid #108ee9;text-align: left;">交易排行榜</h1>
+					</div>
+					<div>
+						<ul>
+							<php>$ii=1;</php>
+							<volist name="trade_max" id="vo">
+								<li>
+									<div>
+										<div style="line-height: 40px;padding:0 10px;">
+										<span style="display: inline-block;width:20px;height: 20px;line-height: 20px;text-align: center;background: #108ee9;color:#fff;margin-right:10px;">{$ii}</span>{$vo['enname']}</div>
+
+									</div>
+									<div style="border-bottom: 1px solid #e9e9e9;overflow: hidden;height:62px;padding:10px 0;">
+										<div style="float: left;width:62px;height:62px;margin-left: 40px;">
+											<img src="{$vo['headimg']}" style="width:62px;height: 62px;border-radius: 50%;overflow: hidden;" />
+											<empty name="vo.headimgis">
+												{$vo['enname']|strbig}
+											</empty>
+										</div>
+										<div style="float: right;width:235px;margin-right: 10px;font-size: 13px;color:#666;">
+											<div>累计交易次数：{$vo['transact']}</div>
+											<div>好评度：{$vo['goodcomm']}%</div>
+											<div>共被 {$vo['trust']} 人信任</div>
+										</div>
+									</div>
+								</li>
+								<php>$ii++;</php>
+							</volist>
+						</ul>
+					</div>
+				</div>
+				<div class="nwbbox">
+					<div class="nwbleft" style="width:368px;border:1px solid #e9e9e9;border-radius: 4px;border-bottom: none;">
+						<div class="top">
+						<h1>官方公告</h1>
+						<span class="more"><a href="/Article/index/id/{$type1['id']}">更多</a></span>
+						</div>
+						<div class="nwbot">
+						<volist name="news_list1" id="vo">
+						<div class="topnew">
+							<div class="rightext">
+								<span class="calendar_data">{$vo['addtime']|date='Y-m-d',###}</span>
+								<span class="title">
+									<a href="{:U('Article/detail','id='.$vo['id'])}">{$vo['title']|msubstr=0,40,'utf-8'}</a>
+								</span>
+							</div>
+						</div>
+						</volist>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<!-- 替换内容开始 -->
+<div class="trustbox" style="background:#fafafa;">
+        <div style="width:1200px;margin:0 auto;">
+            <div class="truinner">
+                <h1 style="color:#333;font-weight: bold;font-size: 24px;margin-bottom: 10px;">优质广告推荐</h1>
+                <h5 style="color:#8b8b8b;font-size:16px;text-align: center;font-weight: normal;"> 让交易更简单<a href="{:U('Trade/index')}" style="color:#f5bc00;text-decoration: underline;"> 更多广告 ></a></h5>
+                <div style="overflow: hidden;">
+                <div class="trubot" style="width: 1200px;">
+
+                        <div style="overflow: hidden;">
+                            <volist name="adinfo" id="vo">
+                            <ul class="ul_new animated">
+                                <li>
+                                <h3 class="top_h3"><if condition="$vo.type  eq 0"><img src="__PUBLIC__/Home/news/images/gm.png" alt=""><else /><img src="__PUBLIC__/Home/news/images/cs.png" alt=""></if>
+                                {$vo.fshb}
+                                </h3>
+                                <div style="border:1px solid #ccc;border-top:0;">
+                                <div class="div_li">
+                                    <img src="{$vo.headimg}" style="border-radius: 50%;overflow: hidden;margin-top: 15px;vertical-align: middle;width:45px;height:45px;border:1px solid #ccc;padding:3px;">
+                                    <empty name="vo.headimgis">
+                                    	<span style="position: absolute;top:33px;width:15px;text-align: center;left:66px;font-size: 14px;color:#fff;">{$vo.enname|strbig}</span>
+                                    </empty>
+                                    <span class="span1">
+                                         <span class="span2">{$vo.enname}</span>
+                                         <br/>
+                                         地区 （{$vo.location}）
+                                    </span>
+
+
+                                </div>
+                                <div class="div_li1">
+                                    <ul>
+                                        <li style="width: 33%;border-right: 1px solid #e6e6e6;font-size: 12px;color:#7f7f7f;text-align: center;float: left;">
+                                            {$vo.transact}
+                                            <span style="display: block;margin-top: 5px;">
+                                            交易次数</span>
+                                        </li>
+                                        <li style="width: 33%;border-right: 1px solid #e6e6e6;font-size: 12px;color:#7f7f7f;text-align: center;float: left;">
+                                           {$vo.goodcomm}%
+                                           <span style="display: block;margin-top: 5px;">
+                                            好评度</span>
+                                        </li>
+                                        <li style="width: 33%;font-size: 12px;color:#7f7f7f;text-align: center;float: left;">
+                                            {$vo.trust}
+                                            <span style="display: block;margin-top: 5px;">信任人数</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="div_li2">
+                                    <p><span>交易价格：</span>{$vo.price}{$vo.currency}</p>
+                                    <p><span>交易限额：{$vo.min_limit}~{$vo.max_limit}{$vo.currency}</span></p>
+                                    <p style="height:40px;"><span style="float:left;width:65px;">支付方式：</span><span style="float:left;width:193px;line-height: 18px;padding-top: 5px;">{$vo.paymethod}</span></p>
+                                </div>
+                                <div class="div_li3">
+
+
+                                       <if condition="$vo.type  eq 0">
+                                       <a href="{:U('Newad/advdetail')}?type=0&id={$vo['id']}" class="btn_a">
+                                        出售
+                                       <else />
+                                       <a href="{:U('Newad/advdetail')}?type=1&id={$vo['id']}" class="btn_a">
+                                        购买
+                                       </if>
+                                    </a>
+                                </div>
+                                </div>
+                                </li>
+                            </ul>
+                            </volist>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+<!-- 替换内容结束 -->
+<div class="trustbox" style="width: 1200px;margin:30px auto;">
+	<div class="truinner" style="width:100%;background:url(__PUBLIC__/Home/news/images/save.png) no-repeat;background-size:100%;">
+		<h1>安全可靠的场外交易平台</h1>
+		<ul class="trubot" style="width:100%;">
+			<li >
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image1.png">
+				</div>
+				<div class="topming1">
+				<h2>资金安全</h2>
+				<p class="desc">
+					银行级别的SSL安全连接以确保交易安全。平台托管保障资产安全。
+				</p>
+				</div>
+			</li>
+			 <li>
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image4.png">
+				</div>
+				<div class="topming1">
+				<h2>信息同步</h2>
+				<p class="desc">
+				   实时获取、同步权威平台价格数据，保障会员资产权益。快速确认交易。 
+				</p>
+				</div>
+			</li>
+			<li style="float: right;margin-right: 0;">
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image6.png">
+				</div>
+				<div class="topming1">
+				<h2>系统专业</h2>
+				<p class="desc">
+					拥有多年技术经验的专业团队维护系统稳定性，多级风险识别控制，保障系统不间断运行
+				</p>
+				</div>
+			</li>
+			<li>
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image2.png">
+				</div>
+				<div class="topming1">
+				<h2>快捷方便</h2>
+				<p class="desc">
+					充值即时、提现迅速，区块链资产转移畅通无阻。
+				</p>
+				</div>
+			</li>
+			<li>
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image5.png">
+				</div>
+				<div class="topming1">
+				<h2>合规合法</h2>
+				<p class="desc">
+					澳大利亚正规金融公司运作，风控、合规、反洗钱体系完善
+				</p>
+				</div>
+			</li>
+			<li style="float: right;margin-right: 0;">
+				<div class="topming">
+					<img src="__PUBLIC__/Home/news/images/image3.png">
+				</div>
+				<div class="topming1">
+				<h2>细致的客户服务</h2>
+				<p class="desc">
+					邮件、微信、电报多渠道沟通，保证任何客服需求都能够及时得到解答处理
+				</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	// 处理首页交易币种行情---------------------E
+
+	var cookieValue = $.cookies.get('cookie_username');
+	if (cookieValue != '' && cookieValue != null) {
+		$("#index_username").val(cookieValue);
+	}
+	function upLoginIndex() {
+		var username = $("#index_username").val();
+		var password = $("#index_password").val();
+		var verify = $("#index_verify").val();
+		var index_ga=$("#index_ga").val();
+		if (username == "" || username == null) {
+			layer.tips('请输入用户名', '#index_username', {tips: 3});
+			return false;
+		}
+		if (password == "" || password == null) {
+			layer.tips('请输入登录密码', '#index_password', {tips: 3});
+			return false;
+		}
+
+		if (verify == "" || verify == null || verify == "请输入验证码") {
+			layer.tips('请输入验证码', '#index_verify', {tips: 3});
+			return false;
+		}
+
+		$.post("{:U('Login/submit')}", {
+			username: username,
+			password: password,
+			verify : verify,
+			ga : index_ga
+		}, function (data) {
+			if (data.status == 1) {
+				$.cookies.set('cookie_username', username);
+				layer.msg(data.info, {icon: 1});
+				window.location = '/User';
+			} else {
+				//刷新验证码
+				//$(".reloadverifyindex").click();
+				var yzm = $(".yzm").attr("src");
+				if (yzm.indexOf('?') > 0) {
+					$(".yzm").attr("src",
+							yzm + '&random=' + Math.random());
+				} else {
+					$(".yzm").attr(
+							"src",
+							yzm.replace(/\?.*$/, '') + '?'
+							+ Math.random());
+				}
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	$('#index_box').addClass('on');
+
+	function chkpwd(){
+		var password = $("#index_password").val();
+		var patten =/^[a-zA-Z0-9]+$/;
+		var match = new RegExp(patten);
+		if (!match.test(password)) {
+			layer.tips('密码格式为6~16位，不含特殊符号！','#index_password',{tips:3});
+			var result = password.substring(0,password.length-1);
+			$("#index_password").val(result);
+		}
+	}
+</script>
+
+<include file="Public:footer_new"/>

@@ -1,0 +1,17 @@
+<div class="top_monkey">
+	<div class="topinfo">
+		<volist name="coin_list" id="vo">
+			<ul>
+				<li class="moneyinfo">
+				<h3 style="color:#eee;font-size: 14px;font-weight: normal;line-height: 40px;">{$vo.name|strtoupper}资产：</h3>
+					<p class="p_new">可用：<span class="span_new">{$vo.xnb|numform} </span>
+					{$vo.name|strtoupper}</p>
+					<p class="p_new">冻结：<span class="span_new span_new1">{$vo.xnbd|numform}</span>
+				{$vo.name|strtoupper}</p>
+				<p class="p_new">总计：<span class="span_new span_new2">{$vo.xnbz|numform}</span>
+					{$vo.name|strtoupper}</p>
+				</li>
+			</ul>
+		</volist>
+	</div>
+</div>

@@ -1,0 +1,168 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+<include file="User:top"/>
+<div class="usncont">
+  <!--左侧菜单-->
+  <include file="User:left"/>
+  <div class="usnc_right">
+    <h1>个人中心</h1>
+    <div class="safetopbox">
+		<form action="{:U('User/upuserinfo')}" method="post" id="frm" name="frm" enctype="multipart/form-data">
+        <div class="safetop_info">
+			<div class="img" style="padding-left: 5px;">
+                <empty name="user['headimg']">
+				          <img src="__PUBLIC__/Home/images/default_head.png" onclick="javarscript:void(0)" name="image" title="" style="border-radius: 50%;overflow: hidden;margin-top: 10px;margin-left:13px;vertical-align: middle;width:45px;height:45px;border:1px solid #ccc;padding:3px;"/>
+                  <span style="position: absolute;top:27px;left:35px;font-size: 14px;color:#fff;width:20px;text-align: center;">{$user.enname|strbig}</span>
+                <else/>
+                <img src="{$user['headimg']}" onclick="javarscript:void(0)" name="image"/>
+                </empty>
+                <input id="file" style="display:none" type="file" name="file" onchange="javarscript:void(0)" accept="image/*" title=""/>
+
+        <p class="name">{$user.enname}</p>
+			</div>
+        </div>
+		<div class="test">
+            <p>
+				实名认证：&nbsp;&nbsp;
+            <if condition="$user.is_agree eq 2">
+            未通过 | <a href="/user/nameauth.html">查看 </a>
+            <elseif condition="$user.is_agree eq 1" />
+            已认证 | <a href="/user/nameauth.html">查看 </a>
+            <elseif condition="$user.is_agree eq 0 and $user.idcard_zheng eq null" />
+            未认证 | <a href="/user/nameauth.html">去认证</a>
+            <else />
+            审核中 | <a href="/user/nameauth.html">查看 </a>
+            </if>
+			</p>
+            <!--<p>
+				电子邮件：&nbsp;&nbsp;
+				<empty name="user['email']"> 未绑定 | <a href="/user/email.html">立即绑定</a> <else />已绑定 | <a href="/user/email.html">查看</a></empty>
+			</p>
+            <p>
+				谷歌验证：&nbsp;&nbsp;
+				<empty name="user['ga']"> 未验证 | <a href="/user/ga.html">立即验证</a> <else /> <a href="/user/ga.html">查看</a> </empty>
+			</p>-->
+      <p>
+        手机验证：&nbsp;&nbsp;
+        <empty name="user['mobile']"> 未验证 | <a href="/user/mobile.html">立即验证</a> <else /> <a href="/user/mobile.html">查看</a> </empty>
+      </p>
+            <p>注册时间：&nbsp;&nbsp; {$user['addtime']|date='Y-m-d H:i:s',###}</p>
+            <p>第一次交易时间：&nbsp;&nbsp;
+               <empty name="user['first_trade_time'] ">
+                   --
+                   <else/>
+                   {$user['first_trade_time']|date='Y-m-d H:i:s',###}
+               </empty>
+            </p>
+            <p>信任人数：&nbsp;&nbsp; 被 {$trust} 人信任</p>
+            <p>累计交易次数：&nbsp;&nbsp;  {$user['transact']} 次</p>
+            <p>好评度：&nbsp;&nbsp;  {$user['goodcomm']|ohunderd}%</p>
+            <!--<p>累计交易量：&nbsp;&nbsp;  {$user['history']|num} BTC</p>-->
+            <p>平均放行时间：&nbsp;&nbsp;  <eq name="user.transact" value="0">0<else/>{$user['sftime_sum']/$user['transact']|round=###,2}</eq> min</p>
+            <p>个人简介</p>
+			<if condition="$user['jianjie'] eq '' ">
+                <textarea class="area"
+                          style="color: rgba(0,0,0,0.7);"
+                          onblur="if(this.value == '')this.value='简介，在您的公共资料上展示您的介绍信息。纯文本，不超过200个字';"
+                          onclick="if(this.value == '简介，在您的公共资料上展示您的介绍信息。纯文本，不超过200个字')this.value='';" id="area">简介，在您的公共资料上展示您的介绍信息。纯文本，不超过200个字</textarea>
+                <else/>
+                <textarea name="jianjie" id="area" class="area" style="color: #666">{$user['jianjie']}</textarea>
+            </if>
+            <div onclick="jj()" class="save" >保存</div>
+		</div>
+        </form>
+    </div>
+
+      <script>
+          function jj(){
+              var jianjie = $('#area').val();
+              if(jianjie != '简介，在您的公共资料上展示您的介绍信息。纯文本，不超过200个字'){
+                  $.post("{:U('User/jianjie')}",{jianjie:jianjie },function(data){
+                      if(data.status==1){
+                          layer.msg(data.info,{icon : 1 });
+                          window.location="{:U('User/index')}";
+                      }else{
+                          layer.msg(data.info,{icon : 2 });
+                          if(data.url){
+                              window.location=data.url;
+                          }
+                      }
+                  },"json");
+              }else{
+                  layer.msg('请填写后提交',{icon:2});
+              }
+          }
+          function select(){
+              $('#file').click();
+              var form=document.getElementById("frm");
+              var fd =new FormData(form);
+
+              $.ajax({
+               url: "{:U('User/upuserinfo')}" ,
+               type: 'POST',
+               data: fd,
+               dataType:'json',
+               async: false,
+               cache: false,
+               contentType: false,
+               processData: false,
+               success: function (data) {
+                    if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                setTimeout('window.location.reload();',1000);
+              } else {
+                layer.msg(data.info);
+                if (data.url) {
+                  window.location = data.url;
+                }
+              }
+               }
+          });
+          }
+
+          function upimg(){
+              if(confirm('是否上传?')){
+                  // $("#frm").submit();
+              var form=document.getElementById("frm");
+              var fd =new FormData(form);
+
+              $.ajax({
+               url: "{:U('User/upuserinfo')}" ,
+               type: 'POST',
+               data: fd,
+               dataType:'json',
+               async: false,
+               cache: false,
+               contentType: false,
+               processData: false,
+               success: function (data) {
+                    if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                setTimeout('window.location.reload();',1000);
+              } else {
+                layer.msg(data.info);
+                if (data.url) {
+                  window.location = data.url;
+                }
+              }
+               }
+          });
+              }
+          }
+
+      </script>
+ 
+  </div>
+
+</div>
+</div>
+<include file="Public:footer_new"/>
+
+
+<script>
+  $('#user_box').addClass('on');
+  $('#user_index').addClass('on');
+  $('#user_index i').attr('class','coin_menu_op_14');
+  //菜单高亮
+  $('#finance_index').addClass('on');
+</script>

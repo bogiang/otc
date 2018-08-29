@@ -1,0 +1,77 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">以太坊转账</span>
+		</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<div style="height:30px;line-height:30px;font-size:13px;color:red;">注意：只能从平台上的钱包账户转出。</div>
+							<table>
+								<tr class="controls">
+									<td class="item-label">转出地址 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="zc_addr" value="" id="zc_addr" />
+										<span id="addr_amount" style="display:none;"></span>
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">转入地址 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="zr_addr" value="">
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">转出数量 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="zc_num" value="">
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">转出钱包的密码 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="zcwallet_password" value="">
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post" target-form="form-horizontal" id="submit" type="submit">确 定</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+					$("#zc_addr").blur(function(){
+						$.post("{:U('Finance/ethamount')}", {
+							zc_addr: $("#zc_addr").val()
+						}, function (data) {
+							if (data.status == 1) {
+								$("#addr_amount").html(data.amount);
+								$("#addr_amount").show();
+							}
+						}, "json");
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

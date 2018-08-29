@@ -1,0 +1,220 @@
+<include file="Public:header_new" />
+<style>
+.change_tab{height: 40px;line-height: 40px;text-align: center;}
+.change_tab a{display: inline-block;width:130px;color:#666;font-weight: bold;font-size: 14px;}
+.change_tab a:hover{color:#f5bc00;border-bottom: 3px solid #f5bc00;}
+.change_tab .on_new{color:#f5bc00;border-bottom: 3px solid #f5bc00;}
+.select_div{width:1198px;margin:0 auto;border:1px solid #e4e4e4;height: 85px;text-align:center;background: #fff;border-radius: 4px;margin-top:3px;}
+.select_div form{width:1050px;margin:0 auto;height:35px;overflow:hidden;margin-top:25px;}
+.select_div select{width: 165px;height: 35px;float:left;border:1px solid #d9d9d9;border-radius: 4px;color:#252525;text-indent: 5px;margin-right: 5px;font-size: 13px;}
+.search_input{width:680px;height:35px;float:left;}
+.search_trade{float:left;background: #3d3d3d;color:#f5bc00;width: 160px;height: 35px;outline: none;border:1px solid #3d3d3d;border-radius: 4px;margin-left: 40px;font-size: 13px;}
+.table_trade{width: 1200px;margin-top:30px;background: #fff;padding-bottom: 20px;border-radius: 4px 4px 0 0;min-height: 750px;}
+.table_trade table tr th{background: #f7f7f7;font-size: 14px;color:rgba(0, 0, 0, 0.9);text-align: left;font-weight: 500;height:53px;}
+.table_trade table tr td{padding:10px 0;border-bottom: 1px solid #d9d9d9;font-size: 14px;color: rgba(0, 0, 0, 0.7);}
+.table_trade table tr:hover{background: #ecf6fd;}
+.bsedit{color:#f5bc00;display: inline-block;width:72px;height:30px;border:1px solid #f5bc00;line-height:30px;text-align: center;border-radius: 4px;}
+</style>
+<div class="usernewout">
+    <div class="usncont">
+        <div>
+            <div class="change_tab">
+                <a href="{:U('Trade/index',array('type'=>0))}" <neq name="Think.get.type" value="1">class="on_new"</neq>>出售广告</a>
+                <a href="{:U('Trade/index',array('type'=>1))}" <eq name="Think.get.type" value="1">class="on_new"</eq>>购买广告</a>
+            </div>
+            <div class="select_div">
+                <form action="{:U('Trade/index')}" method="get">
+                    <input type="hidden" name="type" value="{$type}">
+                    <select id="changeobj" name="obj">
+                        <option value="1" <eq name="Think.get.obj" value="1">selected</eq>>搜广告</option>
+                        <option value="2" <eq name="Think.get.obj" value="2">selected</eq>>搜用户</option>
+                    </select>
+                    <div class="search_input" id="adbox">
+                        <select name="coin">
+                            <option value="" <empty name="Think.get.coin">selected</empty>>币种</option>
+                            <volist name="coin" id="vo">
+                                <option value="{$vo.id}" <eq name="Think.get.coin" value="$vo.id">selected</eq>>{$vo.name|strtoupper} {$vo.title}</option>
+                            </volist>
+                        </select>
+                        <select name="loca">
+                            <option value="" <empty name="Think.get.loca">selected</empty>>地区</option>
+                            <volist name="location" id="vo">
+                                <option value="{$vo.id}" <eq name="Think.get.loca" value="$vo.id">selected</eq>>{$vo.short_name} {$vo.name}</option>
+                            </volist>
+                        </select>
+                        <select name="curr">
+                            <option value="" <empty name="Think.get.curr">selected</empty>>货币</option>
+                            <volist name="currency" id="vo">
+                                <option value="{$vo.id}" <eq name="Think.get.curr" value="$vo.id">selected</eq>>{$vo.short_name} {$vo.name}</option>
+                            </volist>
+                        </select>
+                        <select name="paym">
+                            <option value="" <empty name="Think.get.paym">selected</empty>>支付方式</option>
+                            <volist name="pay_method" id="vo">
+                                <option value="{$vo.id}" <eq name="Think.get.paym" value="$vo.id">selected</eq>>{$vo.name}</option>
+                            </volist>
+                        </select>
+                    </div>
+                    <div class="search_input" id="userbox">
+                        <input type="text" name="uname" value="{$Think.get.uname}" style="width:672px;height:33px;border: 1px solid #dbdbdb;border-radius: 4px;color: #252525;text-indent: 5px;margin-left: -5px;">
+                    </div>
+                    <input type="submit" value="搜索" class="search_trade">
+                </form>
+            </div>
+            <div class="table_trade">
+                <table>
+                    <tr>
+                        <th width="180px" style="padding-left:40px;">用户名</th>
+                        <th width="100px">币种</th>
+                        <!-- <th width="100px">地区</th> -->
+                        <th width="250px">信用</th>
+                        <th width="250px">支付方式</th>
+                        <th width="150px">交易限额</th>
+                        <th width="150px">价格</th>
+                        <th width="115px">操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td style="padding-left:40px;position:relative;">
+                            <span style="float: left;width:60px;">
+                            <img style="height:45px;vertical-align: middle;margin-right:10px;width:45px;border-radius: 50%;border:1px solid #ccc;padding:3px;" src="<empty name='vo.avatar'>__PUBLIC__/Home/images/hportrait/head_portrait60.png<else/>{$vo.avatar}</empty>">
+                                 <if condition="$vo['status'] eq 1"><img src="__PUBLIC__/Home/images/logstate.png" style="position: absolute;top:45px;left:74px;width:28px;">
+                                <else/>
+                                <img src="__PUBLIC__/Home/images/logstate2.png" style="position: absolute;top:45px;left:74px;width:28px;">
+                            </if>
+								<empty name='vo.avatar'>
+								
+                                <span style="position: absolute;top:27px;left:60px;width:15px;text-align: center;font-size: 14px;color:#fff;">{$vo.enname|strbig}</span></empty>
+                            </span>
+                             <span style="float: left;">
+                             <span style="display: block;padding-top: 5px;">{$vo.enname}</span>
+                             <span style="font-size: 12px;">{$vo.location}</span>
+                             </span>
+                             </td>
+                            <td>{$vo.coin|strtoupper}</td>
+
+                            <td>
+                                交易 {$vo.transact} |  好评度 {$vo.goodcomm}% | 信任 {$vo.trust}
+                            </td>
+                            <td>{$vo.pay_method}</td>
+                            <td>{$vo['min_limit']|num}-{$vo['max_limit']|num} {$vo['currency_type']}</td>
+                            <td>{$vo['price']} {$vo['currency_type']}</td>
+                            <td><a href="{:U('Newad/advdetail',array('type'=>$type,'id'=>$vo['id']))}" class="bsedit"><eq name="type" value="0">出售<else/>购买</eq></a></td>
+                        </tr>
+                    </volist>
+                </table>
+                <div class="pages">{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/web_socket.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var obj = $("#changeobj").val();
+		if(obj == 1){
+			$("#userbox").hide();
+		}else if(obj == 2){
+			$('#adbox').hide();
+		}
+	});
+    $('#changeobj').change(function(){
+        var obj_id = $(this).val();
+        if(obj_id == "1"){
+			$('#userbox').hide();
+            $('#adbox').show();
+        }else if(obj_id == "2"){
+            $('#adbox').hide();
+			$('#userbox').show();
+        }
+    });
+    $('#trade_box').addClass('on');
+	
+	if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    // 如果浏览器不支持websocket，会使用这个flash自动模拟websocket协议，此过程对开发者透明
+    WEB_SOCKET_SWF_LOCATION = "/Public/Home/js/WebSocketMain.swf";
+    // 开启flash的websocket debug
+    WEB_SOCKET_DEBUG = true;
+    var ws;
+	var myname = "{$enname}";
+
+    // 连接服务端
+    function connect() {
+       // 创建websocket
+       ws = new WebSocket("ws://"+document.domain+":45101");
+       // 当socket连接打开时，输入用户名
+       ws.onopen = onopen;
+       // 当有消息时根据消息类型显示不同信息
+       ws.onmessage = onmessage; 
+       ws.onclose = function() {
+    	  console.log("连接关闭，定时重连");
+          connect();
+       };
+       ws.onerror = function() {
+     	  console.log("出现错误");
+       };
+    }
+	
+	// 连接建立时发送登录信息
+    function onopen()
+    {
+        // 登录
+        var login_data = '{"type":"login","client_name":"'+myname+'","room_id":"1"}';
+        ws.send(login_data);
+    }
+	var uid_list = "{$uid_list}";
+	// 服务端发来消息时
+    function onmessage(e)
+    {
+        var data = JSON.parse(e.data);
+        switch(data['type']){
+            // 服务端ping客户端
+            case 'ping':
+                ws.send('{"type":"pong"}');
+                break;
+            // 登录 更新用户列表
+            case 'login':
+				//ws.send('{"type":"online","uid":"'+uid_list+'","myname":"'+myname+'"}');
+                break;
+            // 发言
+            case 'say':
+				showsay(data['content']);
+                break;
+			//case 'online':
+				//uponline(data['data']);
+				//break;
+            // 用户退出 更新用户列表
+            case 'logout':
+				break;
+        }
+    }
+	
+	function showsay(content){
+		var arr = content.split("-");
+		switch(arr[2]){
+			case 'neworder':
+				$("#jytscontent").html("您有新的订单。<a href='/Order/orderinfo?type="+arr[1]+"&id="+arr[0]+"'>点击这里</a>查看");
+				$("#jyts").show();
+				setTimeout(function(){$("#jyts").hide('slow');},10000);
+			break;
+		}
+	}
+	
+	$("#closebut").click(function(){
+		$("#jyts").hide('slow');
+	});
+	
+	function uponline(data){
+		if(!data){
+			return;
+		}
+		console.log(data);
+	}
+	
+	window.onload=function(){
+		connect();
+	}
+</script>
+
+<include file="Public:footer"/>

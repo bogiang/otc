@@ -1,0 +1,49 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+	<include file="User:top"/>
+	<div class="usncont">
+		<include file="User:left"/>
+		<div class="usnc_right">
+			<h1>
+				我的信任
+				<div class="xr">
+					<a <if condition="(empty($type)) or ($type eq 1)">class="on"</if> href="{:U('User/trusted')}?type=1">我信任的</a>
+					<a <if condition="$type eq 2">class="on"</if> href="{:U('User/trusted')}?type=2">我屏蔽的</a>
+					<a <if condition="$type eq 3">class="on"</if> href="{:U('User/trusted')}?type=3">信任我的</a>
+				</div>
+			</h1>
+			<div class="recharge_list">
+				<table>
+					<tr>
+						<th width="150px">用户名</th>
+						<th width="100px">交易次数</th>
+						<th width="100px">信任人数</th>
+						<th width="100px">好评度</th>
+						<!--<th width="100px">历史交易</th>-->
+						<th width="100px">放行时间</th>
+						<th width="100px">与TA交易次数</th>
+					</tr>
+					<volist name="list" id="vo">
+					<tr>
+					   <td>{$vo.enname}</td>
+					   <td>{$vo['transact']}</td>
+					   <td>{$vo['trust']}</td>
+					   <td>{$vo['goodcomm']}%</td>
+						<!--<td>{$vo['history']|num} BTC</td>-->
+						<td><eq name="vo.transact" value="0">0<else/>{$vo['sftime_sum']/$vo['transact']|round=###,2}</eq> min</td>
+						<td><empty name="vo.trade_times">0<else/>{$vo['trade_times']}</empty></td>
+					</tr>
+					</volist>
+					<empty name="list"><tr><td style="padding: 10px 0;text-align: center;text-indent: 0;" colspan="7" align="center">暂无数据</td></tr></empty>
+				</table>
+				<div class="pages">{$page}</div>
+			</div>
+		</div>
+	</div>
+<script>
+    //菜单高亮
+    $('#user_box').addClass('on');
+    $('#trusted').addClass('on');
+</script>
+</div>
+<include file="Public:footer_new"/>

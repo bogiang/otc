@@ -1,0 +1,65 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title"><a href="{:U('Config/createAddr')}">{$coin_info['name']|strtoupper}转出地址</a> >></span>
+		</div>
+		<div class="alert-content">这里可以在{$coin_info['name']|strtoupper}转出服务器生成一个新账号，密码由您手动输入。该地址自动作为新的{$coin_info['name']|strtoupper}转出地址，所以请确保该地址的币余额充足。请一定牢记您输入的密码。</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" action="{:U('Config/createAddr')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+								<tr class="controls">
+									<td class="item-label">当前地址 :</td>
+									<td>{$zcaddr}</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">当前地址ETH余额 :</td>
+									<td>{$balance}</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">请输入密码 :</td>
+									<td><input type="text" class="form-control input-10x" name="password" value=""></td>
+									<td class="item-note"></td>
+								</tr>
+								<input type="hidden" name="coinname" value="{$coin_info['name']}" />
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class= "btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">
+												生成新地址
+											</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function() {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Config/createAddr')}");
+	</script>
+</block>

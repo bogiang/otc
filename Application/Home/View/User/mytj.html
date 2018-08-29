@@ -1,0 +1,76 @@
+<include file="Public:header_new"/>
+<script src="__PUBLIC__/Home/js/qrcode.js"></script>
+<style>
+	#qrcode-wallet{display: inline-block;}
+	#qrcode-t{font-size: 13px;text-align: center;color:#108ee9;margin-top: 0;margin-left: -10px;}
+	.usnc_right .invite-content h4{font-size: 16px;color:rgba(0,0,0,0.7);margin-bottom: 27px;}
+	.usnc_right .invite-content p{font-size: 13px;color:rgba(0,0,0,0.7);line-height: 16px;margin-top:10px;}
+	.usnc_right .invite-content .tip_new{cursor: pointer;}
+	.quicklink{border:1px solid #108ee9;;padding:15px 10px;margin:20px auto 0;width:660px;background: #ecf6fd;}
+	.usnc_right .invite-content .tip_new .lj{display: inline-block;width:auto;height:30px;line-height: 30px;border:1px solid #108ee9;color:#108ee9;padding:0 10px;}
+	.usnc_right .leiji{width:300px;border:1px solid #108ee9;padding:8px 10px;margin-top:20px;background: #ecf6fd;float: left;font-size: 13px;color:#666;}
+	.usnc_right .leiji1{float: right;}
+	.usnc_right  .rem{color:#108ee9;font-size: 15px;margin:0 5px;}
+	.usnc_right  .xq{color:#108ee9;float: right;font-size: 13px;line-height: 27px;}
+	.usnc_right  .xq:hover{text-decoration: underline;}
+</style>
+<div class="usernewout">
+	<include file="User:top"/>
+	<div class="usncont">
+		<!--左侧菜单-->
+		<include file="User:left"/>
+		<!--右侧内容-->
+		<div class="usnc_right">
+			<h1>推荐用户</h1>
+			<!-- <div id="qrcode-wallet" width="100">
+				<saon id="codeaa"></saon>
+				<p id="qrcode-t">您的推荐二维码</p>
+			</div> -->
+			<div class="quicklink invite-content">
+				<h4>推荐邀请码</h4>
+				<p class="tip">这是您的推荐邀请码，您可复制后分享给朋友，让他们注册帐号时输入您的邀请码：</p>
+				<p class="tip_new">推荐邀请码：<span class="lj">{$user['invit']}</span></p>
+			</div>
+			<div class="quicklink invite-content" style="overflow: hidden;">
+			<div style="float: left;width:500px;">
+				<h4>推荐链接</h4>
+
+				<p class="tip">这是您的推荐链接，您可复制并发送给您的好友：</p>
+				<p class="tip_new">推荐链接：<span class="lj">http://{$_SERVER['HTTP_HOST']}/Login/register.html?invit={$user['invit']}</span></p>
+				</div>
+				<div id="qrcode-wallet" style="float: right;width:100px;">
+				<saon id="codeaa"></saon>
+				<p id="qrcode-t">您的推荐二维码</p>
+			</div>
+			</div>
+			<div>
+			<div style="width: 680px;margin: 0 auto;">
+				<div class="leiji">
+					累计推荐佣金：
+					<span class="rem">
+					<volist name="yj_arr" id="vo">
+						{$vo[0]} {$vo[1]} &nbsp;&nbsp;
+					</volist>
+					</span>
+					&nbsp;&nbsp;<a href="/User/myjp.html" class="xq">查看详情</a>
+				</div>
+				<div class="leiji leiji1">累计推荐人数：<span class="rem">{$rssum}</span>人 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/User/mywd.html" class="xq">查看详情</a></div>
+				</div>
+			</div>
+			<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+			<script type="text/javascript" >
+			$('#codeaa').qrcode({
+				render: "table",
+				size:90,
+				text: "http://{$_SERVER['HTTP_HOST']}/Login/register.html?invit={$user['invit']}"
+			});
+			</script>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//菜单高亮
+	$('#user_box').addClass('on');
+	$('#user_mytj').addClass('on');
+</script>
+<include file="Public:footer_new"/>

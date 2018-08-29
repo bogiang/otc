@@ -1,0 +1,72 @@
+<include file="Public:header_new"/>
+        <style type="text/css">
+            .newmain{margin: 0 auto;}
+            .dnwlist li{border-bottom: 1px solid #ddd;line-height: 55px;font-size: 16px;}
+            .dnwlist li a{color:#42484d;;}
+            .dnwlist li .time{float: right;font-size: 14px;color:#42484d;}
+            .dnwlist li:hover a{text-decoration: underline;}
+            .hero-inner{position: relative;top: 0%;transform: translateY(0%);width:100%;margin: 0 auto;}
+            .fenleibox{width: 480px;height: auto;overflow: hidden;float: left;margin-right:45px;min-height: 405px;}
+            .title_help{color:#717b84;font-weight: 400;font-size:15px;}
+            .title_help a{color:#108ee9;}
+            .title_help a:hover{text-decoration: underline;}
+            .newmain .nwmleft{border: none;margin-top: 15px;}
+            .newmain .nwmleft .h2_new{font-size: 32px;font-weight: 400;text-align: left;color:#42484d;margin-bottom: 10px;}
+            .newmain .nwmleft .a_help{color:#42484d;font-weight:bold;font-size:18px;}
+
+        </style>
+        <div style="border-top:1px solid #ddd;padding:50px 0;">
+        <div class="newmain">
+            <div class="hero-inner">
+
+                <form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off" action="{:U('Article/listsousuo')}" method="get">
+                <span class="title_help">
+                    <a href="{:U('Article/index')}">帮助中心</a>
+                    <span>>{$ArticleType.title}</span>
+                </span>
+                <input type="search" name="query" id="query" placeholder="搜索" autocomplete="off" aria-label="搜索" style="width:300px;height:40px;float:right;border-radius: 20px;outline: none;border:1px solid #ddd;text-indent: 40px;font-size: 14px;background: url(__PUBLIC__/Home/news/images/search.png) #fff no-repeat 10px 8px;"/></form>
+              </div>
+            <div class="nwmleft" style="float:right;width:1050px;">
+                <h2 class="h2_new">{$ArticleType.title}</h2>
+                <volist name="ArticleTypelist" id="vo">
+                <div class="fenleibox">
+                <h3> <a href="{:U('Article/type','id='.$vo['id'])}" class="a_help">{$vo.title}</a></h3>
+                     <ul class="dnwlist">
+                      <volist name="vo.article_list" id="vo1">
+                        <li>
+                            <a href="{:U('Article/detail','id='.$vo1['id'])}">{$vo1.title|msubstr=0,20,'utf-8'}</a>
+                            <span class="time">{$vo1.addtime|addtime}</span>
+                        </li>
+                      </volist>
+                    </ul>
+                </div>
+                </volist>
+                <!-- <ul class="dnwlist">
+                <notempty name="ArticleTypelist">
+                  <volist name="ArticleTypelist" id="vo">
+                    <li>
+                        <a href="{:U('Article/detail','id='.$vo['id'])}">{$vo.title|msubstr=0,44,'utf-8'}</a>
+                        <span class="time">{$vo.addtime|addtime}</span>
+                    </li>
+                  </volist>
+                <else />
+                    <li>
+                        <a>暂无结果</a>
+                        <span class="time"></span>
+                    </li>
+                    <li>
+                        <a href="{:U('Article/index')}">浏览文章</a>
+                        <span class="time"></span>
+                    </li>
+                </notempty>
+                </ul>
+                <div class="pages" style="margin-top:30px;">{$page}</div>
+                <div class="clear"></div> -->
+            </div>
+
+        </div>
+        </div>
+        <script type="text/javascript">
+        $('#article_box').addClass('on');
+        </script>
+<include file="Public:footer_new"/>

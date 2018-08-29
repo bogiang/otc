@@ -1,0 +1,214 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title"><a href="{:U('Trade/index?market='.$market)}">广告管理</a> >></span>
+
+            <span class="h1-title"><eq name="market" vale="buy">购买广告详情
+	            <else/>
+                                                      出售广告详情
+            </eq></span>
+		</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" action="{:U('Trade/marketEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+									<tr class="controls">
+										<td class="item-label">广告编号 :</td>
+										<td><div class="form-control input-10x">
+											{$order['ad_no']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">发布人昵称 :</td>
+										<td><div class="form-control input-10x">
+											{$order['username']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">所在地区 :</td>
+										<td><div class="form-control input-10x">
+											{$order['location']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">货币 :</td>
+										<td><div class="form-control input-10x">
+											{$order['currency']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">币种 :</td>
+										<td><div class="form-control input-10x">
+											{$order['coin']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">溢价 :</td>
+										<td><div class="form-control input-10x">
+											{$order['margin']}%
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">价格 :</td>
+										<td><div class="form-control input-10x">
+											{$order['price']} {$order['short_name']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">
+											<eq name="market" value="buy">
+												付款期限
+												<else />最低价
+											</eq> : </td>
+										<td><div class="form-control input-10x">
+											<eq name="market" value="buy">{$order['due_time']}分钟
+												<else />{$order['min_price']|Num} {$order['short_name']}
+											</eq>
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">最小限额 :</td>
+										<td><div class="form-control input-10x">
+											{$order['min_limit']|Num} {$order['short_name']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">最大限额 :</td>
+										<td><div class="form-control input-10x">
+											{$order['max_limit']|Num} {$order['short_name']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">收款方式 :</td>
+										<td><div class="form-control input-10x">
+											{$order['pay_method']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">广告留言 :</td>
+										<td><textarea class="form-control" rows="5">{$order['message']}</textarea>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">是否启用安全选项 :</td>
+										<td><eq name="order.safe_option" value="1">开启<else/>关闭</eq></td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">仅限受信任的交易者 :</td>
+										<td><eq name="order.trust_only" value="1">开启<else/>关闭</eq></td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">开放时间 :</td>
+										<td>
+											{$order['open_time']}
+										</td>
+										<td class="item-note"></td>
+									</tr>
+
+									<tr class="controls">
+										<td class="item-label">发布时间 :</td>
+										<td><div class="form-control input-10x">
+											{$order['add_time']|addtime}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">状态 :</td>
+										<td><div class="form-control input-10x">
+			                                <eq name="order.state" value="1">进行中</eq>
+			                                <eq name="order.state" value="2">已下架</eq>
+			                                <eq name="order.state" value="3">已完成</eq>
+											<eq name="order.state" value="4">已冻结</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+
+					function chuli(id,market,type){
+							 
+  						$.post("{:U('Trade/chuli_ajax')}", {
+            			market: market,
+            			id: id,
+            			type:type,
+        				}, function (data) {
+			     			layer.closeAll('loading');
+            				if (data.status == 1) {
+            					layer.alert(data.info, function(index){
+                  				self.location.reload();
+              			});
+
+            			} else {
+            				
+                			layer.msg(data.info, {icon: 2});
+
+            			}
+       	 			}, "json");
+  	
+							
+							
+					}
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Trade/index')}");
+	</script>
+</block>

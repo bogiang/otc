@@ -1,0 +1,91 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">警告内容</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="h1-title">以太坊批量转帐</span>
+        </div>
+
+        <div class="cf">
+            <div class="fl">
+				<button class="btn ajax-post confirm btn-warning " id="submit">批量转出</button>
+            </div>
+        </div>
+
+        <div class="data-table table-striped">
+			<form id="form" action="{:U('Finance/ethbatch')}" method="post" class="form-horizontal">
+				<table class="">
+					<thead>
+					<tr>
+						<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+						<th class="">ID</th>
+						<th class="">地址</th>
+						<th class="">用户名</th>
+						<th width="">金额</th>
+					</tr>
+					</thead>
+					<tbody>
+					<notempty name="address_list">
+						<php>$ii=1;</php>
+						<volist name="address_list" id="vo">
+							<if condition="vo.address neq ''">
+							<tr>
+								<td>
+									<eq name="vo.sel" value="1">
+										<input class="ids" type="checkbox" name="zcaddr[]" value="{$vo.address}" id="{$ii}"/>
+									</eq>
+								</td>
+								<td>{$ii}</td>
+								<td>{$vo['address']} </td>
+								<td>{$vo['username']}</td>
+								<td>
+									{$vo.account_yue}
+									<eq name="vo.sel" value="1">&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="zcamount[]" value="0" id="{$ii}_inp" /></eq>
+								</td>
+							</tr>
+							<php>$ii++;</php>
+							</if>
+						</volist>
+						<div style="height:30px;line-height:30px;">您将从以下地址转出以太坊，请输入您要转入的地址：<input type="text" name="ethzr" /></div>
+						<div style="height:30px;line-height:30px;">您可以指定每个地址转出的数量，如果不填写则默认转出余额减0.001个</div>
+						<input type="hidden" name="token" value="{$ethbatch_token}" />
+						<else/>
+						<td colspan="12" class="text-center">Oh! 暂时还没有内容!</td>
+					</notempty>
+					</tbody>
+				</table>
+			</form>
+            <div class="page">
+                <div>{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	function shuaxin(){
+		window.location.href=window.location.href;
+	}
+	function closetanchu(){
+		layer.closeAll('loading');
+	}
+	//提交表单
+	$('#submit').click(function () {
+		$(".ids").each(function(){
+			if(!$(this).is(':checked')){
+				var id = $(this).attr('id');
+				$("#"+id+"_inp").remove();
+			}
+		});
+		document.theform.submit();
+	});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //导航高亮
+        highlight_subnav("{:U('Finance/ethbatch')}");
+    </script>
+</block>

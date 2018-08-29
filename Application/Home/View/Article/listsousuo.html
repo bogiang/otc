@@ -1,0 +1,41 @@
+<include file="Public:header_new"/>
+        <style type="text/css">
+            .dnwlist li{border-bottom: 1px solid #ddd;line-height: 55px;font-size: 16px;}
+			.dnwlist{min-height:300px;}
+            .dnwlist li a{color:#42484d;}
+            .dnwlist li .time{float: right;font-size: 14px;color: #42484d;}
+            .dnwlist li:hover a{text-decoration: underline;}
+            .hero-inner{position: relative;top: 0%;transform: translateY(0%);max-width: 610px;margin: 0 auto;}
+        </style>
+        <div class="newmain">
+			<form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off" action="{:U('Article/listsousuo')}" method="get"><input type="search" name="query" id="query" placeholder="搜索" autocomplete="off" aria-label="搜索" style="width:300px;height:40px;float:right;border-radius: 20px;outline: none;border:1px solid #ddd;text-indent: 40px;font-size: 14px;background: url(__PUBLIC__/Home/news/images/search.png) #fff no-repeat 10px 8px;"/></form>
+            <div class="nwmleft">
+                <h2>搜索结果</h2>
+                <ul class="dnwlist">
+                <notempty name="article_list">
+                  <volist name="article_list" id="vo">
+                    <li>
+                        <a href="{:U('Article/detail','id='.$vo['id'])}">{$vo.title|msubstr=0,44,'utf-8'}</a>
+                        <span class="time">{$vo.addtime|addtime}</span>
+                    </li>
+                  </volist>
+                <else />
+                    <li>
+                        <a>暂无结果</a>
+                        <span class="time"></span>
+                    </li>
+                    <li>
+                        <a href="{:U('Article/index')}">浏览文章</a>
+                        <span class="time"></span>
+                    </li>
+                </notempty>
+                </ul>
+                <div class="pages" style="margin-top:30px;">{$page}</div>
+                <div class="clear"></div>
+            </div>
+            
+        </div>
+        <script type="text/javascript">
+        $('#article_box').addClass('on');
+        </script>
+<include file="Public:footer_new"/>

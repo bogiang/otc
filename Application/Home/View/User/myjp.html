@@ -1,0 +1,57 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+<include file="User:top"/>
+	<div class="usncont">
+		<!--左侧菜单-->
+		<include file="User:left" />
+		<!--右侧内容-->
+		<div class="usnc_right">
+			<h1>
+				推荐奖励
+				<div class="xr">
+					<a <if condition="$Think.server.REQUEST_URI eq '/User/myjp.html'">class="on"</if> href="{:U('User/myjp')}">交易奖励</a>
+					<a <if condition="$Think.server.REQUEST_URI eq '/User/mytjj.html'">class="on"</if> href="{:U('User/mytjj')}">注册奖励</a>
+				</div>
+			</h1>
+			<div class="recharge_list">
+				<table>
+					<thead>
+						<tr>
+							<th width="150">用户名</th>
+							<th width="100">代数</th>
+							<th width="110">交易币种</th>
+							<th width="110">广告类型</th>
+							<th width="200">发奖时间</th>
+							<th width="110">成交金额</th>
+							<th width="120">奖励金额</th>
+						</tr>
+					</thead>
+					<tbody>
+					<notempty name="list">
+						<volist name="list" id="vo">
+							<tr>
+								<td>{$vo.invit}</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.type}</td>
+								<td>{$vo.buysell}</td>
+								<td>{$vo.addtime|addtime}</td>
+								<td>{$vo['mum']}</td>
+								<td>{$vo['fee']}</td>
+							</tr>
+						 </volist>
+					 <else/>
+						<tr><td colspan="7" style="padding: 10px 0;text-align: center;text-indent: 0;"s>暂无记录</td></tr>
+					 </notempty>
+					</tbody>
+				</table>
+				<div class="pages">{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//菜单高亮
+	$('#user_box').addClass('on');
+	$('#user_myjp').addClass('on');
+</script>
+<include file="Public:footer_new"/>

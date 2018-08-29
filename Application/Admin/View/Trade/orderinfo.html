@@ -1,0 +1,286 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title"><a href="{:U('Trade/orderlist?market='.$market)}">订单管理</a> >></span>
+
+            <span class="h1-title"><empty name="data">订单详情
+	            <else/>
+                                                      订单详情
+            </empty></span>
+		</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" action="{:U('Trade/marketEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+									<tr class="controls">
+										<td class="item-label">订单编号 :</td>
+										<td><div class="form-control input-10x">
+											{$order['order_no']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">买家用户名 :</td>
+										<td><div class="form-control input-10x">
+											{$order['buy_name']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">卖家用户名 :</td>
+										<td><div class="form-control input-10x">
+											{$order['sell_name']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">
+										<eq name="market" value="buy">出售广告编号
+										<else />购买广告编号
+										</eq> : </td>
+										<td><div class="form-control input-10x">
+											<eq name="market" value="buy">{$order['sell_ad_no']}
+											<else />{$order['buy_ad_no']}
+											</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">交易币种 :</td>
+										<td><div class="form-control input-10x">
+											{$order['coin']}
+										</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">交易价格 :</td>
+										<td><div class="form-control input-10x">
+											{$order['deal_price']}{$order['deal_ctype']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">交易金额 :</td>
+										<td><div class="form-control input-10x">
+											{$order['deal_amount']}{$order['deal_ctype']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">交易数量 :</td>
+										<td><div class="form-control input-10x">
+											{$order['deal_num']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">创建时间 :</td>
+										<td><div class="form-control input-10x">
+											{$order['ctime']|addtime}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">付款限时 :</td>
+										<td><div class="form-control input-10x">
+											{$order['ltime']}分钟
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">完成时间 :</td>
+										<td><div class="form-control input-10x">
+										<empty name="order['finished_time']">
+											---
+										<else />
+											{$order['finished_time']|addtime}
+										</empty>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">状态 :</td>
+										<td><div class="form-control input-10x">
+											<eq name="order.status" value="0">已拍下</eq>
+			                                <eq name="order.status" value="1">待付款</eq>
+			                                <eq name="order.status" value="2">待收货</eq>
+			                                <eq name="order.status" value="3">待评价</eq>
+			                                <eq name="order.status" value="4">已完成</eq>
+			                                <eq name="order.status" value="5">取消</eq>
+			                                <eq name="order.status" value="6">申诉</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+
+									<eq name="order.status" value="6">
+									<tr class="controls">
+										<td class="item-label">申诉类别 :</td>
+										<td><div class="form-control input-10x">
+											<eq name="order.su_type" value="1">我已付款，但卖家没有放行</eq>
+			                                <eq name="order.su_type" value="2">卖家未遵守交易广告条款</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">申诉描述 :</td>
+										<td><div class="form-control input-10x">
+											{$order['su_reason']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">申诉图片:</td>
+										<td>
+											<notempty name="order['sutp']">
+												<a href="{$order['sutp']}" target="_blank">
+													<img src="{$order['sutp']}" style="width:300px;height:180px;"/>
+												</a>
+											<else/>
+												未上传图片
+											</notempty>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">处理结果 :</td>
+										<td>
+											<button class="btn submit-btn ajax-post"  onclick="chuli({$order['id']},'{$market}',1)" target-form="form-horizontal">交易正常进行，给买家释放币
+											</button>
+											<button class="btn submit-btn ajax-post"  onclick="chuli({$order['id']},'{$market}',2)" target-form="form-horizontal">交易取消，卖家币解冻
+											</button>
+											
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									</eq>
+									<eq name="order.adminhandle" value="1">
+										<tr class="controls">
+											<td class="item-label">卖家申请管理员介入 :</td>
+											<td>
+											<eq name="order.status" value="1">
+												<input type="button" class="btn" onclick="chuli({$order['id']},'{$market}',1)" value="交易正常进行，给买家释放币" />
+												<input type="button" class="btn" onclick="chuli({$order['id']},'{$market}',2)" value="交易取消，卖家币解冻" />
+											</eq>
+												<input type="button" class="btn" onclick="admindone({$order['id']},'{$market}')" value="不做处理，标记已处理" />
+											</td>
+											<td class="item-note"></td>
+										</tr>
+									</eq>
+									<tr class="controls">
+										<td class="item-label">交易描述 :</td>
+										<td><div class="form-control input-10x">
+											{$order['desc']}
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">买方评价 :</td>
+										<td><div class="form-control input-10x">
+											<eq name="order.buy_pj" value="0"></eq>
+			                                <eq name="order.buy_pj" value="1">好评</eq>
+			                                <eq name="order.buy_pj" value="2">中评</eq>
+			                                <eq name="order.buy_pj" value="3">差评</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">卖方评价 :</td>
+										<td><div class="form-control input-10x">
+											<eq name="order.sell_pj" value="0"></eq>
+			                                <eq name="order.sell_pj" value="1">好评</eq>
+			                                <eq name="order.sell_pj" value="2">中评</eq>
+			                                <eq name="order.sell_pj" value="3">差评</eq>
+											</div>
+										</td>
+										<td class="item-note"></td>
+									</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+
+					function chuli(id,market,type){
+						$.post("{:U('Trade/chuli_ajax')}", {
+							market: market,
+							id: id,
+							type:type,
+							}, function (data) {
+								layer.closeAll('loading');
+								if (data.status == 1) {
+									layer.alert(data.info, function(index){
+									self.location.reload();
+							});
+
+							} else {
+								
+								layer.msg(data.info, {icon: 2});
+
+							}
+						}, "json");
+					}
+					function admindone(id,market){
+						$.post("{:U('Trade/admindone')}", {
+							market: market,
+							id: id
+						}, function (data) {
+							layer.closeAll('loading');
+							if (data.status == 1) {
+								layer.alert(data.info, function(index){
+									self.location.reload();
+								});
+							} else {
+								layer.msg(data.info, {icon: 2});
+							}
+						}, "json");
+					}
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Trade/market')}");
+	</script>
+</block>

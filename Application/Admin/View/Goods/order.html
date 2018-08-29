@@ -1,0 +1,172 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">广告管理<eq name="market" value="buy">(购买广告管理)<else />(出售广告管理)</eq></span>
+		</div>
+		<div class="cf">
+			<div class="fl">
+			
+				<button class="btn btn-warning" onClick="location.href='{:U('Goods/order')}'">初始化搜索</button>
+			</div>
+
+			<div class="search-form fr cf" style="padding-top: 43px;float: none !important;">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1">
+
+						<select style="width: 140px; float: left; margin-right: 10px;display:none" name="state" class="form-control" >
+							<option value=""
+							<empty name="Think.get.state">selected</empty>
+							>全部状态</option>
+							<option value="1"
+							<eq name="Think.get.state" value="1">selected</eq>
+							>进行中</option>
+							<option value="2"
+							<eq name="Think.get.state" value="2">selected</eq>
+							>已下架</option>
+							<option value="4"
+							<eq name="Think.get.state" value="4">selected</eq>
+							>已冻结</option>
+						</select>
+						<select style=" width: 150px; float: left; margin-right: 10px;" name="field" class="form-control">
+							<option value="uname"
+							<eq name="Think.get.field" value="uname">selected</eq>
+							>用户昵称</option>
+							<option value="ad_no"
+							<eq name="Think.get.field" value="ad_no">selected</eq>
+							>广告编号</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//搜索功能
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//回车搜索
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="data-table table-striped">
+		<form id="form" action="{:U('Trade/tradeExcel')}" method="post" class="form-horizontal">
+			<table class="">
+				<thead>
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">编号</th>
+					<th class="">用户名</th>
+					<th class="">商品名称</th>
+					<th class="">商品价格</th>
+					<th class="">购买数量</th>
+					<th class="">电话</th>
+					<th class="">微信</th>
+					<th class="">qq</th>
+					
+					<th class="">购买时间</th>
+					<th class="">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+							<td>{$vo['uname']}</td>
+							<td>{$vo['goodname']}</td>
+							<td>{$vo['prices']}</td>
+							<td>{$vo['nums']}</td>
+							<td>{$vo['tel']}</td>
+							<td>{$vo['weixin']}</td>
+							<td>{$vo['qq']}</td>
+							<td>{$vo.ctime|addtime}</td>
+							
+							<td>
+								
+								<if condition="$vo.status eq 0 "><a href="javascript:upsend({$vo.id})" class="btn btn-primary btn-xs">发货</a>
+									
+								</if>
+								
+							</td>
+						</tr>
+					</volist>
+
+					<else/>
+					<td colspan="12" class="text-center">Oh! 暂时还没有内容!</td>
+				</notempty>
+				</tbody>
+			</table>
+		</form>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//冻结解冻
+	function upsend(id) {
+
+        $.post("{:U('Goods/upsend')}",{id : id},function(data){
+            if(data.status==1){
+                layer.msg(data.info,{icon : 1 });
+                window.location.href=window.location.href;
+            }else{
+                layer.msg(data.info,{icon : 2 });
+            }
+        });
+	}
+	//提交表单
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+	$(".page > div").children("a").each(function(){
+		var ahref = $(this).attr('href');
+		var ahrefarr = ahref.split("/");
+		var ahlength = ahrefarr.length;
+		if(ahrefarr[ahlength-2]=="p"){
+			var jiewei = ahrefarr[ahlength-1].split(".");
+			var page = jiewei[0];
+		}
+		ahrefarr.splice(ahlength-2,2);
+		var newhref = "";
+		for(var i=0;i<ahrefarr.length;i++){
+			if(i>0 && i<3){
+				newhref = newhref + "/" + ahrefarr[i];
+			}
+			if(i==3){
+				newhref = newhref + "/" + ahrefarr[i] + ".html?";
+			}
+			if(i>=4){
+				if(i%2==0){
+					newhref = newhref + "&" + ahrefarr[i];
+				}else{
+					newhref = newhref + "=" + ahrefarr[i];
+				}
+			}
+		}
+		newhref = newhref+"&p="+page;
+		$(this).attr("href",newhref);
+	});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Goods/order')}");
+	</script>
+</block>

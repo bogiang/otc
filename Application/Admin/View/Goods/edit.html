@@ -1,0 +1,195 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/layer/laydate/laydate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title"><a href="{:U('Goods/index')}">商品管理</a> >></span>
+            <span class="h1-title"><empty name="data">添加商品
+	            <else/>
+                                                      编辑商品
+            </empty></span>
+		</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form  id="form1"  onsubmit="return false;" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+								
+								<tr class="controls">
+									<td class="item-label">商品名称 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" id="goods_name" name="goods_name" value="{$data.goods_name}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">商品图片 :</td>
+									<td style="height:190px;">
+										<div class="iptbox" style="float:left;">
+									<a href="javascript:;" class="file file1">
+									<empty name="data.goods_img">
+										<img src="/Public/Home/new_index/images/newspic.png" alt="Image preview" style="width:150px;max-height:150px;margin-top: 20px;">
+										<input type="file" name="goods_img" id="goods_img"/>
+	            					<else/>
+                                        <img src="{$data.goods_img}" alt="Image preview" style="width:150px;max-height:150px;margin-top: 20px;"> 
+                                        <input type="file" name="goods_img" id="goods_img" src="{$data.goods_img}"/>            
+            						</empty>
+
+									
+										
+									</a>
+									</div>
+									<div class="showFileName">
+									</div>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">商品库存 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" id="goods_kc" name="goods_kc" value="{$data.goods_kc}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">商品价格 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" id="goods_price" name="goods_price" value="{$data.goods_price}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">商品内容 :</td>
+									<td height=530 align='top'>
+										<div style="height:530px;overflow-y:scroll;">
+											<textarea name="ueditorcontent" id="ueditorcontent" style="width:850px;border:none;">{$data.goods_content}</textarea>
+										</div>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">添加时间 :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="goods_adtime" value="{$data['goods_adtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">状态 :</td>
+									<td><select name="goods_status" class="form-control input-10x">
+										<option value="1"
+										<eq name="data.goods_status" value="1">selected</eq>
+										>可用</option>
+										<option value="0"
+										<eq name="data.goods_status" value="0">selected</eq>
+										>下架</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="ajax-post btn submit-btn" id="submit" type="button" target-form="form-horizontal">确 定
+											</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function () {
+
+						var form=document.getElementById("form1");
+        				var fd =new FormData(form);
+
+        				$.ajax({
+				       		url: "{:U('Goods/edit')}" ,
+				       		type: 'POST',
+				       		data: fd,
+				       		dataType:'json',
+				       		async: false,
+				       		cache: false,
+				       		contentType: false,
+				       		processData: false,
+				       		success: function (data) {
+				       		
+				            if (data.status == 1) {
+								layer.msg(data.info, {icon: 1});
+								setTimeout('window.location.reload()',1000);
+							} else {
+								layer.msg(data.info, {icon: 2});
+								if (data.url) {
+									// window.location = data.url;
+								}
+							}
+				       }
+					});
+					
+					});
+					
+				</script>
+				<script type="text/javascript">
+					$(".iptbox").on("change","input[type='file']",function(){
+					var filePath=$(this).val();
+					var objUrl = getObjectURL(this.files[0]) ;
+
+					if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("gif")!=-1 || filePath.indexOf("bmp")!=-1){
+						$(".fileerrorTip").html("").hide();
+						var arr=filePath.split('\\');
+						var fileName=arr[arr.length-1];
+						$(this).parent().find("img").css("margin-top",'0px');
+						$(this).parent().find("img").attr("src",objUrl);
+					}else{
+						$(".showFileName").html("");
+						$(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
+						return false
+					}
+				});
+				function getObjectURL(file) {
+    					var url = null;
+    					if (window.createObjectURL != undefined) { // basic
+        					url = window.createObjectURL(file);
+    					} else if (window.URL != undefined) { // mozilla(firefox)
+        					url = window.URL.createObjectURL(file);
+    					} else if (window.webkitURL != undefined) { // webkit or chrome
+        					url = window.webkitURL.createObjectURL(file);
+    					}
+    					return url;
+				}
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var ue = UE.getEditor('ueditorcontent',{
+		toolbars: [
+			['bold', 'indent', 'italic', 'underline', 'strikethrough', 'subscript', 'fontborder', 'superscript', 'formatmatch', 'source', 'blockquote', 'pasteplain', 'selectall', 'horizontal', 'removeformat', 'time', 'date', 'unlink', 'insertrow', 'insertcol', 'mergeright', 'mergedown', 'deleterow', 'deletecol', 'splittorows', 'splittocols', 'splittocells', 'deletecaption', 'inserttitle', 'mergecells', 'deletetable', 'cleardoc', 'fontfamily', 'fontsize', 'paragraph', 'edittable', 'edittd', 'link', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor', 'backcolor', 'imagecenter', 'insertimage', 'drafts', 'lineheight', 'inserttable', 'insertparagraphbeforetable', '', '', '', '', '', '']
+		],
+		initialFrameWidth:800,
+		initialFrameHeight:400
+	});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Goods/index')}");
+	</script>
+</block>

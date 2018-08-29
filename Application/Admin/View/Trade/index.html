@@ -1,0 +1,256 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">广告管理<eq name="market" value="buy">(购买广告管理)<else />(出售广告管理)</eq></span>
+		</div>
+		<div class="cf">
+			<div class="fl">
+				<eq name="market" value="buy">
+					<button class="btn btn-warning"  onClick="location.href='{:U('Trade/index?market=sell')}'">出售广告管理</button>
+					<button class="btn btn-success">购买广告管理</button>
+					<else />
+					<button class="btn btn-success">出售广告管理</button>
+					<button class="btn btn-warning" onClick="location.href='{:U('Trade/index?market=buy')}'">购买广告管理</button>
+				</eq>
+				<button class="btn btn-warning" onClick="location.href='{:U('Trade/index?market='.$market)}'">初始化搜索</button>
+				<!--<button class="btn btn-success" url="" target-form="ids" id="submit" type="submit">导出选中</button>
+				<form action="{:U('Trade/tradeExcel')}" method="post" style="display:inline-block;">
+					<input type="hidden" name="id" value="{$tradeid}" />
+					<input type="submit" class="btn btn-success" value="导出全部" />
+				</form>-->
+			</div>
+
+			<div class="search-form fr cf" style="padding-top: 43px;float: none !important;">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1">
+
+
+						<!--<select style="width: 120px; float: left; margin-right: 10px;" name="bs_type" class="form-control">
+							<option value=""
+							<empty name="Think.get.bs_type">selected</empty>
+							>全部类型</option>
+							<option value="1"
+							<eq name="Think.get.bs_type" value="1">selected</eq>
+							>买入</option>
+							<option value="2"
+							<eq name="Think.get.bs_type" value="2">selected</eq>
+							>卖出</option>
+						</select>-->
+
+
+						<!-- 时间筛选 -->
+                        <script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
+
+                        <input type="text" class="form-control" style=" width: 170px; float: left; margin-right: 10px;" name="starttime" value="{:I('get.starttime')}" placeholder="开始日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                        <input type="text" class="form-control" style=" width: 170px; float: left; margin-right: 10px;" name="endtime" value="{:I('get.endtime')}" placeholder="结束日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+
+
+						<select style="width: 140px; float: left; margin-right: 10px;" name="location" class="form-control">
+							<option value=""
+							<empty name="Think.get.location">selected</empty>
+							>地区</option>
+							<volist name="location" id="vo">
+								<option value="{$vo['id']}"
+								<eq name="vo['id']" value="$Think.get.location">selected</eq>
+								>{$vo['short_name']} {$vo['name']}</option>
+							</volist>
+						</select>
+						<select style="width: 140px; float: left; margin-right: 10px;" name="currency" class="form-control">
+							<option value=""
+							<empty name="Think.get.currency">selected</empty>
+							>货币</option>
+							<volist name="currency" id="vo">
+								<option value="{$vo['id']}"
+								<eq name="vo['id']" value="$Think.get.currency">selected</eq>
+								>{$vo['short_name']} {$vo['name']}</option>
+							</volist>
+						</select>
+						<select style="width: 140px; float: left; margin-right: 10px;" name="coin" class="form-control">
+							<option value=""
+							<empty name="Think.get.coin">selected</empty>
+							>币种</option>
+							<volist name="coin" id="vo">
+								<option value="{$vo['id']}"
+								<eq name="vo['id']" value="$Think.get.coin">selected</eq>
+								>{$vo['js_yw']}</option>
+							</volist>
+						</select>
+						<select style="width: 140px; float: left; margin-right: 10px;" name="pay_method" class="form-control">
+							<option value=""
+							<empty name="Think.get.pay_method">selected</empty>
+							>支付方式</option>
+							<volist name="pay_method" id="vo">
+								<option value="{$vo['id']}"
+								<eq name="vo['id']" value="$Think.get.pay_method">selected</eq>
+								>{$vo['name']}</option>
+							</volist>
+						</select>
+						<select style="width: 140px; float: left; margin-right: 10px;" name="state" class="form-control">
+							<option value=""
+							<empty name="Think.get.state">selected</empty>
+							>全部状态</option>
+							<option value="1"
+							<eq name="Think.get.state" value="1">selected</eq>
+							>进行中</option>
+							<option value="2"
+							<eq name="Think.get.state" value="2">selected</eq>
+							>已下架</option>
+							<option value="4"
+							<eq name="Think.get.state" value="4">selected</eq>
+							>已冻结</option>
+						</select>
+						<select style=" width: 150px; float: left; margin-right: 10px;" name="field" class="form-control">
+							<option value="username"
+							<eq name="Think.get.field" value="username">selected</eq>
+							>用户昵称</option>
+							<option value="ad_no"
+							<eq name="Think.get.field" value="ad_no">selected</eq>
+							>广告编号</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//搜索功能
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//回车搜索
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="data-table table-striped">
+		<form id="form" action="{:U('Trade/tradeExcel')}" method="post" class="form-horizontal">
+			<table class="">
+				<thead>
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">编号</th>
+					<th class="">昵称</th>
+					<th class="">地区</th>
+					<th class="">货币</th>
+					<th class="">币种</th>
+					<th class="">收款方式</th>
+					<th class="">溢价</th>
+					<th class="">价格</th>
+					<eq name="market" value="buy">
+						<th class="">付款期限</th><else/>
+						<th class="">最低价</th></eq>
+					<th class="">限额</th>
+					<th class="">发布时间</th>
+					<th class="">状态</th>
+					<th class="">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.ad_no}</td>
+							<td>{$vo['username']}</td>
+							<td>{$vo['location']}</td>
+							<td>{$vo['currency']}</td>
+							<td>{$vo['coin']}</td>
+							<td>{$vo['pay_method']}</td>
+							<td>{$vo['margin']}%</td>
+							<td>{$vo['price']|Num}</td>
+							<eq name="market" value="buy">
+								<td>{$vo['due_time']|Num}分钟</th><else/>
+								<td>{$vo['min_price']|Num}</th></eq>
+							<td>{$vo['min_limit']|Num}-{$vo['max_limit']|Num}</td>
+							<td>{$vo.add_time|addtime}</td>
+							<td>
+								<eq name="vo.state" value="1">进行中</eq>
+                                <eq name="vo.state" value="2">已下架</eq>
+								<eq name="vo.state" value="4">已冻结</eq>
+							</td>
+							<td>
+								<a href="{:U('Trade/adinfo?id='.$vo['id'].'&market='.$market)}" class="btn btn-primary btn-xs">详情 </a>
+								<a href="{:U('Trade/addel?id='.$vo['id'].'&market='.$market)}" class="btn btn-danger btn-xs">删除 </a>
+								<!--<if condition="$vo.state eq 1 "><a href="javascript:void(0)" class="btn btn-primary btn-xs">冻结</a>
+									<elseif condition="$vo.state eq 4"/><a href="javascript:void(0)" class="btn btn-primary btn-xs">解冻</a>
+								</if>-->
+								<a onClick="if(confirm('确定要执行吗？')) frozen('{$vo.id}','{$market}')" href="javascript:void(0)" <if condition="$vo.state eq 1 ">class="btn btn-info btn-xs">冻结<elseif condition="$vo.state eq 4"/>class="btn btn-warning btn-xs">解冻</if></a>
+							</td>
+						</tr>
+					</volist>
+
+					<else/>
+					<td colspan="12" class="text-center">Oh! 暂时还没有内容!</td>
+				</notempty>
+				</tbody>
+			</table>
+		</form>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//冻结解冻
+	function frozen(id,type) {
+        $.post("{:U('Trade/adfrozen')}",{id : id, type:type},function(data){
+            if(data.status==1){
+                layer.msg(data.info,{icon : 1 });
+                window.location.href=window.location.href;
+            }else{
+                layer.msg(data.info,{icon : 2 });
+            }
+        });
+	}
+	//提交表单
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+	$(".page > div").children("a").each(function(){
+		var ahref = $(this).attr('href');
+		var ahrefarr = ahref.split("/");
+		var ahlength = ahrefarr.length;
+		if(ahrefarr[ahlength-2]=="p"){
+			var jiewei = ahrefarr[ahlength-1].split(".");
+			var page = jiewei[0];
+		}
+		ahrefarr.splice(ahlength-2,2);
+		var newhref = "";
+		for(var i=0;i<ahrefarr.length;i++){
+			if(i>0 && i<3){
+				newhref = newhref + "/" + ahrefarr[i];
+			}
+			if(i==3){
+				newhref = newhref + "/" + ahrefarr[i] + ".html?";
+			}
+			if(i>=4){
+				if(i%2==0){
+					newhref = newhref + "&" + ahrefarr[i];
+				}else{
+					newhref = newhref + "=" + ahrefarr[i];
+				}
+			}
+		}
+		newhref = newhref+"&p="+page;
+		$(this).attr("href",newhref);
+	});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('Trade/index')}");
+	</script>
+</block>

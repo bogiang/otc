@@ -1,0 +1,225 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title"><a href="{:U('User/index')}">用户管理</a> >></span>
+			 <span class="h1-title"><empty name="data">添加用户
+				 <else/>
+			                                           编辑用户
+			 </empty></span>
+		</div>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" action="{:U('User/edit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+								<tr class="controls">
+									<td class="item-label">头像 :</td>
+									<td>
+										<empty name="data.headimg">
+											<img style="width:80px;height:80px;cursor:pointer;border-radius:50%;border:3px solid #fff" src="__PUBLIC__/Home/images/default_head.png" onclick="select()" name="image" title="修改头像"/>
+											<else/>
+											<img style="width:80px;height:80px;cursor:pointer;border-radius:50%;border:3px solid #fff" src="{$data['headimg']}" onclick="select()" name="image"/>
+										</empty>
+										<div id="newimg" onclick="select()"></div>
+										<input style="display:none;" id="file" type="file" name="file" onchange="preview(this)" title="修改头像" value="" />
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">用户名 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="username" value="{$data.username}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">用户昵称 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="enname" value="{$data.enname}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">用户密码 :</td>
+									<td><input type="text" class="form-control input-10x" name="password" value=""></td>
+									<td class="item-note">留空不更新</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">交易密码 :</td>
+									<td><input type="text" class="form-control input-10x" name="paypassword" value="">
+									</td>
+									<td class="item-note">留空不更新</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">手机 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="mobile" value="{$data.mobile}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">邮箱 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="email" value="{$data.email}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<!--<tr class="controls">
+									<td class="item-label">手机认证时间 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="mobiletime" value="{$data['mobiletime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">一代 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="invit_1" value="{$data.invit_1}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">二代 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="invit_2" value="{$data.invit_2}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">三代 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="invit_3" value="{$data.invit_3}">
+									</td>
+									<td class="item-note"></td>
+								</tr>-->
+								<tr class="controls">
+									<td class="item-label">真实姓名 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="truename" value="{$data.truename}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">证件类型 :</td>
+									<td>
+										<select class="form-control input-10x" name="zhengjian">
+											<option value="sfz" <eq name="data.zhengjian" value="sfz">selected</eq>>身份证</option>
+											<option value="hz" <eq name="data.zhengjian" value="hz">selected</eq>>护照</option>
+										</select>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">证件号码 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="idcard" value="{$data.idcard}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">个人简介 :</td>
+									<td>
+										<textarea style="height:150px" type="text" class="form-control input-10x" name="jianjie">{$data.jianjie}</textarea>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">以太坊/代币充币地址 :</td>
+									<td>
+										{$usercoin.ethb}
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">密码 :</td>
+									<td>
+										{$data.ethpassword}
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<!--<tr class="controls">
+									<td class="item-label">密保问题 :</td>
+									<td>
+										<select id="mibao_question" name="mibao_question" class="form-control input-10x" style="">
+		                                <option value="">请选择密保问题</option>
+		                                <option value="你父亲的姓名">你父亲的姓名</option>
+		                                <option value="你母亲的姓名">你母亲的姓名</option>
+		                                <option value="你爱人的姓名">你爱人的姓名</option>
+		                                <option value="你的出生日期">你的出生日期</option>
+		                                <option value="你父亲的出生日期">你父亲的出生日期</option>
+		                                <option value="你母亲的出生日期">你母亲的出生日期</option>
+		                                <option value="你爱人的出生日期">你爱人的出生日期</option>
+		                            </select>
+									</td>
+									<td class="item-note">不选不更新&nbsp;&nbsp;&nbsp;&nbsp;原问题：{$data.mibao_question}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">密保问题答案 :</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="mibao_answer" value="">
+									</td>
+									<td class="item-note">留空不更新&nbsp;&nbsp;&nbsp;&nbsp;原答案：{$data.mibao_answer}</td>
+								</tr>-->
+								<tr class="controls">
+									<td class="item-label">状态 :</td>
+									<td><select name="status" class="form-control input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">selected</eq>
+										>正常</option>
+										<option value="0"
+										<eq name="data.status" value="0">selected</eq>
+										>冻结</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//提交表单
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+    function select(){
+        $('#file').click();
+    }
+    function preview(file) {
+        $("img[name='image']").css('display','none');
+        var prevDiv = document.getElementById('newimg');
+        if (file.files && file.files[0])
+        {
+            var reader = new FileReader();
+            reader.onload = function(evt){
+                prevDiv.innerHTML = '<img style="width:80px;height:80px;cursor:pointer;border-radius:50%;border:3px solid #fff" src="' + evt.target.result + '" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        else
+        {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+</script>

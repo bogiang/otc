@@ -1,0 +1,369 @@
+<include file="Public:header_new"/>
+<link rel="stylesheet" href="__PUBLIC__/Home/assets/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Home/assets/css/multiple-select.css" />
+<style>
+.usernewout .usncont{background: #fff;margin-top: 30px;}
+.usernewout .usncont .usnc_right{width:1120px;float: left;margin-left:40px;border:none;}
+.usernewout .usncont .usnc_right h1{font-size: 30px;padding:0;text-indent: 0;border-bottom: 0;}
+.p_new{color: rgba(0,0,0,.7);font-size: 16px;margin-bottom: 10px;margin-top: 30px;}
+.h4_new{color:rgba(0,0,0,.7);font-size: 20px;line-height: 43px;border-bottom: 1px solid rgba(0,0,0,.2);font-weight: normal;}
+.input_new{font-size: 15px;color: rgba(0,0,0,.7);margin-right: 24px;}
+.input_new input{margin-right: 5px;}
+.usernewout .usncont .usnc_right .rech_bd .rechmid .rechipt_box{position: relative;}
+.cur{position: absolute;right:33px;top:15px;color:rgba(0,0,0,0.7);}
+.bfs{position: absolute;right:33px;top:15px;}
+.usernewout .usncont .usnc_right .rech_bd .rechmid .rechipt_box .iptbox{width:600px;}
+.ms-parent{width:572px!important;height:50px!important;color:rgba(0,0,0,.7)!important;border:1px solid #d9d9d9!important;border-radius:4px!important;}
+</style>
+<div class="usernewout">
+	<div class="usncont">
+		<div class="usnc_right">
+			<h1>编辑一个广告</h1>
+			<div class="rech_box">
+				<div class="rech_bd nmt">
+					<div class="rechmid">
+						<h4 class="h4_new">交易类型</h4>
+						<div>
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>选择广告类型:</p>
+							<div>
+								<label class="input_new"><input id="sell" name="type" type="radio" value="1" checked />在线出售 </label>
+								<label class="input_new"><input id="buy" name="type" type="radio" value="0" />在线购买 </label>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>交易币种:  <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请选择你要发布广告的币种。</span></p>
+							<div class="iptbox">
+								<select id="coin" class="rechipt" style="width:572px;height:50px;color:rgba(0,0,0,.7);">
+									<volist name="coin" id="vo">
+										<empty name="Think.get.coinid">
+										<eq name="ad_info.coin" value="$vo.id">
+											<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}</option>
+											<else/>
+											<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}</option>
+										</eq>
+										<else/>
+											<eq name="Think.get.coinid" value="$vo.id">
+												<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}</option>
+												<else/>
+												<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}</option>
+											</eq>
+										</empty>
+									</volist>
+								</select>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>所在地:  <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请选择你要发布广告的国家。</span></p>
+							<div class="iptbox">
+								<select id="location" class="rechipt" style="width:572px;height:50px;color:rgba(0,0,0,.7);">
+									<volist name="location" id="vo">
+										<eq name="ad_info.location" value="$vo.id">
+											<option value="{$vo.id}" selected="selected">{$vo.short_name} {$vo.name}</option>
+											<else/>
+											<option value="{$vo.id}">{$vo.short_name} {$vo.name}</option>
+										</eq>
+									</volist>
+								</select>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>货币:  <span style="color:rgba(0,0,0,0.7);font-size: 14px;">您希望交易付款的货币类型。</span></p>
+							<div class="iptbox">
+								<select id="currency" class="rechipt" style="width:572px;height:50px;color:rgba(0,0,0,.7);">
+									<volist name="currency" id="vo">
+										<eq name="ad_info.currency" value="$vo.id">
+											<option value="{$vo.id}" selected="selected">{$vo.short_name} {$vo.name}</option>
+											<else/>
+											<option value="{$vo.id}">{$vo.short_name} {$vo.name}</option>
+										</eq>
+									</volist>
+								</select>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>溢价: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">您可以以高于市场价买入或低于市场价卖出的方式来并吸引更多的交易者。</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input id="margin" type="text" value="{$ad_info.margin}" class="rechipt" style="width: 572px;height: 48px;"/>
+								<div class="bfs">%</div>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>价格: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">基于溢价比例得出的报价，10分钟更新一次。</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input type="text" value="" class="rechipt" id="price" readonly="readonly" style="width: 572px;height: 48px;"/>
+								<div class="cur">CNY</div>
+							</div>
+						</div>
+						<div id="zuidi" class="rechipt_box">
+							<p class="p_new">最低价（选填）: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">最低价格是为了您在动荡的市场中保持稳定收益，市场价格低于最低价格时，您的广告仍以最低价格展示出来。</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input type="text" value="{$ad_info.min_price|num}" class="rechipt" id="min_price" style="width: 572px;height: 48px;"/>
+								<div class="cur">CNY</div>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>最小限额: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">一次交易的最低的交易限制。</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input type="text" value="{$ad_info.min_limit|num}" class="rechipt" id="min_limit" style="width: 572px;height: 48px;"/>
+								<div class="cur">CNY</div>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>最大限额: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">一次交易中的最大交易限制，您的钱包余额也会影响最大量的设置。</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input type="text" value="{$ad_info.max_limit|num}" class="rechipt" id="max_limit" style="width: 572px;height: 48px;"/>
+								<div class="cur">CNY</div>
+							</div>
+						</div>
+						<div id="qixian" class="rechipt_box" style="display: none">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>付款期限:<span style="color:rgba(0,0,0,0.7);font-size: 14px;">您承诺在此期限内付款（分钟）</span></p>
+							<div class="iptbox">
+								<input type="text" value="{$ad_info.due_time}" class="rechipt" id="due_time" style="width: 572px;height: 48px;">
+							</div>
+						</div>
+						<div class="paymethod">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>
+							<select id="pay_method" multiple="multiple">
+								{$pay_method_option}
+							</select>
+						</div>
+						<if condition="$type eq 1">
+						<div id="skacc" class="rechipt_box" >
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请填写收款账号，尽量详细。</span></p>
+							<div class="iptbox" style="width:600px;">
+								<input type="text" value="{$ad_info.skaccount}" class="rechipt" id="skaccount" style="width: 572px;height: 48px;">
+							</div>
+						</div>
+						</if>
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>交易条款:</p>
+							<div class="iptbox" style="width: 572px;padding: 15px 10px;height: 110px;resize: none;line-height: 1.25;border:1px solid #d6dbdd;font-size: 14px;">
+								<textarea id="message" style="resize: none;border:none;outline: none;color:rgba(0,0,0,0.7);" rows="5" cols="66"  placeholder="有关您的交易的其他信息，比如您交易的相关条款和支付方式。" onfocus="this.placeholder=''" onblur="this.placeholder='有关您的交易的其他信息，比如您交易的相关条款和支付方式。'">{$ad_info.message}</textarea>
+							</div>
+						</div>
+						<div>
+							<h4 class="h4_new">高级设置</h4>
+							<div>
+								<p class="p_new">是否启用安全选项：<span style="color:rgba(0,0,0,0.7);font-size: 14px;">启用后，仅限于已验证身份证的用户与本广告交易。</span></p>
+								<div>
+									<label class="input_new"><input name="safe_option" type="radio" value="1" <eq name="ad_info.safe_option" value="1">checked</eq>/>启用 </label>
+									<label class="input_new"><input name="safe_option" type="radio" value="0" <eq name="ad_info.safe_option" value="0">checked</eq>/>不启用 </label>
+								</div>
+							</div>
+							<div>
+								<p class="p_new">仅限受信任的交易者：<span style="color:rgba(0,0,0,0.7);font-size: 14px;">启用后，仅限于自己信任的用户与本广告交易。</span></p>
+								<div>
+                                <label class="input_new"><input name="trust_only" type="checkbox" value="1"/>启用 </label>
+									<!-- <input style="vertical-align: middle;" name="trust_only" type="checkbox" value="1" <eq name="ad_info.trust_only" value="1">checked</eq>/>
+									<span style="font-size: 15px;color: rgba(0,0,0,.7);margin-right: 24px;vertical-align: middle;">启用</span> -->
+								</div>
+							</div>
+							<div>
+								<p class="p_new">开放时间：<span style="color:rgba(0,0,0,0.7);font-size: 14px;">您希望广告自动显示和隐藏的天数和小时数。</span></p>
+								<div>
+								<volist name="arr" id="vo">
+                                        <span class="p_new" style="margin-right: 10px;font-size: 14px;">{$vo.xq}:</span>
+                                        <select name="{$vo.start}" style="width:216px!important;height:50px;padding-left: 10px;margin-right: 30px;border:1px solid #d9d9d9;font-size: 14px;color:rgba(0,0,0,.7);">
+                                            {$vo.option}
+                                        </select>
+                                        <select name="{$vo.end}" style="width:216px!important;height:50px;padding-left: 10px;margin-right: 30px;border:1px solid #d9d9d9;font-size: 14px;color:rgba(0,0,0,.7);">
+                                            {$vo.option}
+                                        </select>
+                                        <div style="height: 10px;width:100%;"></div>
+                                    </volist>
+								</div>
+							</div>
+						</div>
+						<div class="rechipt_box">
+							<div class="iptbox mrl110" style="width: 600px;">
+								<input type="button" value="保存" class="rechbut" onclick="Update()" style="background: #3d3d3d;width:190px;border-radius: 4px;height:48px;margin-left: 228px;margin-top: 30px;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__PUBLIC__/Home/assets/js/multiple-select.js"></script>
+<script type="text/javascript">
+    $("#coin").on('change change',function(){
+        window.location.href='?coinid='+this.value;
+    });
+    
+	var type = "{$ad_info.type}";
+    var newad = "{$newad_token}";
+    var price = "{$currency[$ad_info['currency']-1]['price']}";
+    var short_name = "{$currency[$ad_info['currency']-1]['short_name']}";
+    //获取开放时间并进行重组
+    var open_time = "{$ad_info.open_time}".split(",");
+    for(var i in open_time){
+        if(open_time[i]=='1'){
+            open_time[i]='a-a';
+        }
+        if(open_time[i]=='0'){
+            open_time[i]='z-z';
+        }
+    }
+
+    $(function() {
+		if(type == 1){
+            $("#sell").attr("checked","checked");
+            $("#buy").attr("disabled","disabled");
+            $("#qixian").hide();
+            $("#zuidi").show();
+		}else{
+            $("#buy").attr("checked","checked");
+            $("#sell").attr("disabled","disabled");
+            $("#qixian").show();
+            $("#zuidi").hide();
+		}
+        var margin = $('#margin').val();
+        var sum = parseFloat(price)+parseFloat(price * margin/100);
+        sum = sum.toFixed(2);
+        $("#price").val(sum);
+        $(".cur").text(short_name);
+        $("select[name='mon_s']").val(open_time[0].split('-')[0]);
+        $("select[name='mon_e']").val(open_time[0].split('-')[1]);
+        $("select[name='tue_s']").val(open_time[1].split('-')[0]);
+        $("select[name='tue_e']").val(open_time[1].split('-')[1]);
+        $("select[name='wed_s']").val(open_time[2].split('-')[0]);
+        $("select[name='wed_e']").val(open_time[2].split('-')[1]);
+        $("select[name='thu_s']").val(open_time[3].split('-')[0]);
+        $("select[name='thu_e']").val(open_time[3].split('-')[1]);
+        $("select[name='fri_s']").val(open_time[4].split('-')[0]);
+        $("select[name='fri_e']").val(open_time[4].split('-')[1]);
+        $("select[name='sat_s']").val(open_time[5].split('-')[0]);
+        $("select[name='sat_e']").val(open_time[5].split('-')[1]);
+        $("select[name='sun_s']").val(open_time[6].split('-')[0]);
+        $("select[name='sun_e']").val(open_time[6].split('-')[1]);
+    });
+
+    $("#currency").on('change change',function(){
+        var currency_id = $(this).val();
+        var coin_id = $('#coin').val();
+        $.post("{:U('Ajax/getCurrency')}", {
+            id: currency_id,
+            coin:coin_id
+        }, function (data) {
+            var short_name = data.sname;
+            price = data.pri;
+            $(".cur").text(short_name);
+        }, "json");
+    });
+
+    $("#margin").on('keyup change',function(){
+        var margin = $('#margin').val();
+        var sum = parseFloat(price)+parseFloat(price * margin/100);
+        sum = sum.toFixed(2);
+        $("#price").val(sum);
+    });
+
+    function Update() {
+    	var skaccount='';
+        var id = "{$ad_info.id}";
+        var type = $("input[name='type']:checked").val();
+        var coin = $('#coin').val();
+        var location = $('#location').val();
+        var currency = $("#currency").val();
+        var margin = $("#margin").val();
+        var min_price = $("#min_price").val();
+        var min_limit = $("#min_limit").val();
+    	var max_limit = $("#max_limit").val();
+        var due_time = $('#due_time').val();
+        // var pay_method = $('#pay_method').val();
+        var pay_method='';
+
+		$('input[type="checkbox"]:checked').each(function(){
+				if($(this).val()!='on'){
+					pay_method+=$(this).val()+",";
+				}
+
+		});
+		// alert(pay_method);
+
+        var message = $("#message").val();
+        var safe_option =  $("input[name='safe_option']:checked").val();
+        var trust_only = ($("input[name='trust_only']:checked").val()==1)?1:0;
+        var open_time = $("select[name='mon_s']").val()+'-'+$("select[name='mon_e']").val()+','+$("select[name='tue_s']").val()+'-'+$("select[name='tue_e']").val()+','+$("select[name='wed_s']").val()+'-'+$("select[name='wed_e']").val()+','+$("select[name='thu_s']").val()+'-'+$("select[name='thu_e']").val()+','+$("select[name='fri_s']").val()+'-'+$("select[name='fri_e']").val()+','+$("select[name='sat_s']").val()+'-'+$("select[name='sat_e']").val()+','+$("select[name='sun_s']").val()+'-'+$("select[name='sun_e']").val();
+
+    	if(!margin){
+	      layer.tips('请输入溢价！', '#margin', {tips: 3});
+            $('#margin').focus();
+            return false;
+	    }
+
+        if (!min_limit) {
+            layer.tips('请输入最小限额', '#min_limit', {tips: 3});
+            $('#min_limit').focus();
+            return false;
+        }
+
+        if (!max_limit) {
+            layer.tips('请输入最大金额', '#max_limit', {tips: 3});
+            $('#max_limit').focus();
+            return false;
+        }
+
+        if (!message) {
+			layer.tips('请输入交易条款', '#message', {tips: 3});
+            $('#message').focus();
+			return false;
+		}
+		if(pay_method==''){
+			layer.alert("请选择支付方式！");
+			return false;
+		}
+		
+		if(type == 1){
+			var skaccount = $("#skaccount").val();
+			if(!skaccount){
+				layer.tips('请填写收款账号！', '#skaccount', {tips: 3});
+            	$('#skaccount').focus();
+            	return false;
+			}
+		}
+		if(type == 0) {
+            if (!due_time) {
+                layer.tips('请输入付款期限', '#due_time', {tips: 3});
+                $('#due_time').focus();
+                return false;
+            }
+        }
+        $.post("{:U('Newad/upediad')}", {
+            id: id,
+            type: type,
+            coin: coin,
+            location: location,
+            currency: currency,
+            margin: margin,
+            min_price: min_price,
+            min_limit: min_limit,
+            max_limit: max_limit,
+            due_time: due_time,
+            pay_method: pay_method,
+            message: message,
+            safe_option: safe_option,
+            trust_only: trust_only,
+            open_time: open_time,
+            skaccount:skaccount,
+			token: newad
+        }, function (data) {
+			newad = data.url;
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                window.location.href="{:U('User/myad',array('type'=>$type))}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, "json");
+    }
+	$(document).ready(function(){
+		$('#pay_method').change(function() {
+            console.log($(this).val());
+        }).multipleSelect({
+            width: '100%'
+        });
+	});
+</script>
+<include file="Public:footer_new"/>

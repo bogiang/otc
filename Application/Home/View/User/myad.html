@@ -1,0 +1,107 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+	<include file="User:top"/>
+	<div class="usncont">
+		<include file="User:left"/>
+		<div class="usnc_right">
+			<h1>
+				<eq name="type" value="1">出售广告<else/>购买广告</eq>
+				<div class="xr">
+					<a <if condition="($state eq 1) or (empty($state))">class="on"</if> href="{:U('User/myad')}?type={$type}&state=1">进行中</a>
+					<a <if condition="$state eq 2">class="on"</if> href="{:U('User/myad')}?type={$type}&state=2">已下架</a>
+				</div>
+			</h1>
+			<!-- <a <neq name="state" value="2,3">class="on"</neq> href="{:U('User/myad',array('type'=>$type,'state'=>1))}">进行中</a>
+			<a <eq name="state" value="2">class="on"</eq> href="{:U('User/myad',array('type'=>$type,'state'=>2))}">已下架</a>
+			<a <eq name="state" value="3">class="on"</eq> href="{:U('User/myad',array('type'=>$type,'state'=>3))}">已完成</a> -->
+			<div class="recharge_list">
+				<table>
+					<tr>
+						<th width="100px">编号</th>
+						<th width="130px">广告类型</th>
+						<th width="80px">国家</th>
+						<th width="150px">价格</th>
+						<th width="200px">交易限额</th>
+						<th width="230px">创建时间</th>
+						<th width="110px">状态</th>
+						<th width="130px">操作</th>
+					</tr>
+					<volist name="list" id="vo">
+					  <tr>
+						  <td><a href="{:U('Newad/advdetail',array('type'=>$type,'id'=>$vo['id']))}" style="color:rgba(0,0,0,0.7);">{$vo.ad_no|stradno}</a></td>
+					   <td>
+						   <eq name="type" value="1">出售{$vo.coin|strtoupper}<else/>购买{$vo.coin|strtoupper}</eq>
+					   </td>
+					   <td>{$vo.location}</td>
+					   <td>{$vo['price']} {$vo['currency_type']}</td>
+					   <td>{$vo['min_limit']}-{$vo['max_limit']}{$vo['currency_type']}</td>
+					   <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+					   <td>
+						<eq name="vo.state" value="1">进行中</eq>
+						<eq name="vo.state" value="2">已下架</eq>
+						<eq name="vo.state" value="4">已冻结</eq>
+						</td>
+						<td>
+							<input type="button" onclick="window.location.href='{:U(\'Newad/ediad\',array(\'id\'=>$vo[\'id\'],\'type\'=>$type))}'" value="编辑" style="outline: none;border:1px solid #f5bc00;color:#f5bc00;background: #fff;border-radius: 4px;padding:2px 5px;">
+							<eq name="vo.state" value="1">
+								<input class="down" id="{$vo.id}" type="button" value="下架" style="outline: none;border:1px solid #f5bc00;color:#f5bc00;background: #fff;border-radius: 4px;padding:2px 5px;">
+							</eq>
+							<eq name="vo.state" value="2">
+								<input class="up" id="{$vo.id}" type="button" value="上架" style="outline: none;border:1px solid #f5bc00;color:#f5bc00;background: #fff;border-radius: 4px;padding:2px 5px;">
+							</eq>
+							<eq name="vo.state" value="4">
+								<input class="dong" type="button" value="上架" style="outline: none;border:1px solid #f5bc00;color:#f5bc00;background: #fff;border-radius: 4px;padding:2px 5px;">
+							</eq>
+						</td>
+					  </tr>
+					  </volist>
+					<empty name="list"><tr><td style="padding: 10px 0;text-align: center;text-indent: 0;" colspan="8" align="center">暂无数据</td></tr></empty>
+				</table>
+				<div class="pages">{$page}</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	var shelf = "{$shelf_token}";
+	var type = "{$type}";
+	function closetanchu(){
+		layer.closeAll('loading');
+	}
+    $('.down').click(function(){
+		layer.load(0, {shade: [0.5,'#8F8F8F']});
+        $.post("{:U('Newad/setShelf')}",{id : $(this).attr('id'), token:shelf, type:type, act:2},function(data){
+			shelf = data.url;
+			setTimeout("closetanchu()",4000);
+            if(data.status==1){
+                layer.msg(data.info,{icon : 1 });
+				window.location.href=window.location.href;
+            }else{
+                layer.msg(data.info,{icon : 2 });
+            }
+        });
+    });
+    $('.up').click(function(){
+        layer.load(0, {shade: [0.5,'#8F8F8F']});
+        $.post("{:U('Newad/setShelf')}",{id : $(this).attr('id'), token:shelf, type:type, act:1},function(data){
+            shelf = data.url;
+            setTimeout("closetanchu()",4000);
+            if(data.status==1){
+                layer.msg(data.info,{icon : 1 });
+                window.location.href=window.location.href;
+            }else{
+                layer.msg(data.info,{icon : 2 });
+            }
+        });
+    });
+    $('.dong').click(function(){
+        layer.load(0, {shade: [0.5,'#8F8F8F']});
+        setTimeout("closetanchu()",3000);
+        layer.msg('请联系管理员解除冻结!',{icon : 2 });
+    });
+    //菜单高亮
+    $('#user_box').addClass('on');
+    if(type ==1){$('#ad_sell').addClass('on');}
+    else{$('#ad_buy').addClass('on');}
+</script>
+</div>
+<include file="Public:footer_new"/>

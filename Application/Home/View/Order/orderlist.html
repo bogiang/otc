@@ -1,0 +1,492 @@
+<include file="Public:header_new" />
+<style>
+.change_tab{height: 40px;line-height: 40px;text-align: center;}
+.change_tab a{display: inline-block;width:130px;color:#666;font-weight: bold;font-size: 14px;}
+.change_tab a:hover{color:#f5bc00;border-bottom: 3px solid #f5bc00;}
+.change_tab .on_new{color:#f5bc00;border-bottom: 3px solid #f5bc00;}
+.select_div{width:1198px;margin:0 auto;padding:60px 0px 0;border:1px solid #e4e4e4;height: 100px;text-align:center;background: #fff;border-radius: 4px;margin-top:3px;}
+.select_div select{width: 165px;height: 35px;border:1px solid #dbdbdb;border-radius: 4px;color:#252525;text-indent: 5px;margin-right: 5px;}
+.search_trade{background: #6da2d7;color:#fff;width: 160px;height: 34px;outline: none;border:1px solid #6da2d7;border-radius: 4px;margin-left: 40px;}
+.table_trade{width: 1200px;margin-top:30px;background: #fff;padding-bottom: 20px;border-radius: 4px 4px 0 0;}
+.table_trade table tr th{background: #f7f7f7;font-size: 14px;color:rgba(0, 0, 0, 0.9);text-align: left;font-weight: 500;height:53px;}
+.table_trade table tr td{padding:10px 0;border-bottom: 1px solid #d6dbdd;font-size: 14px;color: rgba(0, 0, 0, 0.7);}
+.table_trade table .bg_change:hover{background: #ecf6fd;}
+.chattrigger{width:18px;height:18px;line-height:18px;display:block;cursor:pointer;}
+.chatsubmit{width:60px;height:20px;line-height:20px;text-align:center;font-size:14px;cursor:pointer;}
+#chatcontent_1 td{padding:5px 0;border-bottom: 0;}
+.outlogbox{min-height: 364px;background: none;}
+.outlogbox .logbox h1{font-size: 20px;}
+.outlogbox .logbox{box-shadow:none;-webkit-box-shadow:none;background: none;}
+.ul_pages{overflow: hidden;display: inline-block;}
+.ul_pages li{float: left;}
+.pages_a:hover{color:#fff!important;}
+.headimg{width: 50px;border:0;text-align:center;}
+.headimg img{width:35px;border-radius: 50%;height: 35px;overflow: hidden;}
+.chatcontent{border:0;width:auto;background: #108ee9;line-height: 35px;color:#fff;font-size: 12px;float:left;border-radius:4px 0 4px 4px;text-align: center;text-indent:0;padding:0 10px;}
+.chattips{font-size:10px;color:red;margin-top:-10px;position:absolute;top:-10px;left:0;}
+.bjyfk{color: #f5bc00;display: inline-block;width: 90px;height:32px;border: 1px solid #f5bc00;line-height: 30px;text-align: center;border-radius: 4px;outline: none;background: #fff;margin-bottom: 5px;}
+.qxjy{color: #f5bc00;display: inline-block;width: 90px;height: 32px;border: 1px solid #f5bc00;line-height:30px;text-align: center;border-radius: 4px;outline: none;background: #fff;}
+.fx{color: #f5bc00;display: inline-block;width: 90px;height: 32px;border: 1px solid #f5bc00;line-height:30px;text-align: center;border-radius: 4px;outline: none;background: #fff;}
+.qpj{color: #f5bc00;display: inline-block;width: 90px;height: 30px;border: 1px solid #f5bc00;line-height: 30px;text-align: center;border-radius: 4px;}
+.contactcontent:hover .table_trade table tr:hover{background: #fff;}
+.chatheadimg{width:1180px;padding:0 10px 0 20px;margin-top: 10px;overflow: hidden;height:45px;}
+</style>
+<div class="usernewout">
+    <div class="usncont">
+        <div>
+            <div class="change_tab">
+             <a href="{:U('Order/orderlist')}?status=3" <eq name="Think.get.status" value="3">class="on_new"</eq>>临时订单</a>
+                <a href="{:U('Order/orderlist')}?status=0" <if condition="$Think.get.status eq 0" >class="on_new"</if>>进行中的订单</a>
+                <a href="{:U('Order/orderlist')}?status=1" <eq name="Think.get.status" value="1">class="on_new"</eq>>已完成的订单</a>
+            </div>
+
+            <div class="table_trade" style="min-height:750px;height: auto;">
+                <table>
+                    <tr>
+						<th width="50px" style="padding-left: 30px;"></th>
+                        <th width="200px">交易伙伴</th>
+                        <th width="230px">订单编号</th>
+                        <th width="100px">类型</th>
+                        <th width="170px">交易金额</th>
+                        <th width="170px">交易数量</th>
+                        <th width="190px">创建时间</th>
+                        <th width="115px">交易状态</th>
+                        <th width="115px">交易操作</th>
+                    </tr>
+					<php>$ii=1;</php>
+                    <volist name="list" id="vo">
+                        <tr class="bg_change">
+							<td style="padding-left: 30px;">
+								<div style="width:100%;height:100%;position:relative;">
+									<span class="chattips" id="ct_{$vo.id}" data="{$vo.id}" type="{$vo['type']}"></span>
+									<span class="chattrigger" data="1" id="{$ii}" style="margin-top: -5px;">
+										<img src="__PUBLIC__/Home/news/images/chat.png" style="width: 18px;" />
+										<img src="__PUBLIC__/images/downdown.png" style="margin-left: 3px;" />
+									</span>
+								</div>
+							</td>
+                            <td>
+                                <span style="display:block;width:100%;height:53px;position:relative;">
+								<img style="height:45px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:45px;border-radius: 50%;" src="<empty name='vo.hinfo.headimg'>__PUBLIC__/Home/images/hportrait/head_portrait60.png<else/>{$vo.hinfo.headimg}</empty>">
+								<empty name='vo.hinfo.headimg'>
+										<span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:17px;left:19px;text-align: center;">{$vo['hinfo']['enname']|strbig}</span>
+								</empty>
+								{$vo['hinfo']['enname']}
+                                </span>
+							</td>
+                            <td>
+								<eq name="status" value="3">
+									<a href="/Newad/advdetail?type={$vo.advtype}&id={$vo['aid']}" style="color:#108ee9;">
+										{$vo['order_no']|strorderno}
+									</a>
+								<else/>
+									<a href="/Order/orderinfo?type={$vo.type}&id={$vo.id}" style="color:#108ee9;">
+										{$vo['order_no']|strorderno}
+									</a>
+								</eq>
+                            </td>
+                            <td>{$vo.ztype}</td>
+                            <td>{$vo['deal_amount']} {$vo['hb']}</td>
+                            <td>{$vo['deal_num']}</td>
+                            <td>{$vo['ctime']|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo['zt'][0]}</td>
+                            <td>
+                            <if condition="$vo['zt'][1] eq 1">
+								<button onclick="biaoji({$vo.type},{$vo.id})" class="bjyfk">标记已付款 </button>
+								<button onclick="cancle({$vo.type},{$vo.id})" class="qxjy">取消交易</button>
+                            <elseif condition="$vo['zt'][1] eq 2" />
+								<button onclick="sfbtc({$vo.type},{$vo.id})" class="fx">放行 </button>
+                            </if>
+							<if condition="($vo['status'] eq 3)">
+								<if condition="($Think.session.userId eq $vo['sell_id'] )">
+									<if condition="empty($vo['sell_pj'])">
+										<a href="/Order/orderinfo?type={$vo.type}&id={$vo.id}" class="qpj">去评价</a>
+									</if>
+								<elseif condition="($Think.session.userId eq $vo['buy_id'] )" />
+									<if condition="empty($vo['buy_pj'])">
+										<a href="/Order/orderinfo?type={$vo.type}&id={$vo.id}" class="qpj">去评价</a>
+									</if>
+								</if>
+							</if>
+                            </td>
+                        </tr>
+						<tr style="display:none;" id="chat_{$ii}" class="chat" data="{$vo['chatnum']}">
+							<td colspan="9" style="padding:0;">
+								<div style="width:100%;min-height: 200px;height: auto;" id="chatcontent_{$ii}">
+									<volist name="vo.chatlist" id="vv">
+                                        <if condition="$vv.touid eq $myid">
+                                        <div class="chatheadimg">
+                                            <div class="headimg" style="float:left;">
+                                                <!-- <img src="{$vv['fromuid']|headimg=###}" /> -->
+                                                <span style="display:block;width:100%;height:35px;position:relative;margin-right: 5px;">
+                                <img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="<empty name='vo.hinfo.headimg'>__PUBLIC__/Home/images/hportrait/head_portrait60.png<else/>{$vo.hinfo.headimg}</empty>">
+                                <empty name='vo.hinfo.headimg'>
+                                        <span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:11px;left:13px;text-align: center;">{$vo['hinfo']['enname']|strbig}</span>
+                                </empty>
+                                {$vo['hinfo']['enname']}
+                                </span>
+                                            </div>
+                                            <div class="chatcontent" style="border-radius:0px 4px 4px 4px;">
+                                                {$vv['content']}
+                                                <notempty name="vv['addon']">
+                                                    <img src="{$vv['addon']}"/>
+                                                </notempty>
+                                            </div>
+                                        </div>
+                                        <else/>
+                                        <div class="chatheadimg">
+                                            <div class="headimg" style="float:right;">
+                                                <!-- <img src="{$vv['fromuid']|headimg=###}" /> -->
+                                                <span style="display:block;width:100%;height:35px;position:relative;margin-left: 5px;">
+                                <img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="<empty name='user.headimg'>__PUBLIC__/Home/images/hportrait/head_portrait60.png<else/>{$user.headimg}</empty>">
+                                <empty name='user.headimg'>
+                                        <span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:11px;left:13px;text-align: center;">{$user['enname']|strbig}</span>
+                                </empty>
+                                {$vo['hinfo']['enname']}
+                                </span>
+
+                                            </div>
+                                            <div class="chatcontent" style="float:right;margin-top: 5px;">
+                                                {$vv['content']}
+                                                <notempty name="vv['addon']">
+                                                    <img src="{$vv['addon']}"/>
+                                                </notempty>
+                                            </div>
+
+                                        </div>
+                                        </if>
+                                    </volist>
+								</div>
+								<input type="hidden" id="ordertype_{$ii}" value="{$vo['type']}" />
+								<input type="hidden" id="orderid_{$ii}" value="{$vo['id']}" />
+							</td>
+						</tr>
+						<php>$ii++;</php>
+                    </volist>
+                </table>
+                <div class="pages">{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/web_socket.js"></script>
+<script type="text/javascript">
+    $('#changeobj').change(function(){
+        var obj_id = $(this).val();
+        if(obj_id == "1"){
+            $('#adbox').show();
+            $('#userbox').hide();
+        }else if(obj_id == "2"){
+            $('#adbox').hide();
+            $('#userbox').show();
+        }
+    });
+
+	//提交聊天
+	var chatordertoken = "{$chatorder_token}";
+	function upChat(id){
+		var content = $("#saycontent").val();
+		if(content==""||content==null){
+			layer.alert("发送内容不能为空！");
+		}
+		var ordertype = $("#ordertype_"+id).val();
+		var orderid = $("#orderid_"+id).val();
+		var status = "{$status}";
+		$.post("{:U('Order/upChat')}", {content: content, chatpic: "", ordertype: ordertype, orderid: orderid, token: chatordertoken, status: status}, function (data) {
+			if (data.status == 1) {
+				$("#saycontent").val('');
+				chatordertoken=data.url;
+			} else {
+				layer.msg(data.info, {icon: 2});
+				chatordertoken=data.url;
+			}
+		}, "json");
+	}
+	//获取聊天记录
+	var userid="{$Think.session.userId}";
+	var t;
+	function getChat(id){
+		if($("#chat_"+id).css('display')=='none'){
+			return;
+		}
+		var chatnum = $("#chat_"+id).attr("data");
+		var orderid = $("#orderid_"+id).val();
+		var ordertype = $("#ordertype_"+id).val();
+		var status = "{$status}";
+		$.getJSON("/Ajax/orderChat?orderid="+orderid+"&ordertype="+ordertype+"&chatnum="+chatnum+"&status="+status+"&t="+Math.random(),function(data){
+			if(data){
+				var chatcontent="";
+				for(var i=0;i<data.length;i++){
+                    if(data[i].touid==userid){
+                        if(data[i].addon){
+                            chatcontent += '<div class="chatheadimg"><div class="headimg" style="float:left;"><span style="display:block;width:100%;height:35px;position:relative;margin-left: 5px;"><img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="'+data[i].fromuser+'"><span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:11px;left:13px;text-align: center;">'+data[i].fromusername+'</span></div><div class="chatcontent">'+data[i].content+'<img src="'+data[i].addon+'"/></div></div>';
+                        }else{
+                            chatcontent += '<div class="chatheadimg"><div class="headimg" style="float:left;"><span style="display:block;width:100%;height:35px;position:relative;margin-left: 5px;"><img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="'+data[i].fromuser+'"><span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:11px;left:13px;text-align: center;">'+data[i].fromusername+'</span></div><div class="chatcontent">'+data[i].content+'</div></div>';
+                        }
+                        chatnum++;
+                    }else{
+                        if(data[i].addon){
+                            chatcontent += '<div class="chatheadimg"><div class="headimg" style="float:right;"><img src="'+data[i].fromuser+'"></div><div class="chatcontent" style="float:right;margin-top:5px;">'+data[i].content+'<img src="'+data[i].addon+'"/></div></div>';
+                        }else{
+                            chatcontent += '<div class="chatheadimg"><div class="headimg" style="float:right;"><span style="display:block;width:100%;height:35px;position:relative;margin-left: 5px;"><img style="height:34px;vertical-align: middle;margin-right:10px;border:1px solid #ccc;padding:3px;width:34px;border-radius: 50%;" src="'+data[i].fromuser+'"><span style="position: absolute;width:15px;font-size: 14px;color:#fff;top:11px;left:13px;text-align: center;">'+data[i].fromusername+'</span></div><div class="chatcontent" style="float:right;margin-top:5px;">'+data[i].content+'</div></div>';
+                        }
+                        chatnum++;
+                    }
+                }
+				$("#chat_"+id).attr("data",chatnum);
+				$("#chatcontent_"+id).append(chatcontent);
+			}
+		});
+		t = setTimeout(function(){getChat(id)},2000);
+	}
+
+	$(document).ready(function(){
+		//打开合上聊天记录
+		$(".chattrigger").click(function(){
+			var data = $(this).attr("data");
+			if(data==1){
+				$(".chat").each(function(){
+					$(this).find("table").each(function(){
+						if($(this).attr("id") == "chat"){
+							$(this).remove();
+						}
+					});
+					$(this).hide();
+				});
+				$(this).children("img:nth-child(2)").attr("src","/Public/images/upup.png");
+				$(this).attr("data","2");
+				var id = $(this).attr("id");
+                var orderid = $(this).parent().find(".chattips").attr("data");
+                var ordertype = $(this).parent().find(".chattips").attr("type");
+                $("#chat_"+id+" > td").append('<table id="chat" style="width:1200px;margin-top:10px;border-top:1px solid #d6dbdd;"><tr><td class="uploadpic" style="border-bottom:none;width:6%;padding:0;padding-left:27px;"><iframe style="width:40px;height:40px;border:none;overflow:hidden;" src="/Order/upload.html?id='+id+'&orderid='+orderid+'&ordertype='+ordertype+'&status={$status}"></iframe></td><td class="contactcontent" style="border-bottom:none;padding:0;"><input type="text" id="saycontent" placeholder="说点什么吧..."  style="width:79%;height:32px;line-height:32px;outline:none;font-size:16px;border:none;text-indent10px;background: transparent;" onkeydown="if(event.keyCode==13){upChat('+id+');}"/></td><td class="chatsubmit" onclick="upChat('+id+');" style="border-bottom:none;width:15%;padding:0;padding-left:110px;"><img src="/Public/Home/news/images/fs.png" alt="" width="35" style="margin-top:5px;"/></td></tr></table>');
+                $("#chat_"+id).show("1000");
+				getChat(id);
+				markread(orderid,ordertype);
+			}
+			if(data==2){
+				$(this).children("img:nth-child(2)").attr("src","/Public/images/downdown.png");
+				$(this).attr("data","1");
+				var id = $(this).attr("id");
+				$("#chat").remove();
+				$("#chat_"+id).hide("1000");
+			}
+		});
+		$(".chattips").each(function(){
+			var id = $(this).attr("id");
+			var orderid = $(this).attr("data");
+			var sta = "{$status}";
+			if(sta=='3'){
+				var status = 3;
+			}else{
+				var status = 0;
+			}
+			var ordertype = $(this).attr("type");
+			if(orderid!='undefined' && orderid>0){
+				chatNum(id,orderid,ordertype,status);
+			}
+		});
+	});
+
+	function markread(orderid,ordertype){
+		var sta="{$status}";
+		if(sta=='3'){
+			var status = 3;
+		}else{
+			var status = 0;
+		}
+		var chatnum = $("#ct_"+orderid).html();
+		$("#ct_"+orderid).html('');
+		if(chatnum){
+			var headnum = $("#neworder").html();
+			var newchatnum = parseInt(headnum) - parseInt(chatnum);
+			if(newchatnum){
+				if(newchatnum>0){
+					$("#neworder").html(newchatnum);
+				}else{
+					$("#neworder").html('');
+					$("#neworder").hide();
+				}
+			}else{
+				$("#neworder").html('');
+				$("#neworder").hide();
+			}
+		}
+		$.post("{:U('Order/markRead')}", {
+			orderid: orderid,
+			ordertype: ordertype,
+			status: status
+		}, function (data) {
+
+		}, "json");
+	}
+
+	xdctoken='{$myxdc_token}';
+	bjtoken='{$mybj_token}';
+	sfbtoken='{$mysfb_token}';
+	//取消交易
+	function cancle(type,id){
+		$.post("{:U('Order/ordercancle_ajax')}", {
+			type: type,
+			id: id,
+			token:xdctoken
+		}, function (data) {
+			xdctoken = data.url;
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage(id,type,'outqxjy',data.info);
+				layer.alert("取消交易", function(index){
+					self.location.reload();
+				});
+			} else {
+				token = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	//标记已付款
+	function biaoji(type,id){
+		$.post("{:U('Order/uptrade_ajax')}", {
+			type: type,
+			id: id,
+			token:bjtoken
+		}, function (data) {
+			bjtoken=data.url;
+			layer.closeAll('loading');
+			if (data.status == 1) {
+				sendMessage(id,type,'outbjyfk',data.info);
+				layer.alert("操作成功", function(index){
+					self.location.reload();
+				});
+			} else {
+				token = data.url;
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	//放行
+	function sfbtc(type,id){
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: '输入交易密码，并确认',
+				formType: 1
+			}, function (val) {
+				if (val) {
+					//需要执行的方法
+					$.post("{:U('Order/sfbtc_ajax')}", {
+						type: type,
+						id: id,
+						token:sfbtoken,
+						paypassword: val
+					}, function (data) {
+						sfbtoken=data.url;
+						layer.closeAll('loading');
+						if (data.status == 1) {
+							sendMessage(id,type,'outfx',data.info);
+							layer.alert("放行成功！", function(index){
+								self.location.reload();
+							});
+						} else {
+							token = data.url;
+							layer.msg(data.info, {icon: 2});
+						}
+					}, "json");
+				}
+			});
+		});
+	}
+	if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    // 如果浏览器不支持websocket，会使用这个flash自动模拟websocket协议，此过程对开发者透明
+    WEB_SOCKET_SWF_LOCATION = "/Public/Home/js/WebSocketMain.swf";
+    // 开启flash的websocket debug
+    WEB_SOCKET_DEBUG = true;
+    var ws;
+	var myname = "{$myname}";
+
+    // 连接服务端
+    function connect() {
+       // 创建websocket
+       ws = new WebSocket("ws://"+document.domain+":45101");
+       // 当socket连接打开时，输入用户名
+       ws.onopen = onopen;
+       // 当有消息时根据消息类型显示不同信息
+       ws.onmessage = onmessage; 
+       ws.onclose = function() {
+    	  console.log("连接关闭，定时重连");
+          connect();
+       };
+       ws.onerror = function() {
+     	  console.log("出现错误");
+       };
+    }
+	
+	// 连接建立时发送登录信息
+    function onopen()
+    {
+        // 登录
+        var login_data = '{"type":"login","client_name":"'+myname+'","room_id":"1"}';
+        ws.send(login_data);
+    }
+	
+	// 服务端发来消息时
+    function onmessage(e)
+    {
+        var data = JSON.parse(e.data);
+        switch(data['type']){
+            // 服务端ping客户端
+            case 'ping':
+                ws.send('{"type":"pong"}');
+                break;
+            // 登录 更新用户列表
+            case 'login':
+                break;
+            // 发言
+            case 'say':
+				showsay(data['content'],data['from_client_name']);
+                break;
+            // 用户退出 更新用户列表
+            case 'logout':
+				break;
+        }
+    }
+	//提交对话
+	function sendMessage(id,type,action,othername) {
+		content = id+"-"+type+"-"+action;
+		ws.send('{"type":"say","to_client_name":"'+othername+'","content":"'+content+'"}');
+    }
+	
+	function showsay(content,othername){
+		var arr = content.split("-");
+		switch(arr[2]){
+			case 'outqxjy':
+				layer.msg(othername+"已取消交易", {icon: 1});
+				pagereload();
+			break;
+			case 'outbjyfk':
+				layer.msg(othername+"已付款", {icon: 1});
+				pagereload();
+			break;
+			case 'outfx':
+				layer.msg(othername+"已放行", {icon: 1});
+				pagereload();
+			break;
+			case 'neworder':
+				$("#jytscontent").html("您有新的订单。<a href='/Order/orderinfo?type="+arr[1]+"&id="+arr[0]+"'>点击这里</a>查看");
+				$("#jyts").show();
+				setTimeout(function(){$("#jyts").hide('slow');},10000);
+			break;
+		}
+	}
+	
+	function pagereload(){
+		setTimeout(function(){window.location.href=window.location.href},2000);
+	}
+	
+	window.onload=function(){
+		connect();
+	}
+</script>
+<include file="Public:footer"/>

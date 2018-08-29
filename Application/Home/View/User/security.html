@@ -1,0 +1,112 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+	<include file="User:top"/>
+    <div class="usncont">
+        <!--左侧菜单-->
+        <include file="User:left"/>
+        <div class="usnc_right">
+            <h1>安全中心</h1>
+
+            <div class="safeftbox" id="safebox">
+                <div class="sc_info_list" id="sc_info_list">
+                    <dl>
+                      <div style="float: left;height: 90px;width:60px;"><img src="__PUBLIC__/Home/news/images/icon_03.png" alt=""></div>
+                      <div style="float: left;height: 90px;width:850px;">
+                        <dt>登录密码</dt>
+                        <dd>
+                            <p>登录账户时需要输入的密码</p>
+                        </dd>
+                        <dd>
+                            <div class="changepw">
+                                <a href="/user/password.html">修改登录密码</a>
+                            </div>
+                        </dd>
+                        </div>
+                    </dl>
+                    <dl>
+                    <div style="float: left;height: 90px;width:60px;"><img src="__PUBLIC__/Home/news/images/icon_09.png" alt=""></div>
+                     <div style="float: left;height: 90px;width:850px;">
+                        <dt>交易密码</dt>
+                        <dd>
+                            <p>在进行交易、提现等时需要输入的密码</p>
+                        </dd>
+                        <dd>
+                            <div class="changepw">
+								<a style="display:inline;border:none;width:auto;height:auto;" href="{:U('Login/findpaypwd')}">忘记交易密码?</a><span style="display:line-block;margin:0 10px;color:#999">|</span>
+                                <empty name="user['paypassword']">
+                                    <a href="/user/paypassword.html">设置交易密码</a>
+                                    <else />
+                                    <a href="/user/paypassword.html">修改交易密码</a>
+                                </empty>
+                            </div>
+                        </dd>
+                        </div>
+                    </dl>
+                    <dl>
+                    <div style="float: left;height: 90px;width:60px;"><img src="__PUBLIC__/Home/news/images/icon_13.png" alt=""></div>
+                     <div style="float: left;height: 90px;width:850px;">
+                        <dt>实名认证</dt>
+                        <dd>
+                            <p>必须完成实名认证才能提现</p>
+                        </dd>
+                        <dd>
+                            <div class="changepw">
+                                <if condition="$user.is_agree eq 2">
+                                未通过<span style="display:line-block;margin:0 10px;">|</span><a href="/user/nameauth.html">查看 </a>
+                                <elseif condition="$user.is_agree eq 1" />
+                                已认证<span style="display:line-block;margin:0 10px;">|</span><a href="/user/nameauth.html">查看 </a>
+                                <elseif condition="$user.is_agree eq 0 and $user.idcard_zheng eq null" />
+                                未认证<span style="display:line-block;margin:0 10px;">|</span><a href="/user/nameauth.html">去认证</a>
+                                <else />
+                                审核中<span style="display:line-block;margin:0 10px;">|</span><a href="/user/nameauth.html">查看 </a>
+                                </if>
+                            </div>
+                        </dd>
+                        </div>
+                    </dl>
+                    <!--<dl>
+                    <div style="float: left;height: 90px;width:60px;"><img src="__PUBLIC__/Home/news/images/icon_11.png" alt=""></div>
+                     <div style="float: left;height: 90px;width:850px;">
+                        <dt>谷歌验证</dt>
+                        <dd>
+                            <p>Google Authenticator (双重验证)，可以更安全的保护您的账户</p>
+                        </dd>
+                        <dd>
+                            <div class="changepw">
+                                <empty name="user['ga']"> 未验证<span style="display:line-block;margin:0 10px;">|</span><a href="/user/ga.html">立即验证</a> <else /><a href="/user/ga.html">查看</a> </empty>
+                            </div>
+                        </dd>
+                        </div>
+                    </dl>-->
+                    <dl>
+                    <div style="float: left;height: 90px;width:60px;"><img src="__PUBLIC__/Home/news/images/icon_07.png" alt=""></div>
+                     <div style="float: left;height: 90px;width:850px;">
+                        <dt>手机绑定</dt>
+                        <dd>
+                            <p>在订单处理过程中需要使用</p>
+                        </dd>
+                        <dd>
+                            <div class="changepw">
+                                <empty name="user['mobile']"> 未绑定<span style="display:line-block;margin:0 10px;">|</span><a href="/user/mobile.html">立即绑定</a>
+                                <else />已绑定<span style="display:line-block;margin:0 10px;">|</span><a href="/user/mobile.html"> 查看</a> </empty>
+                            </div>
+                        </dd>
+                        </div>
+                    </dl>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<include file="Public:footer_new"/>
+
+
+<script>
+    $('#user_sec').addClass('on');
+    $('#user_index').addClass('on');
+    $('#user_index i').attr('class','coin_menu_op_14');
+    //菜单高亮
+    $('#finance_index').addClass('on');
+</script>

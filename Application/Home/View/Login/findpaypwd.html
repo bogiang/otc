@@ -1,0 +1,379 @@
+<include file="Public:header_new" />
+<div class="outlogbox">
+	<div class="logbox">
+		<!-- <h1>找回交易密码</h1>
+		<div class="regtop">
+			<ul>
+				<li class="selbut" id="mobile_fpw">手机找回</li>
+				<li class="selbut on" id="email_fpw">邮箱找回</li>
+			</ul>
+		</div> -->
+		<div class="inbox">
+        <h1>找回交易密码</h1>
+			<div class="boxrow" id="mobile_div" >
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>手机号</label>
+				<div class="rightbox">
+					<input type="text" placeholder="" class="iptbox"  id="mobile" name="mobile" onblur="fppwdmobile();" />
+				</div>
+			</div>
+			<div class="boxrow" id="email_div" style="display: none">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>邮箱</label>
+				<div class="rightbox">
+					<input type="text" placeholder="" class="iptbox"  id="email" name="email" onblur="fpwemail();" />
+				</div>
+			</div>
+			<div class="boxrow">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>验证码</label>
+				<div class="rightbox">
+					<input type="text" placeholder="" class="iptbox yzm"  id="verify" name="code" onblur="fppwdverify();"  maxlength="4"/>
+					<span class="yzmimg">
+						<img id="codeImg" src="{:U('Verify/code')}" width="145" height="42" onclick="this.src=this.src+'?t='+Math.random()" style="float: left; cursor: pointer;" title="换一张">
+					</span>
+				</div>
+			</div>
+			<div class="boxrow" id="myz_div" >
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>短信验证码</label>
+				<div class="rightbox">
+					<input type="text" placeholder="" class="iptbox yzm"  id="mobile_verify" name="code" onblur="inputcode();" maxlength="6"/>
+					<span class="yzmimg">
+						<input type="button" class="getyzm" value="发送验证码"  onclick="SendCode()" id="regBtn" />
+					</span>
+				</div>
+			</div>
+			<div class="boxrow" id="eyz_div" style="display: none">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>邮箱验证码</label>
+				<div class="rightbox">
+					<input type="text" placeholder="" class="iptbox yzm" id="email_verify" name="code" onblur="emailcode();" maxlength="6"/>
+					<span class="yzmimg">
+						<input type="button" class="getyzm" value="发送验证码"  onclick="EmCode()" id="regBtn1" />
+					</span>
+				</div>
+			</div>
+			<div id="usemibao" style="display:none;">
+			<div class="boxrow">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>密保问题：</label>
+				<div class="rightbox">
+					<select id="mibao_question" class="iptbox">
+						<option value="">请选择密保问题</option>
+						<option value="你父亲的姓名">你父亲的姓名</option>
+						<option value="你母亲的姓名">你母亲的姓名</option>
+						<option value="你爱人的姓名">你爱人的姓名</option>
+						<option value="你的出生日期">你的出生日期</option>
+						<option value="你父亲的出生日期">你父亲的出生日期</option>
+						<option value="你母亲的出生日期">你母亲的出生日期</option>
+						<option value="你爱人的出生日期">你爱人的出生日期</option>
+					</select>
+				</div>
+				<div id="mibao_question-msg" class="form_explain" data-explain="请选择密保问题<em></em>" style="display: none;">
+					请选择密保问题<em></em>
+				</div>
+			</div>
+			<div class="boxrow">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>问题答案：</label>
+				<div class="rightbox">
+					<input type="text" id="mibao_answer" class="iptbox"  placeholder=""  />
+				</div>
+				<div id="mibao_answer-msg" class="form_explain" data-explain="请输入问题答案<em></em>" style="display: none;">
+					请输入问题答案<em></em>
+				</div>
+			</div>
+			</div>
+		<!--	<div class="boxrow">
+				<label>　　　　　</label>
+				<div class="rightbox">
+					忘记密保问题？请联系
+					<a href="tencent://message/?uin={$C['contact_qq'][2]}&Site=&Menu=yes" style="color:#108ee9;">
+					在线客服
+					</a>
+					（客服在线时间9点-21点）进行找回！
+				</div>
+			</div>-->
+
+			<div class="boxrow">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>新交易密码</label>
+				<div class="rightbox">
+					<input type="password" class="iptbox" id="password" name="password" onkeyup="chknewpwd();" maxlength="16"/>
+				</div>
+			</div>
+			<div class="boxrow">
+				<label><span style="color:#fd634f;margin-right: 4px;">*</span>确认交易密码</label>
+				<div class="rightbox">
+					<input type="password" class="iptbox" id="repassword" name="password" onkeyup="rechknewpwd();" maxlength="16"/>
+				</div>
+			</div>
+			<input type="hidden" id="fpw_type" value="phone" />
+			<input type="hidden" id="isusemibao" value="0" />
+			<div class="boxrow">
+				<div class="rightbox nolabel">
+					<input type="button" class="iptbut" value="确认修改密码"  name="index_submit" id="Submin" onclick="Update();" >
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function fppwdmobile(){
+		var mobile = $('#mobile').val();
+		if(mobile==""||mobile==null||(mobile!=null&&mobile.length<11)){
+			layer.tips('请输入正确的手机号','#mobile',{tips:3});
+			return false;
+		}
+		$.post("{:U('Login/chkusepaymibao')}",{mobile:mobile},function(data){
+			if(!data.status){
+				layer.tips(data.info,'#mobile',{tips:3});
+			}else{
+				if(data.usemibao && data.usemibao>0){
+					$("#isusemibao").val(1);
+					$("#usemibao").show();
+				}
+			}
+		},'json');
+	}
+	function fpwemail(){
+		var email = $('#email').val();
+		if(email==""||email==null){
+			layer.tips('请输入邮箱地址','#email',{tips:3});
+			return false;
+		}
+		$.post("{:U('Login/chkusepaymibao')}",{email:email},function(data){
+			if(!data.status){
+				layer.tips(data.info,'#email',{tips:3});
+			}else{
+				if(data.usemibao && data.usemibao>0){
+					$("#isusemibao").val(1);
+					$("#usemibao").show();
+				}
+			}
+		},'json');
+	}
+	function emailcode(){
+		var emailcode = $("#emailcode").val();
+		if(emailcode==""||emailcode==null){
+			layer.tips('请输入邮箱验证码！','#emailcode',{tips:3});
+			return false;
+		}
+	}
+    function SendCode(){
+        var mobile=$("#mobile").val();
+        var verify=$("#verify").val();
+        if(mobile==""||mobile==null){
+            layer.tips('请输入手机号码','#mobile',{tips:3});
+            return false;
+        }
+        if(verify==""||verify==null){
+            layer.tips('请输入图形验证码','#verify',{tips:3});
+            return false;
+        }
+        layer.load(0, {shade: [0.5,'#8F8F8F']});
+        $('#regBtn').attr("disabled","disabled");
+        $.post("{:U('Verify/findpaypwd')}",{mobile:mobile,verify:verify},function(data){
+            layer.closeAll();
+            if(data.status==1){
+                layer.msg(data.info,{icon:1});
+                var obj=$('#regBtn');
+                var wait=120;
+                var interval=setInterval(function(){
+                    obj.css('backgroundColor','#f6f6f6');
+                    obj.val('（'+wait+'）秒后再次发送');
+                    wait--;
+                    if(wait<0){
+                        obj.removeAttr("disabled");
+                        clearInterval(interval);
+                        obj.val('获取验证码');
+                        obj.css('backgroundColor','#f6f6f6');
+                    }
+                    ;
+                },1000);
+            }else{
+                layer.msg(data.info,{icon:2});
+                $('#regBtn').removeAttr("disabled");
+            }
+        },"json");
+    }
+	function EmCode(){
+		var email = $("#email").val();
+        if (email == "" || email == null) {
+            layer.tips('请输入电子邮箱', '#email', {tips: 3});
+            return false;
+        }
+		var verify = $('#verify').val();
+		if(verify==""||verify==null){
+			layer.tips('请先输入图形验证码', '#verify', {tips: 3});
+			return false;
+		}
+		// layer.load(0, {shade: [0.5,'#8F8F8F']});
+		$('#regBtn1').attr("disabled", "disabled");
+		var obj = $('#regBtn1');
+        var wait = 60;
+        var interval = setInterval(function () {
+            obj.css('backgroundColor', '#f6f6f6');
+            obj.val(wait + '秒再次发送');
+            wait--;
+            if (wait < 0) {
+            	$('#regBtn1').removeAttr("disabled");
+                clearInterval(interval);
+                obj.val('获取验证码');
+                obj.css('backgroundColor', '#f6f6f6');
+            }
+            ;
+        }, 1000);
+
+        $.post("{:U('Verify/findpaypwdemail')}", {
+            email: email,verify: verify
+        }, function (data) {
+			// layer.closeAll();
+            if (data.status == 1) {
+                //刷新验证码
+                layer.msg(data.info, {icon: 1});
+            } else {
+                //刷新验证码
+                layer.msg(data.info, {icon: 2});
+                clearInterval(interval);
+                obj.val('获取验证码');
+                obj.css('backgroundColor', '#f6f6f6');
+                $('#regBtn1').removeAttr("disabled");
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+	}
+    function Update(){
+		var fpw_type = $("#fpw_type").val();
+		if(fpw_type != 'phone' && fpw_type != 'emailaddr'){
+			layer.msg('参数错误！',{icon:2});
+		}
+		var isusemibao = $("#isusemibao").val();
+        var mobile=$("#mobile").val();
+        var mobile_verify=$("#mobile_verify").val();
+        var verify=$("#verify").val();
+        var password=$("#password").val();
+        var repassword=$("#repassword").val();
+        var mibao_question=$("#mibao_question").val();
+        var mibao_answer=$("#mibao_answer").val();
+		var email=$("#email").val();
+		var emailcode=$("#email_verify").val();
+        if((mobile==""||mobile==null) && fpw_type == 'phone'){
+            layer.tips('请输入手机号码','#mobile',{tips:3});
+            return false;
+        }
+        if((mobile_verify==""||mobile_verify==null) && fpw_type == 'phone'){
+            layer.tips('请输入短信验证码','#mobile_verify',{tips:3});
+            return false;
+        }
+		if ((email == "" || email == null) && fpw_type == 'emailaddr') {
+            layer.tips('请输入电子邮箱', '#email', {tips: 3});
+            return false;
+        }
+		if((emailcode==""||emailcode==null) && fpw_type == 'emailaddr'){
+			layer.tips('请输入邮箱验证码','#email_verify',{tips:3});
+			return false;
+		}
+        if(verify==""||verify==null){
+            layer.tips('请输入图形验证码','#verify',{tips:3});
+            return false;
+        }
+        if(isusemibao>0 && (mibao_question==""||mibao_question==null)){
+            layer.tips('请选择密保问题','#mibao_question',{tips:3});
+            return false;
+        }
+        if(isusemibao>0 && (mibao_answer==""||mibao_answer==null)){
+            layer.tips('请输入密保问题答案','#mibao_answer',{tips:3});
+            return false;
+        }
+        if(password==""||password==null){
+            layer.tips('请输入新交易密码','#password',{tips:3});
+            return false;
+        }
+        if(repassword==""||repassword==null){
+            layer.tips('请输入确认交易密码','#repassword',{tips:3});
+            return false;
+        }
+        if(password!=repassword){
+            layer.tips('两次输入的密码不一致','#repassword',{tips:3});
+            return false;
+        }
+        $.post("{:U('Login/findpaypwd')}",{fpw_type:fpw_type,isusemibao:isusemibao,mobile:mobile,mobile_verify:mobile_verify,verify:verify,password:password,repassword:repassword,mibao_question:mibao_question,mibao_answer:mibao_answer,email:email,emailcode:emailcode},function(data){
+            if(data.status==1){
+                layer.msg(data.info,{icon:1});
+                window.setTimeout("window.location='/'",1000);
+            }else{
+                layer.msg(data.info,{icon:2});
+            }
+        },"json");
+    }
+	function fppwdverify(){
+		var verify = $('#verify').val();
+		if(verify==""||verify==null){
+			layer.tips('请输入图形验证码','#verify',{tips:3});
+			return false;
+		}
+	}
+	function inputcode(){
+		var mobilecode = $("#mobile_verify").val();
+		if(mobilecode==""||mobilecode==null){
+			layer.tips('请输入短信验证码！','#mobile_verify',{tips:3});
+			return false;
+		}
+	}
+	function emailcode(){
+		var emailcode = $("#email_verify").val();
+		if(emailcode==""||emailcode==null){
+			layer.tips('请输入邮箱验证码！','#emailcode',{tips:3});
+			return false;
+		}
+	}
+	$("#mibao_answer").blur(function(){
+		if($(this).val()==''||$(this).val()==null){
+			layer.tips('请输入密保问题答案！','#mibao_answer',{tips:3});
+			return false;
+		}
+	});
+	$("#mibao_answer").focus(function(){
+		var mibaoquestion = $("#mibao_question").val();
+		if(mibaoquestion == null || mibaoquestion==""){
+			layer.tips('请先选择密保问题！','#mibao_question',{tips:3});
+		}
+	});
+	function chknewpwd(){
+		var password = $("#password").val();
+		var patten =/^[a-zA-Z0-9]+$/;
+		var match = new RegExp(patten);
+		if (!match.test(password)) {
+			layer.tips('密码格式为6~16位，不含特殊符号！','#password',{tips:3});
+			var result = password.substring(0,password.length-1);
+			$("#password").val(result);
+		}
+	}
+	function rechknewpwd(){
+		var repassword = $("#repassword").val();
+		var patten =/^[a-zA-Z0-9]+$/;
+		var match = new RegExp(patten);
+		if (!match.test(repassword)) {
+			layer.tips('密码格式为6~16位，不含特殊符号！','#repassword',{tips:3});
+			var result = repassword.substring(0,repassword.length-1);
+			$("#repassword").val(result);
+		}
+	}
+	$("#mobile_fpw").click(function(){
+		$(this).attr("class","selbut on");
+		$("#mobile_div").show();
+		$("#myz_div").show();
+		$("#fpw_type").val("phone");
+		$("#email_fpw").attr("class","selbut");
+		$("#email_div").hide();
+		$("#eyz_div").hide();
+	});
+	$("#email_fpw").click(function(){
+		$(this).attr("class","selbut on");
+		$("#mobile_div").hide();
+		$("#myz_div").hide();
+		$("#fpw_type").val("emailaddr");
+		$("#mobile_fpw").attr("class","selbut");
+		$("#email_div").show();
+		$("#eyz_div").show();
+	});
+    //顶部菜单高亮
+    $('#menu_top_index').addClass('current');
+</script>
+<include file="Public:footer_new"/>

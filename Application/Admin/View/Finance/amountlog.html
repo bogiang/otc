@@ -1,0 +1,165 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">资金日志</span>
+		</div>
+		<div>
+			<div class="cf">
+				<div class="fl">
+					<button class="btn btn-warning" onClick="location.href='{:U('Finance/amountlog')}'">初始化搜索</button>
+				</div>
+				<div class="search-form fr cf" style="padding-top: 43px;float: none !important;">
+					<div class="sleft">
+						<form name="formSearch" id="formSearch" method="get" name="form1">
+							<!-- 类型 -->
+							<select style="width: 80px; float: left; margin-right: 10px;" name="position" class="form-control">
+								<option value="all" <eq name="Think.get.position" value="all">selected</eq>>操作者</option>
+								<option value="-1" <eq name="Think.get.position" value="-1">selected</eq>>系统</option>
+								<option value="1" <eq name="Think.get.position" value="1">selected</eq>>管理员</option>
+								<option value="2" <eq name="Think.get.position" value="2">selected</eq>>用户</option>
+							</select>
+							<!-- 类型 -->
+							
+							<select style="width: 80px; float: left; margin-right: 10px;" name="plusminus" class="form-control">
+								<option value="all" <eq name="Think.get.plusminus" value="all">selected</eq>>加/减</option>
+								<option value="jia" <eq name="Think.get.plusminus" value="jia">selected</eq>>增加</option>
+								<option value="jian" <eq name="Think.get.plusminus" value="jian">selected</eq>>减少</option>
+							</select>
+
+							<!--币种-->
+							<select style="width: 120px; float: left; margin-right: 10px;" name="coin" class="form-control">
+								<volist name="coinlist" id="vo">
+									<option value="{$vo['name']}" <if condition="$coin eq $vo['name']">selected</if>>{$vo['title']}</option>
+								</volist>
+							</select>
+							
+							<!--资金类型-->
+							<select style="width: 120px; float: left; margin-right: 10px;" name="cointype" class="form-control">
+								<option value="" <empty name="Think.get.cointype">selected</empty>>全部资金</option>
+								<option value="1" <eq name="Think.get.cointype" value="1">selected</eq>>可用</option>
+								<option value="2" <eq name="Think.get.cointype" value="2">selected</eq>>冻结</option>
+							</select>
+
+							<!-- 时间筛选 -->
+	                        <script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
+
+	                        <input type="text" class="form-control" style=" width: 170px; float: left; margin-right: 10px;" name="starttime" value="{:I('get.starttime')}" placeholder="开始日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+	                        <input type="text" class="form-control" style=" width: 170px; float: left; margin-right: 10px;" name="endtime" value="{:I('get.endtime')}" placeholder="结束日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+
+							<select style=" width: 100px; float: left; margin-right: 10px;" name="field" class="form-control">
+								<option value="username" <eq name="Think.get.field" value="username">selected</eq>>用户名</option>
+								<option value="enname" <eq name="Think.get.field" value="enname">selected</eq>>昵称</option>
+							</select>
+							<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+							<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+						</form>
+						<script>
+							//搜索功能
+							$(function () {
+								$('#search').click(function () {
+									$('#formSearch').submit();
+								});
+							});
+							//回车搜索
+							$(".search-input").keyup(function (e) {
+								if (e.keyCode === 13) {
+									$("#search").click();
+									return false;
+								}
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="data-table table-striped">
+			<table class="">
+				<thead>
+				<tr>
+					<th class="row-selected row-selected"></th>
+					<th class="">ID</th>
+					<th class="">用户名</th>
+					<th class="">昵称</th>
+					<th class="">动作</th>
+					<th class="">操作类型</th>
+					<th class="">资金类型</th>
+					<th class="">金额</th>
+					<th class="">操作人</th>
+					<th class="">描述</th>
+					<th class="">操作时间</th>
+					<th class="">所在IP</th>
+					<th class=""></th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td></td>
+							<td>{$vo.id}</td>
+							<td>{$vo['username']}</td>
+							<td>{$vo['enname']}</td>
+							<td>{$vo['action']}</td>
+							<td>{$vo.plusminus}</td>
+							<td>{$vo.ctype}</td>
+							<td>{$vo.amount|numform}</td>
+							<td>{$vo.operator}</td>
+							<td>{$vo.desc}</td>
+							<td>{$vo.ctime}</td>
+							<td>{$vo.addip}</td>
+							<td></td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">Oh! 暂时还没有内容!</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(".page > div").children("a").each(function(){
+	var ahref = $(this).attr('href');
+	var ahrefarr = ahref.split("/");
+	var ahlength = ahrefarr.length;
+	if(ahrefarr[ahlength-2]=="p"){
+		var jiewei = ahrefarr[ahlength-1].split(".");
+		var page = jiewei[0];
+	}
+	ahrefarr.splice(ahlength-2,2);
+	var newhref = "";
+	for(var i=0;i<ahrefarr.length;i++){
+		if(i>0 && i<3){
+			newhref = newhref + "/" + ahrefarr[i];
+		}
+		if(i==3){
+			newhref = newhref + "/" + ahrefarr[i] + ".html?";
+		}
+		if(i>=4){
+			if(i%2==0){
+				newhref = newhref + "&" + ahrefarr[i];
+			}else{
+				newhref = newhref + "=" + ahrefarr[i];
+			}
+		}
+	}
+	newhref = newhref+"&p="+page;
+	$(this).attr("href",newhref);
+});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//导航高亮
+		highlight_subnav("{:U('User/amountlog')}");
+	</script>
+</block>
