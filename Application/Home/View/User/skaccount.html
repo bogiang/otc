@@ -1,0 +1,247 @@
+<include file="Public:header_new"/>
+<script type="text/javascript" src="__PUBLIC__/Home/js/cityselect.js"></script>
+<style>
+    #withdrawCnyAddress{
+        padding: 0 20px;
+        background: #fff;
+        width: 400px;
+        height: auto;
+        overflow: auto;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+    #withdrawCnyAddress .PopLayer li span{
+        width: 70px;
+    }
+    textarea{
+        resize:none;
+        height: 60px;
+    }
+</style>
+<div class="usernewout">
+    <include file="User:top"/>
+    <div class="usncont">
+        <!--左侧菜单-->
+        <include file="User:left"/>
+        <!--右侧内容-->
+        <style type="text/css">
+            .layui-layer-setwin .layui-layer-close1{width: 25px;height: 25px;background:url(__PUBLIC__/Home/news/images/closebut.png) center no-repeat!important;background-size: 18px!important; }
+            .layui-layer-setwin{right: 5px;top: 5px;}
+        </style>
+        <div class="usnc_right">
+            <h1>
+                收款账号管理
+            </h1>
+            <div class="recharge_list nmt">
+                <table>
+                    <tr>
+                        <th width="10%">收款类型</th>
+                        <th width="15%">收款人</th>
+                        <th width="15%">收款账号</th>
+                        <th width="30%">收款详情</th>
+                        <th width="15%">操作</th>
+                    </tr>
+                    <volist name="userSkaccountList" id="vo">
+                        <tr>
+                            <td>{$vo.pay_name}</td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.account}</td>
+                            <td>{$vo.desc}</td>
+                            <td>
+                                <a class="cancel" href="javascript:void(0)" onclick="addAddress({$vo['id']})">编辑</a>
+                                <a class="cancel" href="javascript:void(0)" onclick="delDate({$vo['id']})">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+                <div class="pages">{$page}</div>
+                <div class="addbanks">
+                    <a href="javascript:void(0)" onclick="addAddress()">添加收款账号</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="okcoinPop" id="withdrawCnyAddress" style="display: none;">
+    <div class="tan_title">
+        <h4 style="font-size:14px;">添加钱包地址</h4>
+        <span class="closebut" onclick="closeCharge();"><img src="__PUBLIC__/Home/news/images/closebut.png"></span>
+    </div>
+    <div class="dialog_content" id="dialog_content_CnyAddress">
+        <div class="dialog_body center">
+            <div style="line-height: 35px; text-align: left; padding-left:10px;">
+                <ul class="PopLayer">
+                    <input name="name" id="sk_id" type="text" hidden>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan1">收款方式 </span>
+                        <select class="khname cztxinput" id="pay_method">
+                            <volist name="payMethod" id="vo">
+                                <option value="{$vo.id}">{$vo.name}</option>
+                            </volist>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan2">收款人名字 </span>
+                        <input name="name" id="name" type="text" class="cztxinput">
+                    </li>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan4">收款账号 </span>
+                        <input name="name" id="account" type="text" class="cztxinput">
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan5">二维码 </span>
+                        <input name="name" id="qrcode" type="text" class="cztxinput">
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan6">开户行 </span>
+                        <input name="name" id="bank" type="text" class="cztxinput">
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan7">详细 </span>
+                        <textarea name="name" id="desc" type="text" class="cztxinput"></textarea>
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan8">交易密码 </span>
+                        <input name="name" id="qianbao_paypassword" type="password" class="cztxinput">
+                        <span style="display: block;text-align: left;width:340px;margin-left: 70px;">
+                        <if condition="empty($user['paypassword'])">
+							<a href="/User/paypassword.html" style="color:#108ee9;font-size: 13px;">请先设置交易密码</a>
+						<else />
+							<a href="/Login/findpaypwd.html" class="reg_floatr">忘记交易密码?</a>
+						</if>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="Update()" class="btn" id="btn" style="">立即添加</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialogBoxShadow" style="position: absolute; top: 0px; left: 0px; z-index: 100; background-color: rgb(0, 0, 0); opacity: 0.4; width: 100%; background-position: initial initial; background-repeat: initial initial; display: none;"></div>
+
+<script>
+    var myzc_token = "{$myzr_token}";
+    var coin = "{$xnb}";
+    $("#city_1").citySelect({
+        nodata: "none",
+        required: false
+    });
+
+    $('#dialogBoxShadow').height($(document).height());
+    function closeAddress() {
+        $("#withdrawCnyAddress").hide();
+        $("#dialogBoxShadow").hide();
+    }
+    function showA() {
+        $("#withdrawCnyAddress").show();
+        $("#dialogBoxShadow").show();
+    }
+    function addAddress(sk_id){
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: 'autos',
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            content: $('#withdrawCnyAddress')
+        });
+        $("#sk_id").val(sk_id);
+    }
+    function closeCharge(){
+        layer.closeAll();
+    }
+    function Update() {
+        var id = $('#sk_id').val();
+        alert(id);return false;
+        var pay_method = $('#pay_method').val();
+
+        var name = $('#name').val();
+        var account = $('#account').val();
+
+        var qrcode = $('#qrcode').val();
+        var bank = $('#bank').val();
+        var desc = $('#desc').val();
+
+        var paypassword = $('#qianbao_paypassword').val();
+        if (name == "" || name == null) {
+            layer.tips('请输入收款人名字', '#name', {tips: 3});
+            return false;
+        }
+        if (account == "" || account == null) {
+            layer.tips('请输入收款账号', '#account', {tips: 3});
+            return false;
+        }
+        if (paypassword == "" || paypassword == null) {
+            layer.tips('请输入交易密码', '#qianbao_paypassword', {tips: 3});
+            return false;
+        }
+
+
+        $.post("{:U('User/upskaccount')}", {
+            id: id,
+            pay_method: pay_method,
+            name: name,
+            account: account,
+            qrcode: qrcode,
+            bank: bank,
+            desc: desc,
+            paypassword: paypassword,
+            token : myzc_token
+        }, function (data) {
+            myzc_token = data.url;
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                window.location = "{:U('User/skaccount')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+    function delDate(id) {
+        layer.config({
+            extend: 'extend/layer.ext.js'
+        });
+        layer.ready(function () {
+            //默认prompt
+            layer.prompt({
+                title: '输入交易密码，并确认',
+                formType: 1
+            }, function (val) {
+                if (val) {
+                    //需要执行的方法
+                    $.post("{:U('User/delskaccount')}", {
+                        id: id,
+                        paypassword: val
+                    }, function (data) {
+                        if (data.status == 1) {
+                            layer.msg(data.info, {icon: 1});
+                            window.location = "{:U('User/skaccount')}";
+                        } else {
+                            layer.msg(data.info, {icon: 2});
+                            if (data.url) {
+                                window.location = data.url;
+                            }
+                        }
+                    }, "json");
+                }
+                ;
+            });
+
+        });
+    }
+    //菜单高亮
+    $('#user_box').addClass('on');
+    $('#skaccount').addClass('on');
+</script>
+<include file="Public:footer_new"/>

@@ -7,7 +7,7 @@ class UserController extends HomeController
     protected function _initialize()
     {
         parent::_initialize();
-        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj");
+        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj", "skaccount", "upskaccount", "delskaccount");
         if (!in_array(ACTION_NAME, $allow_action)) {
             $this->error("非法操作！");
         }
@@ -1319,7 +1319,6 @@ class UserController extends HomeController
 
         // 过滤非法字符----------------E
 
-
         if (!userid()) {
             redirect('/Login/index.html');
         }
@@ -1841,6 +1840,162 @@ class UserController extends HomeController
 		$this->assign('page', $show);
 		$this->display();
 	}
+
+	//收款账号
+    public function skaccount(){
+
+        if (!userid()) {
+            redirect('/Login/index.html');
+        }
+
+        $user_coin = M('user_coin')->where(array('userid'=>userid()))->find();
+        $coinlist = M('Coin')->where(array('type'=>array('neq','rmb'),'status'=>1))->select();
+        $new_coinlist=array();
+        foreach($coinlist as $k=>$v){
+            $new_coinlist[$v['name']]['name'] = $v['name'];
+            $new_coinlist[$v['name']]['img'] = $v['img'];
+            $new_coinlist[$v['name']]['title'] = $v['title'] . '(' . strtoupper($v['name']) . ')';
+            $new_coinlist[$v['name']]['xnb'] = round($user_coin[$v['name']],8);
+            $new_coinlist[$v['name']]['xnbd'] = round($user_coin[$v['name'] . 'd'],8);
+            $new_coinlist[$v['name']]['xnbz'] = round($user_coin[$v['name']]+$user_coin[$v['name'] . 'd'],8);
+            $new_coinlist[$v['name']]['zr_dz'] = $v['zr_dz'];
+        }
+        $this->assign('coin_list', $new_coinlist);
+
+        if (!$coin) {
+            $coin = $coinlist[0]['name'];
+        }
+        $this->assign('xnb', $coin);
+
+        $user = M('User')->where(array('id' => userid()))->find();
+        $this->assign('user', $user);
+
+        //导航
+        $daohang = S('daohang');
+        $this->assign('daohang', $daohang);
+
+        //支付方式
+        $payMethod = M('pay_method')->select();
+        $this->assign('payMethod', $payMethod);
+
+        //收款账号列表
+
+        $myzr_token = set_token('myzr');
+        $this->assign('myzr_token', $myzr_token);
+        $userSkaccountList = M('user_skaccount')->where(array('userid' => userid()))->select();
+
+        foreach ($userSkaccountList as $ke => $val){
+            $userSkaccountList[$ke]['pay_name'] = $payMethod[$val['pay_method_id'] - 1]['name'];
+        }
+        $this->assign('userSkaccountList', $userSkaccountList);
+//        print_r($userSkaccountList);exit();
+
+
+        $this->display();
+    }
+
+    //新增、修改收款账号
+    public function upskaccount($id, $pay_method, $name, $account, $qrcode, $bank, $desc, $paypassword, $token)
+    {
+
+        if (!userid()) {
+            redirect('/Login/index.html');
+        }
+
+        if(!session('myzrtoken')) {
+            set_token('myzr');
+        }
+        if(!empty($token)){
+            $res = valid_token('myzr',$token);
+            if(!$res){
+                $this->error("请不要频繁提交！",session('myzrtoken'));
+            }
+        }else{
+            $this->error("缺少参数！",session('myzrtoken'));
+        }
+        $extra=session('myzrtoken');
+
+        if (!check($paypassword, 'password')) {
+            $this->error('密码格式为6~16位，不含特殊符号！',$extra);
+        }
+
+        $user_paypassword = M('User')->where(array('id' => userid()))->getField('paypassword');
+
+        if (md5($paypassword) != $user_paypassword) {
+            $this->error('交易密码错误！',$extra);
+        }
+
+        $userSkaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
+
+        if (100 <= count($userSkaccount)) {
+            $this->error('每个人最多只能添加100个收款账号！',$extra);
+        }
+
+        if($id == false){
+            //新增
+            if (M('user_skaccount')->add(array(
+                'user_id' => userid(),
+                'pay_method_id' => intval($pay_method),
+                'name' => $name,
+                'account' => $account,
+                'qrcode' => $qrcode,
+                'bank' => $bank,
+                'desc' => $desc,
+                'addtime' => time()
+                ))) {
+                $this->success('添加成功！',$extra);
+            } else {
+                $this->error('添加失败！',$extra);
+            }
+        } else {
+
+            if (!M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->find()) {
+                $this->error('非法访问！');
+            }
+            //修改
+            M('user_skaccount')->save(array(
+                'pay_method_id' => intval($pay_method),
+                'name' => $name,
+                'account' => $account,
+                'qrcode' => $qrcode,
+                'bank' => $bank,
+                'desc' => $desc,
+            ), array('id' => $id));
+            $this->success('修改成功！',$extra);
+        }
+
+
+    }
+
+    //删除收款账号
+    public function delskaccount($id, $paypassword)
+    {
+        if (!userid()) {
+            redirect('/Login/index.html');
+        }
+
+        if (!check($paypassword, 'password')) {
+            $this->error('密码格式为6~16位，不含特殊符号！');
+        }
+
+        if (!check($id, 'd')) {
+            $this->error('参数错误！');
+        }
+
+        $user_paypassword = M('User')->where(array('id' => userid()))->getField('paypassword');
+
+        if (md5($paypassword) != $user_paypassword) {
+            $this->error('交易密码错误！');
+        }
+
+        if (!M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->find()) {
+            $this->error('非法访问！');
+        } else if (M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->delete()) {
+            $this->success('删除成功！');
+        } else {
+            $this->error('删除失败！');
+        }
+    }
 }
 
 ?>

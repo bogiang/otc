@@ -155,6 +155,9 @@
 						$("#neworder").html('');
 					}
 				});
+				if (orderid == ''){
+				    return 0;
+                }
 				setTimeout(function(){chatNum(id,orderid,ordertype,status)},3000);
 			}
         </script>
