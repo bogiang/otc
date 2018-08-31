@@ -24,7 +24,21 @@
     }
     .selpic{line-height:20px;float:left;}
     .progress{background:rgb(0,183,238);opacity:0.5;filter:Alpha(opacity=50);margin-bottom:5px;height:5px;line-height:5px;border-radius:2px;}
+    .moban{
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+        float: left;
+        background-color:rgba(0, 0, 0, 0.5);
+        display: none;
+    }
 </style>
+<div class="moban">
+    <div style="margin: 15% 50%;">
+        <img style="width: 200px;height: 300px" src="" alt="" id="showqrcode">
+    </div>
+</div>
 <div class="usernewout">
     <include file="User:top"/>
     <div class="usncont">
@@ -55,7 +69,8 @@
                             <td>{$vo.account}</td>
                             <td>{$vo.desc}</td>
                             <td>
-                                <a class="cancel" href="javascript:void(0)" onclick="addAddress({$vo['id']})">编辑</a>
+                                <if condition="($vo['pay_method_id'] == 3) OR ($vo['pay_method_id'] == 4) "><a class="cancel" href="javascript:void(0)" onclick="showqrcode('{$vo["qrcode"]}')">二维码</a></if>
+                                    <a class="cancel" href="javascript:void(0)" onclick="addAddress({$vo['id']})">编辑</a>
                                 <a class="cancel" href="javascript:void(0)" onclick="delDate({$vo['id']})">删除</a>
                             </td>
                         </tr>
@@ -167,6 +182,28 @@
         });
         $("#sk_id").val(sk_id);
 
+        //显示值
+        if (sk_id != '' || sk_id != null) {
+            $.post("{:U('User/checkaccount')}", {
+                sk_id: sk_id,
+            }, function (data) {
+                // console.log(data);return false;
+                if (data.status == 1) {
+                    $("#pay_method").val(data.pay_method_id);
+                    $("#name").val(data.name);
+                    $("#account").val(data.account);
+                    $("#WU_FILE_0_1").val(data.qrcode);
+                    $("#bank").val(data.bank);
+                    $("#desc").val(data.desc);
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                    if (data.url) {
+                        window.location = data.url;
+                    }
+                }
+            }, "json");
+        }
+
         // //强行将上传图片按钮变大
         $("#filePicker label").css({"width":"78px", "height":"40px"});
         $("#filePicker div:eq(1)").css({"width":"78px", "height":"40px"});
@@ -211,6 +248,7 @@
             paypassword: paypassword,
             token : myzc_token
         }, function (data) {
+            // console.log(data); return false;
             myzc_token = data.url;
             if (data.status == 1) {
                 layer.msg(data.info, {icon: 1});
@@ -219,6 +257,10 @@
                 layer.msg(data.info, {icon: 2});
                 if (data.url) {
                     window.location = data.url;
+                } else {
+                    setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+                        location.reload();//页面刷新
+                    },2000);
                 }
             }
         }, "json");
@@ -253,7 +295,6 @@
                 }
                 ;
             });
-
         });
     }
     //菜单高亮
@@ -363,5 +404,14 @@
     //加载上传图片
     idcard("fileList","filePicker");
 
+    //显示二维码
+    function showqrcode(qrcode) {
+        $(".moban").show();
+        qrcode = 'http://' + window.location.hostname + '/' + qrcode;
+        $("#showqrcode").attr("src",qrcode);
+    }
+    $(".moban").on('click',function () {
+        $(".moban").hide();
+    });
 </script>
 <include file="Public:footer_new"/>

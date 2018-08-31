@@ -2,12 +2,14 @@
 
 namespace Home\Controller;
 
+use think\Db;
+
 class UserController extends HomeController
 {
     protected function _initialize()
     {
         parent::_initialize();
-        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj", "skaccount", "upskaccount", "delskaccount", "skqrcode");
+        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj", "skaccount", "upskaccount", "delskaccount", "skqrcode", "checkaccount");
         if (!in_array(ACTION_NAME, $allow_action)) {
             $this->error("非法操作！");
         }
@@ -1894,6 +1896,22 @@ class UserController extends HomeController
         $this->display();
     }
 
+    //查询收款账号
+    public function checkaccount($sk_id){
+        if (!userid()) {
+            redirect('/Login/index.html');
+        }
+
+        $info = M('user_skaccount')->where(array('userid' => userid(), 'id' => $sk_id))->find();
+        if (!$info) {
+            $this->error('非法访问！');
+        }
+        $info['status'] = 1;
+        $info['desc'] = htmlspecialchars_decode($info['desc']);
+        echo json_encode($info);
+
+    }
+
     //新增、修改收款账号
     public function upskaccount($id, $pay_method, $name, $account, $qrcode, $bank, $desc, $paypassword, $token){
 
@@ -1939,7 +1957,7 @@ class UserController extends HomeController
                 'account' => $account,
                 'qrcode' => $qrcode,
                 'bank' => $bank,
-                'desc' => $desc,
+                'desc' => htmlspecialchars(str_replace("\n","<br>",$desc)),
                 'addtime' => time()
                 ))) {
                 $this->success('添加成功！',$extra);
@@ -1952,15 +1970,22 @@ class UserController extends HomeController
                 $this->error('非法访问！');
             }
             //修改
-            M('user_skaccount')->save(array(
-                'pay_method_id' => intval($pay_method),
-                'name' => $name,
-                'account' => $account,
-                'qrcode' => $qrcode,
-                'bank' => $bank,
-                'desc' => $desc,
-            ), array('id' => $id));
-            $this->success('修改成功！',$extra);
+
+            $result = M('user_skaccount')->save(array(
+                    'id' => intval($id),
+                    'pay_method_id' => intval($pay_method),
+                    'name' => $name,
+                    'account' => $account,
+                    'qrcode' => $qrcode,
+                    'bank' => $bank,
+                    'desc' => htmlspecialchars(str_replace("\n","<br>",$desc))
+                ));
+
+            if ($result){
+                $this->success('修改成功！',$result);
+            } else {
+                $this->error('修改失败！');
+            }
         }
 
 
@@ -2023,10 +2048,12 @@ class UserController extends HomeController
                     $new_width = 600;
                     $new_height = intval($new_width / $bili);
                     // 按照原图的比例生成一个最大宽度为600像素的缩略图并删除原图
-                    $image->thumb($new_width, $new_height)->save('./Upload/skqrcode/' . $file['savepath'] . $file['savename']);
+                    $image->thumb($new_width, $new_height)->save('./Upload/skqrcode/' . $file['savepath'] . 's_' .$file['savename']);
+                    //直接保存地址，方便操作
+                    $name = 'Upload/skqrcode/' . $file['savepath'] . 's_' .$file['savename'];
                     unlink('./Upload/skqrcode/' . $file['savepath'] . $file['savename']);
                 }
-                echo json_encode(array('name'=>$file['savename']));
+                echo json_encode(array('name'=>$name));
             }
         }
     }
