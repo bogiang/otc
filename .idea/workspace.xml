@@ -13,46 +13,13 @@
     <pharConfigPath>$PROJECT_DIR$/workermanchat/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.31423172">
+    <splitter split-orientation="horizontal" split-proportion="0.51826197">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="NewadController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1073">
-                  <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
-                  <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="51" selection-end-column="41" />
-                  <folding>
-                    <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#7;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#9;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#10;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#12;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#13;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#14;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#15;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/User/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1758">
+                <state relative-caret-position="946">
                   <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
                 </state>
               </provider>
@@ -61,17 +28,8 @@
           <file leaf-file-name="header_new.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/Public/header_new.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="713">
+                <state relative-caret-position="656">
                   <caret line="159" column="17" selection-start-line="159" selection-start-column="17" selection-end-line="159" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="left.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/User/left.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="779">
-                  <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -79,60 +37,60 @@
           <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="319">
-                  <caret line="1324" column="8" lean-forward="true" selection-start-line="1324" selection-start-column="8" selection-end-line="1324" selection-end-column="8" />
+                <state relative-caret-position="700">
+                  <caret line="2030" column="9" lean-forward="true" selection-start-line="2030" selection-start-column="9" selection-end-line="2030" selection-end-column="9" />
                   <folding>
                     <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                    <element signature="e#22535#25689#0#PHP" />
-                    <element signature="e#25695#27956#0#PHP" />
-                    <element signature="e#27962#29621#0#PHP" />
-                    <element signature="e#29627#32418#0#PHP" />
-                    <element signature="e#32424#36208#0#PHP" />
-                    <element signature="e#36214#37435#0#PHP" />
-                    <element signature="e#37441#38890#0#PHP" />
-                    <element signature="e#38896#40030#0#PHP" />
-                    <element signature="e#40036#40821#0#PHP" />
-                    <element signature="e#40827#41838#0#PHP" />
-                    <element signature="e#41844#42046#0#PHP" />
-                    <element signature="e#42052#42857#0#PHP" />
-                    <element signature="e#42863#43421#0#PHP" />
-                    <element signature="e#43427#45439#0#PHP" />
-                    <element signature="e#45445#46279#0#PHP" />
-                    <element signature="e#47899#50053#0#PHP" />
-                    <element signature="e#50059#50901#0#PHP" />
-                    <element signature="e#50907#52238#0#PHP" />
-                    <element signature="e#52245#54383#0#PHP" />
-                    <element signature="e#54389#56849#0#PHP" />
-                    <element signature="e#56856#57347#0#PHP" />
-                    <element signature="e#57361#59072#0#PHP" />
-                    <element signature="e#59088#59304#0#PHP" />
-                    <element signature="e#59308#60885#0#PHP" />
-                    <element signature="e#60889#62270#0#PHP" />
-                    <element signature="e#62274#62942#0#PHP" />
-                    <element signature="e#62945#64843#0#PHP" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-384">
-                  <caret line="555" column="9" selection-start-line="555" selection-start-column="9" selection-end-line="555" selection-end-column="9" />
+          <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/README.md">
+              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+                <state split_layout="SPLIT">
+                  <first_editor relative-caret-position="114">
+                    <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+                  </first_editor>
+                  <second_editor />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="qianbao.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/User/qianbao.html">
+          <file leaf-file-name="nameauth.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Application/Home/View/User/nameauth.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="520">
-                  <caret line="126" column="58" selection-start-line="126" selection-start-column="58" selection-end-line="126" selection-end-column="58" />
+                <state relative-caret-position="551">
+                  <caret line="203" column="45" selection-start-line="203" selection-start-column="39" selection-end-line="203" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#9711#9836#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="webuploader.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Public/Home/js/webuploader.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="639">
+                  <caret line="7695" column="39" selection-start-line="7695" selection-start-column="39" selection-end-line="7695" selection-end-column="39" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="webuploader.css" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Public/Home/js/webuploader.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="475">
+                  <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
                 </state>
               </provider>
             </entry>
@@ -140,15 +98,17 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="skaccount.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="344">
-                  <caret line="155" column="5" lean-forward="true" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
+                <state relative-caret-position="306">
+                  <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
                   <folding>
                     <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+                    <element signature="e#9565#11855#0" />
                   </folding>
                 </state>
               </provider>
@@ -167,17 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>myzr</find>
-      <find>M('Myzr')</find>
-      <find>myzr(</find>
-      <find>balance</find>
-      <find>input_new</find>
-      <find>p_new</find>
-      <find>name=&quot;type&quot;</find>
-      <find>showBalance</find>
-      <find>trusted</find>
-      <find>qianbao(</find>
-      <find>user_box</find>
       <find>user_qianbao</find>
       <find>addAddress</find>
       <find>dialog_content_CnyAddress</find>
@@ -197,6 +146,17 @@
       <find>非法操作</find>
       <find>Deldate</find>
       <find>foreach</find>
+      <find>idcard_zheng</find>
+      <find>webuploader-pick</find>
+      <find>webuploader</find>
+      <find>pic</find>
+      <find>pick</find>
+      <find>WU_FILE_0_1</find>
+      <find>uploader-list</find>
+      <find>progress</find>
+      <find>PopLayer</find>
+      <find>idcard</find>
+      <find>position:</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -232,13 +192,13 @@
         <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/workermanchat/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Application/Home/View/User/left.html" />
         <option value="$PROJECT_DIR$/Application/Home/View/User/skaccout.html" />
         <option value="$PROJECT_DIR$/data.sql" />
         <option value="$PROJECT_DIR$/Application/Home/View/Public/header_new.html" />
         <option value="$PROJECT_DIR$/Application/Home/Controller/UserController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/View/User/skaccount.html" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -259,9 +219,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="99" />
-    <option name="y" value="-24" />
-    <option name="width" value="1775" />
+    <option name="x" value="13" />
+    <option name="y" value="61" />
+    <option name="width" value="1857" />
     <option name="height" value="993" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -270,6 +230,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -282,11 +243,74 @@
               <item name="otc" type="462c0819:PsiDirectoryNode" />
               <item name="Application" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Upload" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Upload" type="462c0819:PsiDirectoryNode" />
+              <item name="skqrcode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="otc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="otc" type="462c0819:PsiDirectoryNode" />
+              <item name="Upload" type="462c0819:PsiDirectoryNode" />
+              <item name="skqrcode" type="462c0819:PsiDirectoryNode" />
+              <item name="20180831" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,36 +356,37 @@
       <workItem from="1534906049212" duration="4057000" />
       <workItem from="1534996679147" duration="11000" />
       <workItem from="1535357315018" duration="8704000" />
-      <workItem from="1535508086281" duration="25547000" />
+      <workItem from="1535508086281" duration="26147000" />
+      <workItem from="1535679205866" duration="8342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74753000" />
+    <option name="totallyTimeSpent" value="83695000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17291667" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3295325" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17291667" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24957362" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24957362" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,28 +396,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="14756" column="4" selection-start-line="14756" selection-start-column="4" selection-end-line="14756" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/workermanchat/MIT-LICENSE.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/workermanchat/vendor/composer/installed.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/workermanchat/vendor/workerman/workerman/Worker.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="203" column="11" selection-start-line="203" selection-start-column="11" selection-end-line="203" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Trade/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -556,11 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
           <caret line="87" column="41" selection-start-line="87" selection-start-column="31" selection-end-line="87" selection-end-column="41" />
-          <folding>
-            <element signature="e#353#800#0#PHP" />
-            <element signature="e#804#1403#0#PHP" />
-            <element signature="e#1407#2148#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -584,16 +582,6 @@
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="76">
-            <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/User/top.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -615,10 +603,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Runtime/Tog5231a2cba8d7766fc3as/Home/1535528825-18_08_29.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1026" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Runtime/Tog5231a2cba8d7766fc3as/Home/18_08_29.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-474334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="10" column="49" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/Public/footer_new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/Home/news/style/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="594" column="41" selection-start-line="594" selection-start-column="41" selection-end-line="594" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="555" column="9" selection-start-line="555" selection-start-column="9" selection-end-line="555" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/left.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3629">
+          <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="51" selection-end-column="41" />
+        <state relative-caret-position="-722">
+          <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
           <folding>
             <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -637,127 +677,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Runtime/Tog5231a2cba8d7766fc3as/Home/1535528825-18_08_29.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Runtime/Tog5231a2cba8d7766fc3as/Home/18_08_29.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-474334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="10" column="49" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/User/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1758">
+        <state relative-caret-position="946">
           <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/View/Public/footer_new.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Public/header_new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
+        <state relative-caret-position="656">
           <caret line="159" column="17" selection-start-line="159" selection-start-column="17" selection-end-line="159" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/left.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="555" column="9" selection-start-line="555" selection-start-column="9" selection-end-line="555" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Public/Home/news/style/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="594" column="41" selection-start-line="594" selection-start-column="41" selection-end-line="594" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/User/qianbao.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
+        <state relative-caret-position="-437">
           <caret line="126" column="58" selection-start-line="126" selection-start-column="58" selection-end-line="126" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
+    <entry file="file://$PROJECT_DIR$/Public/Home/news/images/tx.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/Home/js/webuploader.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1073">
-          <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
+        <state relative-caret-position="475">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/Home/js/webuploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="7695" column="39" selection-start-line="7695" selection-start-column="39" selection-end-line="7695" selection-end-column="39" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/nameauth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="203" column="45" selection-start-line="203" selection-start-column="39" selection-end-line="203" selection-end-column="45" />
+          <folding>
+            <element signature="e#9711#9836#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="155" column="5" lean-forward="true" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
+        <state relative-caret-position="306">
+          <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="e#9565#11855#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="114">
+            <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="1324" column="8" lean-forward="true" selection-start-line="1324" selection-start-column="8" selection-end-line="1324" selection-end-column="8" />
+        <state relative-caret-position="700">
+          <caret line="2030" column="9" lean-forward="true" selection-start-line="2030" selection-start-column="9" selection-end-line="2030" selection-end-column="9" />
           <folding>
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="e#22535#25689#0#PHP" />
-            <element signature="e#25695#27956#0#PHP" />
-            <element signature="e#27962#29621#0#PHP" />
-            <element signature="e#29627#32418#0#PHP" />
-            <element signature="e#32424#36208#0#PHP" />
-            <element signature="e#36214#37435#0#PHP" />
-            <element signature="e#37441#38890#0#PHP" />
-            <element signature="e#38896#40030#0#PHP" />
-            <element signature="e#40036#40821#0#PHP" />
-            <element signature="e#40827#41838#0#PHP" />
-            <element signature="e#41844#42046#0#PHP" />
-            <element signature="e#42052#42857#0#PHP" />
-            <element signature="e#42863#43421#0#PHP" />
-            <element signature="e#43427#45439#0#PHP" />
-            <element signature="e#45445#46279#0#PHP" />
-            <element signature="e#47899#50053#0#PHP" />
-            <element signature="e#50059#50901#0#PHP" />
-            <element signature="e#50907#52238#0#PHP" />
-            <element signature="e#52245#54383#0#PHP" />
-            <element signature="e#54389#56849#0#PHP" />
-            <element signature="e#56856#57347#0#PHP" />
-            <element signature="e#57361#59072#0#PHP" />
-            <element signature="e#59088#59304#0#PHP" />
-            <element signature="e#59308#60885#0#PHP" />
-            <element signature="e#60889#62270#0#PHP" />
-            <element signature="e#62274#62942#0#PHP" />
-            <element signature="e#62945#64843#0#PHP" />
           </folding>
         </state>
       </provider>

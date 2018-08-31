@@ -1,5 +1,7 @@
 <include file="Public:header_new"/>
 <script type="text/javascript" src="__PUBLIC__/Home/js/cityselect.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/js/webuploader.css">
+<script type="text/javascript" src="__PUBLIC__/Home/js/webuploader.js"></script>
 <style>
     #withdrawCnyAddress{
         padding: 0 20px;
@@ -10,6 +12,9 @@
         margin: 0 auto;
         border-radius: 5px;
     }
+    .PopLayer li{
+        float: left;
+    }
     #withdrawCnyAddress .PopLayer li span{
         width: 70px;
     }
@@ -17,6 +22,8 @@
         resize:none;
         height: 60px;
     }
+    .selpic{line-height:20px;float:left;}
+    .progress{background:rgb(0,183,238);opacity:0.5;filter:Alpha(opacity=50);margin-bottom:5px;height:5px;line-height:5px;border-radius:2px;}
 </style>
 <div class="usernewout">
     <include file="User:top"/>
@@ -86,27 +93,33 @@
                     </li>
                     <li>
                         <span class="c2" id="lotteryAmountSpan4">收款账号 </span>
-                        <input name="name" id="account" type="text" class="cztxinput">
+                        <input name="account" id="account" type="text" class="cztxinput">
                     </li>
 
                     <li>
-                        <span class="c2" id="lotteryAmountSpan5">二维码 </span>
-                        <input name="name" id="qrcode" type="text" class="cztxinput">
+                        <span class="c2" id="lotteryAmountSpan5" style="float: left">二维码 </span>
+                        <div class="selpic">
+                            <!--用来存放item-->
+                            <div id="fileList" class="uploader-list"></div>
+                            <div id="filePicker">选择图片</div>
+                            <input type="hidden" name="qrcode" id="WU_FILE_0_1" />
+                        </div>
+                        <!--<input name="qrcode" id="qrcode" type="text" class="cztxinput">-->
                     </li>
 
                     <li>
                         <span class="c2" id="lotteryAmountSpan6">开户行 </span>
-                        <input name="name" id="bank" type="text" class="cztxinput">
+                        <input name="bank" id="bank" type="text" class="cztxinput">
                     </li>
 
                     <li>
                         <span class="c2" id="lotteryAmountSpan7">详细 </span>
-                        <textarea name="name" id="desc" type="text" class="cztxinput"></textarea>
+                        <textarea name="desc" id="desc" type="text" class="cztxinput"></textarea>
                     </li>
 
                     <li>
                         <span class="c2" id="lotteryAmountSpan8">交易密码 </span>
-                        <input name="name" id="qianbao_paypassword" type="password" class="cztxinput">
+                        <input name="qianbao_paypassword" id="qianbao_paypassword" type="password" class="cztxinput">
                         <span style="display: block;text-align: left;width:340px;margin-left: 70px;">
                         <if condition="empty($user['paypassword'])">
 							<a href="/User/paypassword.html" style="color:#108ee9;font-size: 13px;">请先设置交易密码</a>
@@ -153,36 +166,39 @@
             content: $('#withdrawCnyAddress')
         });
         $("#sk_id").val(sk_id);
+
+        // //强行将上传图片按钮变大
+        $("#filePicker label").css({"width":"78px", "height":"40px"});
+        $("#filePicker div:eq(1)").css({"width":"78px", "height":"40px"});
+
     }
     function closeCharge(){
         layer.closeAll();
     }
     function Update() {
         var id = $('#sk_id').val();
-        alert(id);return false;
         var pay_method = $('#pay_method').val();
-
         var name = $('#name').val();
         var account = $('#account').val();
-
-        var qrcode = $('#qrcode').val();
+        var qrcode = $('#WU_FILE_0_1').val();
         var bank = $('#bank').val();
         var desc = $('#desc').val();
-
         var paypassword = $('#qianbao_paypassword').val();
+
         if (name == "" || name == null) {
             layer.tips('请输入收款人名字', '#name', {tips: 3});
             return false;
         }
+
         if (account == "" || account == null) {
             layer.tips('请输入收款账号', '#account', {tips: 3});
             return false;
         }
+
         if (paypassword == "" || paypassword == null) {
             layer.tips('请输入交易密码', '#qianbao_paypassword', {tips: 3});
             return false;
         }
-
 
         $.post("{:U('User/upskaccount')}", {
             id: id,
@@ -243,5 +259,109 @@
     //菜单高亮
     $('#user_box').addClass('on');
     $('#skaccount').addClass('on');
+
+    // 图片上传demo
+    function idcard(sel,pic){
+        var $ = jQuery,
+            $list = $('#'+sel),
+            // 优化retina, 在retina下这个值是2
+            ratio = window.devicePixelRatio || 1,
+
+            // 缩略图大小
+            thumbnailWidth = 120 * ratio,
+            thumbnailHeight = 90 * ratio,
+
+            // Web Uploader实例
+            uploader;
+
+        // 初始化Web Uploader
+        uploader = WebUploader.create({
+
+            // 自动上传。
+            auto: true,
+
+            // swf文件路径
+            swf: '/Public/Home/js/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/User/skqrcode',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#'+pic,
+
+            // 只允许选择文件，可选。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+
+        // 当有文件添加进来的时候
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '</div>'
+                ),
+                $img = $li.find('img');
+
+            $list.html( $li );
+
+            // 创建缩略图
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                $img.attr( 'src', src );
+            }, thumbnailWidth, thumbnailHeight );
+        });
+
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress span');
+
+            // 避免重复创建
+            if ( !$percent.length ) {
+                $percent = $('<p class="progress"><span></span></p>')
+                    .appendTo( $li )
+                    .find('span');
+            }
+
+            $percent.css( 'width', percentage * 100 + '%' );
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function( file,response ) {
+            $('#'+file.id+'_1').val(response.name);
+            $( '#'+file.id ).addClass('upload-state-done');
+        });
+
+        // 文件上传失败，现实上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        });
+
+        // 完成上传完了，成功或者失败，先删除进度条。
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').remove();
+        });
+    }
+
+    //加载上传图片
+    idcard("fileList","filePicker");
+
 </script>
 <include file="Public:footer_new"/>

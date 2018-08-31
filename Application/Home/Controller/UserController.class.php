@@ -7,7 +7,7 @@ class UserController extends HomeController
     protected function _initialize()
     {
         parent::_initialize();
-        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj", "skaccount", "upskaccount", "delskaccount");
+        $allow_action = array("index", "security",'jianjie', "nameauth", "upauth", "password", "uppassword", "paypassword", "uppaypassword", "qianbao", "upqianbao", "delqianbao", "log", "upauth2", "idcard", 'upuserinfo', 'myad', 'trusted', 'coinlog', "mobile", "upmobile", "mytj", "mywd", "myjp", "follower", "mytjj", "skaccount", "upskaccount", "delskaccount", "skqrcode");
         if (!in_array(ACTION_NAME, $allow_action)) {
             $this->error("非法操作！");
         }
@@ -1895,8 +1895,7 @@ class UserController extends HomeController
     }
 
     //新增、修改收款账号
-    public function upskaccount($id, $pay_method, $name, $account, $qrcode, $bank, $desc, $paypassword, $token)
-    {
+    public function upskaccount($id, $pay_method, $name, $account, $qrcode, $bank, $desc, $paypassword, $token){
 
         if (!userid()) {
             redirect('/Login/index.html');
@@ -1968,8 +1967,7 @@ class UserController extends HomeController
     }
 
     //删除收款账号
-    public function delskaccount($id, $paypassword)
-    {
+    public function delskaccount($id, $paypassword){
         if (!userid()) {
             redirect('/Login/index.html');
         }
@@ -1994,6 +1992,42 @@ class UserController extends HomeController
             $this->success('删除成功！');
         } else {
             $this->error('删除失败！');
+        }
+    }
+
+    //上传收款照片
+    public function skqrcode(){
+        if(IS_POST){
+            $upload = new \Think\Upload();//实列化上传类
+            $upload->maxSize = 3145728;//设置上传文件最大，大小
+            $upload->exts = array('jpg', 'gif', 'png', 'jpeg');//后缀
+            $upload->rootPath = './Upload/skqrcode/';//上传目录
+            $upload->savePath = ''; // 设置附件上传（子）目录
+            $upload->autoSub = true;
+            $upload->subName = array('date', 'Ymd');
+            $upload->saveName = array('uniqid', '');//设置上传文件规则
+            $info = $upload->upload();//执行上传方法
+            if (!$info) {
+                $this->error($upload->getError());
+            } else {
+                $image = new \Think\Image();
+                foreach ($info as $key => $file) {
+                    $image->open('./Upload/skqrcode/' . $file['savepath'] . $file['savename']);
+                    $width = $image->width();
+                    $height = $image->height();
+                    if (empty($width) || empty($height)) {
+                        $bili = 1;
+                    } else {
+                        $bili = intval($width / $height);
+                    }
+                    $new_width = 600;
+                    $new_height = intval($new_width / $bili);
+                    // 按照原图的比例生成一个最大宽度为600像素的缩略图并删除原图
+                    $image->thumb($new_width, $new_height)->save('./Upload/skqrcode/' . $file['savepath'] . $file['savename']);
+                    unlink('./Upload/skqrcode/' . $file['savepath'] . $file['savename']);
+                }
+                echo json_encode(array('name'=>$file['savename']));
+            }
         }
     }
 }
