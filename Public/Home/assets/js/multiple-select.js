@@ -126,7 +126,7 @@
     function MultipleSelect($el, options) {
         var that = this,
             name = $el.attr('name') || options.name || '';
-
+        console.log($el);
         this.options = options;
 
         // hide select element

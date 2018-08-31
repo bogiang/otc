@@ -121,19 +121,29 @@
 								<input type="text" value="{$ad_info.due_time}" class="rechipt" id="due_time" style="width: 572px;height: 48px;">
 							</div>
 						</div>
+						<!--<div class="paymethod">-->
+							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>-->
+							<!--<select id="pay_method" multiple="multiple">-->
+								<!--{$pay_method_option}-->
+							<!--</select>-->
+						<!--</div>-->
+
+						<if condition="$type eq 1">
+
 						<div class="paymethod">
-							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>
-							<select id="pay_method" multiple="multiple">
-								{$pay_method_option}
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号:</p>
+							<select id="skaccount" multiple="multiple">
+								{$skaccount_option}
 							</select>
 						</div>
-						<if condition="$type eq 1">
-						<div id="skacc" class="rechipt_box" >
-							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请填写收款账号，尽量详细。</span></p>
-							<div class="iptbox" style="width:600px;">
-								<input type="text" value="{$ad_info.skaccount}" class="rechipt" id="skaccount" style="width: 572px;height: 48px;">
-							</div>
-						</div>
+
+						<!--<div id="skacc" class="rechipt_box" >-->
+							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请填写收款账号，尽量详细。</span></p>-->
+							<!--<div class="iptbox" style="width:600px;">-->
+								<!--<input type="text" value="{$ad_info.skaccount}" class="rechipt" id="skaccount" style="width: 572px;height: 48px;">-->
+							<!--</div>-->
+						<!--</div>-->
+
 						</if>
 						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>交易条款:</p>
@@ -272,14 +282,14 @@
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
         // var pay_method = $('#pay_method').val();
-        var pay_method='';
+        // var pay_method='';
+        // $('input[data-name="selectItempay_method"]:checked').each(function(){
+        // 	if($(this).val()!='on'){
+        // 		pay_method+=$(this).val()+",";
+        // 	}
+        // });
 
-		$('input[type="checkbox"]:checked').each(function(){
-				if($(this).val()!='on'){
-					pay_method+=$(this).val()+",";
-				}
 
-		});
 		// alert(pay_method);
 
         var message = $("#message").val();
@@ -310,18 +320,26 @@
             $('#message').focus();
 			return false;
 		}
-		if(pay_method==''){
-			layer.alert("请选择支付方式！");
-			return false;
-		}
+		// if(pay_method==''){
+		// 	layer.alert("请选择支付方式！");
+		// 	return false;
+		// }
 		
 		if(type == 1){
-			var skaccount = $("#skaccount").val();
-			if(!skaccount){
-				layer.tips('请填写收款账号！', '#skaccount', {tips: 3});
-            	$('#skaccount').focus();
-            	return false;
-			}
+			// var skaccount = $("#skaccount").val();
+
+            var skaccount = '';
+            $('input[data-name="selectItemskaccount"]:checked').each(function(){
+                if($(this).val()!='on'){
+                    skaccount+=$(this).val()+",";
+                }
+            });
+
+            if(!skaccount){
+                layer.tips('请填写收款账号！', '#skaccount', {tips: 3});
+                $('#skaccount').focus();
+                return false;
+            }
 		}
 		if(type == 0) {
             if (!due_time) {
@@ -359,11 +377,19 @@
         }, "json");
     }
 	$(document).ready(function(){
-		$('#pay_method').change(function() {
+        // $('#pay_method').change(function() {
+        //     console.log($(this).val());
+        // }).multipleSelect({
+        //     width: '100%'
+        // });
+
+        $('#skaccount').change(function() {
             console.log($(this).val());
         }).multipleSelect({
-            width: '100%'
+            width: '100%',
+            name: 'skaccount'
         });
+
 	});
 </script>
 <include file="Public:footer_new"/>

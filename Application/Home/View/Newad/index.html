@@ -127,21 +127,32 @@
 								<input type="text" value="" class="rechipt" id="due_time" style="width: 572px;height: 48px;">
 							</div>
 						</div>
+						<!--<div class="paymethod">-->
+							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>-->
+							<!--<select id="pay_method" multiple="multiple">-->
+								<!--<volist name="pay_method" id="vo">-->
+									<!--<option value="{$vo.id}">{$vo.name}</option>-->
+								<!--</volist>-->
+							<!--</select>-->
+						<!--</div>-->
+						<div style="clear:both;"></div>
+
 						<div class="paymethod">
-							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>
-							<select id="pay_method" multiple="multiple">
-								<volist name="pay_method" id="vo">
-									<option value="{$vo.id}">{$vo.name}</option>
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款方式:</p>
+							<select id="skaccount" multiple="multiple">
+								<volist name="skaccountList" id="vo">
+									<option value="{$vo.id}">{$vo.name} | {$vo.account}</option>
 								</volist>
 							</select>
 						</div>
 						<div style="clear:both;"></div>
-						<div id="skacc" class="rechipt_box" >
-							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请填写收款账号，尽量详细。</span></p>
-							<div class="iptbox" style="width:600px;">
-								<input type="text" value="" class="rechipt" id="skaccount" style="width: 572px;height: 48px;">
-							</div>
-						</div>
+
+						<!--<div id="skacc" class="rechipt_box" >-->
+							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请填写收款账号，尽量详细。</span></p>-->
+							<!--<div class="iptbox" style="width:600px;">-->
+								<!--<input type="text" value="" class="rechipt" id="skaccount" style="width: 572px;height: 48px;">-->
+							<!--</div>-->
+						<!--</div>-->
 						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>交易条款:</p>
 							<div class="iptbox" style="width: 572px;padding: 15px 10px;height: 110px;resize: none;line-height: 1.25;border:1px solid #d9d9d9;font-size: 14px;">
@@ -196,12 +207,11 @@
 <script type="text/javascript">
 	$(function () {
 		var is_show = $("input[name='type']").val();
-
         showBalance(is_show);
     });
+
 	function showBalance(obj){
 	    var is_show = obj;
-        console.log(is_show);
         if (is_show == 1){
             $(".showBalance").show();
         } else {
@@ -258,20 +268,27 @@
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
         // var pay_method = $('#pay_method').val();
-        var pay_method='';
+        // var pay_method='';
+        // $('input[data-name="selectItempay_method"]:checked').each(function(){
+			// 	if($(this).val()!='on'){
+			// 		pay_method+=$(this).val()+",";
+			// 	}
+        // });
 
-		$('input[type="checkbox"]:checked').each(function(){
-				if($(this).val()!='on'){
-					pay_method+=$(this).val()+",";
-				}
+		var skaccount = '';
+        $('input[data-name="selectItemskaccount"]:checked').each(function(){
+            if($(this).val()!='on'){
+                skaccount+=$(this).val()+",";
+            }
+        });
 
-		});
-		
+        alert(skaccount);return false;
+        // var skaccount = $("#skaccount").val();
         var message = $("#message").val();
         var safe_option =  $("input[name='safe_option']:checked").val();
         var trust_only = ($("input[name='trust_only']:checked").val()==1)?1:0;
         var open_time = $("select[name='mon_s']").val()+'-'+$("select[name='mon_e']").val()+','+$("select[name='tue_s']").val()+'-'+$("select[name='tue_e']").val()+','+$("select[name='wed_s']").val()+'-'+$("select[name='wed_e']").val()+','+$("select[name='thu_s']").val()+'-'+$("select[name='thu_e']").val()+','+$("select[name='fri_s']").val()+'-'+$("select[name='fri_e']").val()+','+$("select[name='sat_s']").val()+'-'+$("select[name='sat_e']").val()+','+$("select[name='sun_s']").val()+'-'+$("select[name='sun_e']").val();
-		var skaccount = $("#skaccount").val();
+
 		if(type == 1 && !skaccount){
 			layer.tips('请填写收款账号！', '#skaccount', {tips: 3});
             $('#skaccount').focus();
@@ -300,10 +317,10 @@
             $('#message').focus();
 			return false;
 		}
-		if(pay_method==''){
-			layer.alert("请选择支付方式！");
-			return false;
-		}
+		// if(pay_method==''){
+		// 	layer.alert("请选择支付方式！");
+		// 	return false;
+		// }
 		if(type == 0) {
             if (!due_time) {
                 layer.tips('请输入付款期限', '#due_time', {tips: 3});
@@ -352,10 +369,18 @@
 				window.location.href="/User/paypassword";
 			});
 		}
-		$('#pay_method').change(function() {
+        // $('#pay_method').change(function() {
+        //     console.log($(this).val());
+        // }).multipleSelect({
+        //     width: '100%',
+			// name: 'pay_method'
+        // });
+
+        $('#skaccount').change(function() {
             console.log($(this).val());
         }).multipleSelect({
-            width: '100%'
+            width: '100%',
+			name: 'skaccount'
         });
 	});
 </script>

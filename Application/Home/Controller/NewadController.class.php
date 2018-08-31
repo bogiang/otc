@@ -67,6 +67,11 @@ class NewadController extends HomeController
 
 		$str = '<option value="a">结束时间</option><option value="z">关闭</option><option value="0">0:00</option><option value="1">1:00</option><option value="2">2:00</option><option value="3">3:00</option><option value="4">4:00</option><option value="5">5:00</option><option value="6">6:00</option><option value="7">7:00</option><option value="8">8:00</option>																<option value="9">9:00</option><option value="10">10:00</option><option value="11">11:00</option><option value="12">12:00</option><option value="13">13:00</option><option value="14">14:00</option><option value="15">15:00</option><option value="16">16:00</option><option value="17">17:00</option><option value="18">18:00</option><option value="19">19:00</option><option value="20">20:00</option><option value="21">21:00</option><option value="22">22:00</option><option value="23">23:00</option><option value="24">24:00</option>';
 		$arr = array(0=>array('xq'=>'星期一 ','start'=>'mon_s','end'=>'mon_e','option'=>$str),1=>array('xq'=>'星期二 ','start'=>'tue_s','end'=>'tue_e','option'=>$str),2=>array('xq'=>'星期三 ','start'=>'wed_s','end'=>'wed_e','option'=>$str),3=>array('xq'=>'星期四 ','start'=>'thu_s','end'=>'thu_e','option'=>$str),4=>array('xq'=>'星期五 ','start'=>'fri_s','end'=>'fri_e','option'=>$str),5=>array('xq'=>'星期六 ','start'=>'sat_s','end'=>'sat_e','option'=>$str),6=>array('xq'=>'星期日 ','start'=>'sun_s','end'=>'sun_e','option'=>$str));
+
+		//收款账号
+        $skaccountList = M('user_skaccount')->where(array("user_id" => userid()))->select();
+
+		$this->assign('skaccountList',$skaccountList);
 		$this->assign('arr',$arr);
 		$this->assign('coinid',$coinid);
 		$this->assign('coinname',$coinname);
@@ -179,9 +184,9 @@ class NewadController extends HomeController
 			$this->error('最小限额不能大于最大限额！', $extra);
 		}
 		
-		if(empty($pay_method)){
-			$this->error('请选择支付方式！', $extra);
-		}
+//		if(empty($pay_method)){
+//			$this->error('请选择支付方式！', $extra);
+//		}
 		
 		if(!check($pay_method,'a')){
 			$this->error("参数错误！", $extra);
@@ -266,17 +271,34 @@ class NewadController extends HomeController
 		}
 		$ad_info['margin'] = floatval($ad_info['margin']);
 		$ad_info['type'] = $type;
-		$pay_method_arr = explode(",",$ad_info['pay_method']);
-		$pay_method_option = '';
-		foreach($pay_method as $pm){
-			if(in_array($pm['id'],$pay_method_arr)){
-				$pay_method_option .= '<option value="'.$pm['id'].'" selected="selected">'.$pm['name'].'</option>';
-			}else{
-				$pay_method_option .= '<option value="'.$pm['id'].'">'.$pm['name'].'</option>';
-			}
+
+		//支付方式  备注掉
+//		$pay_method_arr = explode(",",$ad_info['pay_method']);
+//		$pay_method_option = '';
+//		foreach($pay_method as $pm){
+//			if(in_array($pm['id'],$pay_method_arr)){
+//				$pay_method_option .= '<option value="'.$pm['id'].'" selected="selected">'.$pm['name'].'</option>';
+//			}else{
+//				$pay_method_option .= '<option value="'.$pm['id'].'">'.$pm['name'].'</option>';
+//			}
+//		}
+//		$this->assign('pay_method_option', $pay_method_option);
+
+		//收款账号
+        $skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
+		$skaccount_arr = explode(",",$ad_info['skaccount']);
+		$skaccount_option = '';
+		foreach($skaccount as $sa){
+		    if(in_array($sa['id'], $skaccount_arr)){
+                $skaccount_option .= '<option value="'.$sa['id'].'" selected="selected">'.$sa['name']. '|'. $sa['account'] .'</option>';
+            } else {
+		        $skaccount_option .= '<option value="'.$sa['id'].'">'.$sa['name']. '|'. $sa['account'] .'</option>';
+            }
 		}
-		$this->assign('pay_method_option', $pay_method_option);
-		$this->assign('ad_info', $ad_info);
+        $this->assign('skaccount_option', $skaccount_option);
+//		dump($skaccout_arr);exit();
+
+        $this->assign('ad_info', $ad_info);
 
 		$coin = M('Coin')->field('id,title,js_yw,name')->where(array('status'=>1,'name'=>array('neq','cny')))->select();
 		$this->assign('coin', $coin);
