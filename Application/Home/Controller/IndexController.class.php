@@ -64,7 +64,7 @@ class IndexController extends HomeController
 		
 		if(!empty($id_list) || !empty($id_listc)){
 			if(empty($id_list)){
-				$list = M()->query("select * from (select id,add_time,userid,pay_method,currency,location,margin,min_limit,max_limit,coin,type from tw_ad_sell where(id in ($id_listc))) as temp  order by add_time desc limit 4");
+				$list = M()->query("select * from (select id,add_time,userid,pay_method,currency,location,margin,min_limit,max_limit,coin,type,skaccount from tw_ad_sell where(id in ($id_listc))) as temp  order by add_time desc limit 4");
 			}
 			if(empty($id_listc)){
 				$list = M()->query("select * from (select id,add_time,userid,pay_method,currency,location,margin,min_limit,max_limit,coin,type from tw_ad_buy where(id in ($id_list))) as temp  order by add_time desc limit 4");
@@ -82,9 +82,12 @@ class IndexController extends HomeController
 				}
 				if($vv['type']==0){
 					$fs='购买';
-				}else{
+                    $adinfo[$k]['paymethod'] = getpaymethod($vv['pay_method']);//M()->table('tw_pay_method')->where(array('id'=>$vv['pay_method']))->getField('name');
+                }else{
 					$fs='出售';
-				}
+					$skaccount = M('ad_sell')->where(array('id'=>$vv['id']))->field('skaccount')->find();
+					$adinfo[$k]['paymethod'] = skaccount_get_account($skaccount['skaccount']);
+                }
 				$hb = M()->table('tw_coin')->where("id=".$vv['coin'])->getField('name');
 				$adinfo[$k]['fshb']=$fs.strtoupper($hb);
 
@@ -117,13 +120,13 @@ class IndexController extends HomeController
 				$adinfo[$k]['headimg'] = !empty($userinfo['headimg']) ? $userinfo['headimg'] : "/Public/Home/images/hportrait/head_portrait60.png";
 				$adinfo[$k]['min_limit']=$vv['min_limit'];
 				$adinfo[$k]['max_limit']=$vv['max_limit'];
-				$adinfo[$k]['paymethod']=getpaymethod($vv['pay_method']);//M()->table('tw_pay_method')->where(array('id'=>$vv['pay_method']))->getField('name');
 				$adinfo[$k]['type']=$vv['type'];
 				$adinfo[$k]['id']=$vv['id'];
 
 			}
 			$this->assign('adinfo', $adinfo);
 		}
+//		print_r($adinfo);exit();
 
 		$ad_buy=M('Ad_buy')->where(array('state'=>1))->order('add_time desc')->select();
 		$ad_sell=M('Ad_sell')->where(array('state'=>1))->order('add_time desc')->select();

@@ -121,16 +121,16 @@
 								<input type="text" value="{$ad_info.due_time}" class="rechipt" id="due_time" style="width: 572px;height: 48px;">
 							</div>
 						</div>
-						<!--<div class="paymethod">-->
-							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>-->
-							<!--<select id="pay_method" multiple="multiple">-->
-								<!--{$pay_method_option}-->
-							<!--</select>-->
-						<!--</div>-->
+						<div class="paymethod" id="paymethod">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>
+							<select id="pay_method" multiple="multiple">
+								{$pay_method_option}
+							</select>
+						</div>
 
 						<if condition="$type eq 1">
 
-						<div class="paymethod">
+						<div class="paymethod" id="skfs">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款账号:</p>
 							<select id="skaccount" multiple="multiple">
 								{$skaccount_option}
@@ -221,11 +221,15 @@
             $("#sell").attr("checked","checked");
             $("#buy").attr("disabled","disabled");
             $("#qixian").hide();
+            $("#paymethod").hide();
+            $("#skfs").show();
             $("#zuidi").show();
 		}else{
             $("#buy").attr("checked","checked");
             $("#sell").attr("disabled","disabled");
             $("#qixian").show();
+            $("#paymethod").show();
+            $("#skfs").hide();
             $("#zuidi").hide();
 		}
         var margin = $('#margin').val();

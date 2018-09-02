@@ -276,16 +276,16 @@ class NewadController extends HomeController
 		$ad_info['type'] = $type;
 
 		//支付方式  备注掉
-//		$pay_method_arr = explode(",",$ad_info['pay_method']);
-//		$pay_method_option = '';
-//		foreach($pay_method as $pm){
-//			if(in_array($pm['id'],$pay_method_arr)){
-//				$pay_method_option .= '<option value="'.$pm['id'].'" selected="selected">'.$pm['name'].'</option>';
-//			}else{
-//				$pay_method_option .= '<option value="'.$pm['id'].'">'.$pm['name'].'</option>';
-//			}
-//		}
-//		$this->assign('pay_method_option', $pay_method_option);
+		$pay_method_arr = explode(",",$ad_info['pay_method']);
+		$pay_method_option = '';
+		foreach($pay_method as $pm){
+			if(in_array($pm['id'],$pay_method_arr)){
+				$pay_method_option .= '<option value="'.$pm['id'].'" selected="selected">'.$pm['name'].'</option>';
+			}else{
+				$pay_method_option .= '<option value="'.$pm['id'].'">'.$pm['name'].'</option>';
+			}
+		}
+		$this->assign('pay_method_option', $pay_method_option);
 
 		//收款账号
         $skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
@@ -643,7 +643,8 @@ class NewadController extends HomeController
 
 		$selllist = M('AdSell')->where(array('userid' => $record['userid'], 'state' => 1))->select();
 		foreach ($selllist as $k=> $v){
-			$selllist[$k]['pay_method'] =getpaymethod($v['pay_method']);// M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
+			$selllist[$k]['pay_method'] =skaccount_get_account($v['skaccount']);
+//			$selllist[$k]['pay_method'] =getpaymethod($v['pay_method']);// M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
 			$selllist[$k]['currency_type'] = get_price($v['coin'],$v['currency'],0);
 			$selllist[$k]['coin'] = M('Coin')->where(array('id'=>$v['coin']))->getField('name');
 			$price = get_price($v['coin'],$v['currency'],1);

@@ -2522,4 +2522,20 @@ function numform($number){
 		}
 	}
 }
+//通过skaccount来查询收款方式
+function skaccount_get_account($ids){
+    $pays_ids = M('user_skaccount')->where("FIND_IN_SET(id,'".$ids."' )")->field('pay_method_id')->select();
+    $new_pays_ids = array();
+    foreach ($pays_ids as $val){
+        array_push($new_pays_ids, $val['pay_method_id']);
+    }
+    array_unique($new_pays_ids);
+    $new_ids = implode(',', $new_pays_ids);
+    $pays="";
+    $name=M('pay_method')->where("FIND_IN_SET(id,'".$new_ids."' )")->field('name')->select();
+    foreach ($name as $key => $v) {
+        $pays.=$v['name']." ";
+    }
+    return $pays;
+}
 ?>
