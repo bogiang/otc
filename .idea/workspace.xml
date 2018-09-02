@@ -16,11 +16,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.6511335">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/User/index.html">
+          <file leaf-file-name="NewadController.class.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3078">
-                  <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
+                <state relative-caret-position="563">
+                  <caret line="470" column="9" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
@@ -28,8 +28,8 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="230">
-                  <caret line="274" column="50" lean-forward="true" selection-start-line="274" selection-start-column="50" selection-end-line="274" selection-end-column="50" />
+                <state relative-caret-position="390">
+                  <caret line="328" selection-start-line="328" selection-end-line="328" />
                   <folding>
                     <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -38,7 +38,9 @@
                     <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#7;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                    <element signature="n#div#9;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+                    <element signature="n#style#0;n#div#9;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#10;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#p#0;n#div#10;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#div#13;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#14;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#15;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -47,38 +49,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="NewadController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="734">
-                  <caret line="470" column="9" lean-forward="true" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/.gitignore">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="38">
-                  <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+          <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="551">
-                  <caret line="597" column="35" selection-start-line="597" selection-start-column="35" selection-end-line="597" selection-end-column="35" />
+                  <caret line="128" column="12" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ediad.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="ediad.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/ediad.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1159">
-                  <caret line="283" column="38" selection-start-line="283" selection-start-column="38" selection-end-line="283" selection-end-column="38" />
+                <state relative-caret-position="381">
+                  <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
                   <folding>
                     <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -94,15 +78,6 @@
                     <element signature="n#div#11;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
                     <element signature="n#div#12;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="39026">
-                  <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -139,8 +114,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>webuploader-pick</find>
-      <find>webuploader</find>
       <find>pic</find>
       <find>pick</find>
       <find>WU_FILE_0_1</find>
@@ -156,7 +129,6 @@
       <find>skaccount</find>
       <find>type=&quot;checkbox&quot;</find>
       <find>cons</find>
-      <find>paymethod</find>
       <find>#pay_method</find>
       <find>selectItemName</find>
       <find>selectGroupName</find>
@@ -169,6 +141,9 @@
       <find>skaccout</find>
       <find>pay_method</find>
       <find>$skaccount</find>
+      <find>showBalance</find>
+      <find>paymethod</find>
+      <find>#paymethod</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -209,10 +184,10 @@
         <option value="$PROJECT_DIR$/Application/Home/Controller/UserController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/View/User/skaccount.html" />
         <option value="$PROJECT_DIR$/Public/Home/assets/js/multiple-select.js" />
-        <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
-        <option value="$PROJECT_DIR$/Application/Home/View/Newad/ediad.html" />
         <option value="$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Application/Home/View/Newad/ediad.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
       </list>
     </option>
   </component>
@@ -232,9 +207,9 @@
       <path value="$PROJECT_DIR$/workermanchat/vendor/workerman/gateway-worker" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="55" />
-    <option name="y" value="-21" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="268" />
+    <option name="y" value="51" />
     <option name="width" value="1857" />
     <option name="height" value="993" />
   </component>
@@ -351,18 +326,18 @@
       <workItem from="1535357315018" duration="8704000" />
       <workItem from="1535508086281" duration="26147000" />
       <workItem from="1535679205866" duration="33088000" />
-      <workItem from="1535856125679" duration="3505000" />
+      <workItem from="1535856125679" duration="4598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111946000" />
+    <option name="totallyTimeSpent" value="113039000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="268" y="51" width="1857" height="993" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17291667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18033677" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3295325" />
@@ -395,13 +370,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/QueueController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="69" column="59" selection-start-line="69" selection-start-column="59" selection-end-line="69" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/FinanceController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -660,17 +628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/index.html">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
-          <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39026">
-          <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -681,10 +642,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="470" column="9" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="274" column="50" lean-forward="true" selection-start-line="274" selection-start-column="50" selection-end-line="274" selection-end-column="50" />
+        <state relative-caret-position="390">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
           <folding>
             <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -693,7 +675,9 @@
             <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#7;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#9;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#div#9;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#10;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#div#10;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#div#13;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#14;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#15;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -701,10 +685,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="128" column="12" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/ediad.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1159">
-          <caret line="283" column="38" selection-start-line="283" selection-start-column="38" selection-end-line="283" selection-end-column="38" />
+        <state relative-caret-position="381">
+          <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
@@ -720,20 +711,6 @@
             <element signature="n#div#11;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#12;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="470" column="9" lean-forward="true" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>

@@ -127,17 +127,17 @@
 								<input type="text" value="" class="rechipt" id="due_time" style="width: 572px;height: 48px;">
 							</div>
 						</div>
-						<!--<div class="paymethod">-->
-							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>-->
-							<!--<select id="pay_method" multiple="multiple">-->
-								<!--<volist name="pay_method" id="vo">-->
-									<!--<option value="{$vo.id}">{$vo.name}</option>-->
-								<!--</volist>-->
-							<!--</select>-->
-						<!--</div>-->
+						<div class="paymethod" id="paymethod" style="display: none">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>支付方式:</p>
+							<select id="pay_method" multiple="multiple">
+								<volist name="pay_method" id="vo">
+									<option value="{$vo.id}">{$vo.name}</option>
+								</volist>
+							</select>
+						</div>
 						<div style="clear:both;"></div>
 
-						<div class="paymethod">
+						<div class="paymethod" id="skfs">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款方式:</p>
 							<select id="skaccount" multiple="multiple">
 								<volist name="skaccountList" id="vo">
@@ -224,14 +224,19 @@
 
     $("#sell").click(function(){
 		$("#qixian").hide();
+		$("#paymethod").hide();
+		$("#skfs").show();
 		$("#zuidi").show();
 		$("#skacc").show();
 
     });
 	$("#buy").click(function(){
 		$("#qixian").show();
+		$("#paymethod").show();
+		$("#skfs").hide();
 		$("#zuidi").hide();
 		$("#skacc").hide();
+
 	});
 
     var newad = "{$newad_token}";
@@ -267,14 +272,13 @@
         var min_limit = $("#min_limit").val();
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
-        var pay_method = '';
         // var pay_method = $('#pay_method').val();
-        // var pay_method='';
-        // $('input[data-name="selectItempay_method"]:checked').each(function(){
-			// 	if($(this).val()!='on'){
-			// 		pay_method+=$(this).val()+",";
-			// 	}
-        // });
+        var pay_method='';
+        $('input[data-name="selectItempay_method"]:checked').each(function(){
+				if($(this).val()!='on'){
+					pay_method+=$(this).val()+",";
+				}
+        });
 
 		var skaccount = '';
         $('input[data-name="selectItemskaccount"]:checked').each(function(){
@@ -316,11 +320,13 @@
             $('#message').focus();
 			return false;
 		}
-		// if(pay_method==''){
-		// 	layer.alert("请选择支付方式！");
-		// 	return false;
-		// }
+
 		if(type == 0) {
+            if(pay_method==''){
+                layer.alert("请选择支付方式！");
+                return false;
+            }
+
             if (!due_time) {
                 layer.tips('请输入付款期限', '#due_time', {tips: 3});
                 $('#due_time').focus();
@@ -368,12 +374,12 @@
 				window.location.href="/User/paypassword";
 			});
 		}
-        // $('#pay_method').change(function() {
-        //     console.log($(this).val());
-        // }).multipleSelect({
-        //     width: '100%',
-			// name: 'pay_method'
-        // });
+        $('#pay_method').change(function() {
+            console.log($(this).val());
+        }).multipleSelect({
+            width: '100%',
+			name: 'pay_method'
+        });
 
         $('#skaccount').change(function() {
             console.log($(this).val());

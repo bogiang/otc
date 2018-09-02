@@ -281,14 +281,13 @@
         var min_limit = $("#min_limit").val();
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
-        var pay_method = '';	//设置为空
         // var pay_method = $('#pay_method').val();
-        // var pay_method='';
-        // $('input[data-name="selectItempay_method"]:checked').each(function(){
-        // 	if($(this).val()!='on'){
-        // 		pay_method+=$(this).val()+",";
-        // 	}
-        // });
+        var pay_method='';
+        $('input[data-name="selectItempay_method"]:checked').each(function(){
+            if($(this).val()!='on'){
+                pay_method+=$(this).val()+",";
+            }
+        });
 
 
 		// alert(pay_method);
@@ -321,10 +320,7 @@
             $('#message').focus();
 			return false;
 		}
-		// if(pay_method==''){
-		// 	layer.alert("请选择支付方式！");
-		// 	return false;
-		// }
+
 		
 		if(type == 1){
 			// var skaccount = $("#skaccount").val();
@@ -343,6 +339,11 @@
             }
 		}
 		if(type == 0) {
+            if(pay_method==''){
+                layer.alert("请选择支付方式！");
+                return false;
+            }
+
             if (!due_time) {
                 layer.tips('请输入付款期限', '#due_time', {tips: 3});
                 $('#due_time').focus();
@@ -378,11 +379,12 @@
         }, "json");
     }
 	$(document).ready(function(){
-        // $('#pay_method').change(function() {
-        //     console.log($(this).val());
-        // }).multipleSelect({
-        //     width: '100%'
-        // });
+        $('#pay_method').change(function() {
+            console.log($(this).val());
+        }).multipleSelect({
+            width: '100%',
+            name: 'pay_method'
+        });
 
         $('#skaccount').change(function() {
             console.log($(this).val());
