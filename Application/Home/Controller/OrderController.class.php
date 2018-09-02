@@ -510,12 +510,18 @@ class OrderController extends HomeController
         		}
         }
 		$pay_method = explode(",",$adinfo['pay_method']);
-		$payd_arr=[];
-		foreach($pay_method as $pm){
-			$pmname = M('pay_method')->where(array('id'=>$pm))->find();
-			$payd_arr[] = $pmname['name'];
-		}
-		$payd = implode(" ",$payd_arr);
+        if ($type == 0) {
+            $payd_arr=[];
+            foreach($pay_method as $pm){
+                $pmname = M('pay_method')->where(array('id'=>$pm))->find();
+                $payd_arr[] = $pmname['name'];
+            }
+            $payd = implode(" ",$payd_arr);
+        } else {
+            $payd = skaccount_get_account($adinfo['skaccount']);
+        }
+
+
         //生成token
 		$mybj_token = set_token('mybj');
 		$this->assign('mybj_token',$mybj_token);

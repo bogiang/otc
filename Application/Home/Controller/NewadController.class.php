@@ -587,7 +587,11 @@ class NewadController extends HomeController
         $this->assign("currency",$currency);
 
 		//付款方式
-        $paymethod =getpaymethod($record['pay_method']);// M('pay_method')->where(array('id'=>$record['pay_method']))->find();
+        if($type == 0){
+            $paymethod = getpaymethod($record['pay_method']);// M('pay_method')->where(array('id'=>$record['pay_method']))->find();
+        } else {
+            $paymethod = skaccount_get_account($record['skaccount']);
+        }
         $this->assign("paymethod",$paymethod);
 
 		//查找用户的信息
@@ -643,7 +647,7 @@ class NewadController extends HomeController
 
 		$selllist = M('AdSell')->where(array('userid' => $record['userid'], 'state' => 1))->select();
 		foreach ($selllist as $k=> $v){
-			$selllist[$k]['pay_method'] =skaccount_get_account($v['skaccount']);
+			$selllist[$k]['pay_method'] = skaccount_get_account($v['skaccount']);
 //			$selllist[$k]['pay_method'] =getpaymethod($v['pay_method']);// M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
 			$selllist[$k]['currency_type'] = get_price($v['coin'],$v['currency'],0);
 			$selllist[$k]['coin'] = M('Coin')->where(array('id'=>$v['coin']))->getField('name');
@@ -660,7 +664,7 @@ class NewadController extends HomeController
 
 		$buylist = M('AdBuy')->where(array('userid'=>$record['userid'],'state'=>1))->select();
 		foreach ($buylist as $k=> $v){
-			$buylist[$k]['pay_method'] =getpaymethod($v['pay_method']);// M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
+			$buylist[$k]['pay_method'] = getpaymethod($v['pay_method']);// M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
 			$buylist[$k]['currency_type'] = get_price($v['coin'],$v['currency'],0);
 			$buylist[$k]['coin'] = M('Coin')->where(array('id'=>$v['coin']))->getField('name');
 			$price = get_price($v['coin'],$v['currency'],1);

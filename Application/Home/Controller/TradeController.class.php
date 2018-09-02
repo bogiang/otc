@@ -45,7 +45,8 @@ class TradeController extends HomeController
 
 		$Module = ($type == 0)?M('Ad_buy a'):M('Ad_sell a');
 		//获取满足条件的记录id
-		$count_id = $Module->join('tw_user b on a.userid=b.id')->where($where)->field('a.id as id,a.userid')->select();
+        $count_id = $Module->join('tw_user b on a.userid=b.id')->where($where)->field('a.id as id,a.userid')->select();
+
 		// var_dump($Module->getlastsql());
 		//过滤在隐藏时间记录后的记录数
 		$count=0;
@@ -81,7 +82,11 @@ class TradeController extends HomeController
 			}
 			$list[$k]['price'] = round($price + $price * $v['margin']/100,2);
 			// $list[$k]['pay_method'] = M('PayMethod')->where(array('id'=>$v['pay_method']))->getField('name');
-			$list[$k]['pay_method'] = getpaymethod($v['pay_method']);
+			if($type == 0){
+                $list[$k]['pay_method'] = getpaymethod($v['pay_method']);
+            } else {
+                $list[$k]['pay_method'] = skaccount_get_account($v['skaccount']);
+            }
 			$adverinfo = M('User')->where(array('id'=>$v['userid']))->find();
 			$list[$k]['avatar'] = $adverinfo['headimg'];
 			$list[$k]['enname'] = $adverinfo['enname'];
