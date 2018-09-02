@@ -111,18 +111,20 @@
                         <input name="account" id="account" type="text" class="cztxinput">
                     </li>
 
-                    <li>
+                    <li id="xuni">
                         <span class="c2" id="lotteryAmountSpan5" style="float: left">二维码 </span>
                         <div class="selpic">
                             <!--用来存放item-->
-                            <div id="fileList" class="uploader-list"></div>
+                            <div id="fileList" class="uploader-list">
+                                <img id="ajax_qrcode" src="" style="width: 120px;height: 90px">
+                            </div>
                             <div id="filePicker">选择图片</div>
                             <input type="hidden" name="qrcode" id="WU_FILE_0_1" />
                         </div>
                         <!--<input name="qrcode" id="qrcode" type="text" class="cztxinput">-->
                     </li>
 
-                    <li>
+                    <li id="yinhang">
                         <span class="c2" id="lotteryAmountSpan6">开户行 </span>
                         <input name="bank" id="bank" type="text" class="cztxinput">
                     </li>
@@ -161,6 +163,28 @@
         required: false
     });
 
+    //改变收款方式
+    $(function () {
+        var pay_method = $('#pay_method').val();
+        showtime(pay_method);
+    });
+    $('#pay_method').on('change',function () {
+        var pay_method = $('#pay_method').val();
+        showtime(pay_method);
+    });
+    function showtime(pay_method){
+        if(pay_method == 1){
+            $('#xuni').hide();
+            $('#yinhang').hide();
+        } else if (pay_method == 2) {
+            $('#xuni').hide();
+            $('#yinhang').show();
+        } else {
+            $('#xuni').show();
+            $('#yinhang').hide();
+        }
+    }
+
     $('#dialogBoxShadow').height($(document).height());
     function closeAddress() {
         $("#withdrawCnyAddress").hide();
@@ -182,6 +206,7 @@
         });
         $("#sk_id").val(sk_id);
 
+
         //显示值
         if (sk_id != '' || sk_id != null) {
             $.post("{:U('User/checkaccount')}", {
@@ -195,6 +220,8 @@
                     $("#WU_FILE_0_1").val(data.qrcode);
                     $("#bank").val(data.bank);
                     $("#desc").val(data.desc);
+                    showtime(data.pay_method_id);
+                    $("#ajax_qrcode").attr('src','http://' + window.location.hostname + '/' + data.qrcode);
                 } else {
                     layer.msg(data.info, {icon: 2});
                     if (data.url) {

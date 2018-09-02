@@ -13,118 +13,53 @@
     <pharConfigPath>$PROJECT_DIR$/workermanchat/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.88916874">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="NewadController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="599">
-                  <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
-                  <folding>
-                    <element signature="e#3750#7964#0#PHP" />
-                    <element signature="e#7967#12002#0#PHP" />
-                    <element signature="e#12005#15728#0#PHP" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/Trade/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TradeController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/TradeController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-114">
-                  <caret line="39" column="64" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="257">
-                  <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="OrderController.class.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Application/Home/Controller/OrderController.class.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="278">
-                  <caret line="518" column="43" selection-start-line="518" selection-start-column="43" selection-end-line="518" selection-end-column="43" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="orderinfo.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/Order/orderinfo.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="542">
-                  <caret line="356" column="49" selection-start-line="356" selection-start-column="49" selection-end-line="356" selection-end-column="49" />
-                  <folding>
-                    <element signature="n#style#0;n#img#0;n#div#0;n#if#1;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#div#0;n#if#2;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="skaccount.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="192">
-                  <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
-                  <folding>
-                    <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#div#1;n#!!top" />
-                    <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="NewadController.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="599">
+              <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
+              <folding>
+                <element signature="e#3750#7964#0#PHP" />
+                <element signature="e#7967#12002#0#PHP" />
+                <element signature="e#12005#15728#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="590">
+              <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="skaccount.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="121" column="82" selection-start-line="121" selection-start-column="82" selection-end-line="121" selection-end-column="82" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#2;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -135,10 +70,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user_skaccount</find>
-      <find>showqrcode</find>
-      <find>skaccount</find>
-      <find>type=&quot;checkbox&quot;</find>
       <find>cons</find>
       <find>#pay_method</find>
       <find>selectItemName</find>
@@ -150,7 +81,6 @@
       <find>upad</find>
       <find>pay_method_option</find>
       <find>skaccout</find>
-      <find>pay_method</find>
       <find>showBalance</find>
       <find>#paymethod</find>
       <find>paymethod</find>
@@ -165,6 +95,11 @@
       <find>value</find>
       <find>pm</find>
       <find>$key</find>
+      <find>pay_method</find>
+      <find>sq</find>
+      <find>showqrcode</find>
+      <find>qrcode</find>
+      <find>ajax_qrcode</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -202,7 +137,6 @@
         <option value="$PROJECT_DIR$/Application/Home/View/Public/header_new.html" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Application/Home/Controller/UserController.class.php" />
-        <option value="$PROJECT_DIR$/Application/Home/View/User/skaccount.html" />
         <option value="$PROJECT_DIR$/Public/Home/assets/js/multiple-select.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Application/Home/View/Newad/index.html" />
@@ -213,6 +147,7 @@
         <option value="$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/Controller/OrderController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/View/Order/orderinfo.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/User/skaccount.html" />
       </list>
     </option>
   </component>
@@ -232,9 +167,9 @@
       <path value="$PROJECT_DIR$/workermanchat/vendor/workerman/gateway-worker" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="366" />
-    <option name="y" value="49" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="127" />
+    <option name="y" value="36" />
     <option name="width" value="1857" />
     <option name="height" value="993" />
   </component>
@@ -289,7 +224,7 @@
               <item name="Application" type="462c0819:PsiDirectoryNode" />
               <item name="Home" type="462c0819:PsiDirectoryNode" />
               <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="Order" type="462c0819:PsiDirectoryNode" />
+              <item name="Trade" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="otc" type="b2602c69:ProjectViewProjectNode" />
@@ -297,7 +232,7 @@
               <item name="Application" type="462c0819:PsiDirectoryNode" />
               <item name="Home" type="462c0819:PsiDirectoryNode" />
               <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="Trade" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -351,15 +286,15 @@
       <workItem from="1535357315018" duration="8704000" />
       <workItem from="1535508086281" duration="26147000" />
       <workItem from="1535679205866" duration="33088000" />
-      <workItem from="1535856125679" duration="17660000" />
+      <workItem from="1535856125679" duration="20112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126101000" />
+    <option name="totallyTimeSpent" value="128553000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="359" y="54" width="1857" height="993" extended-state="0" />
+    <frame x="133" y="41" width="1857" height="993" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18033677" />
@@ -581,19 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#!!top" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Public/Home/assets/js/multiple-select.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
@@ -619,13 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
           <caret line="162" column="14" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -686,29 +601,10 @@
         <state relative-caret-position="-290428" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
-          <folding>
-            <element signature="e#3750#7964#0#PHP" />
-            <element signature="e#7967#12002#0#PHP" />
-            <element signature="e#12005#15728#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Newad/advdetail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="153" column="43" selection-start-line="153" selection-start-column="33" selection-end-line="153" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/View/Trade/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -771,6 +667,52 @@
             <element signature="n#style#0;n#span#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/Trade/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewadController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="593" column="9" selection-start-line="593" selection-start-column="9" selection-end-line="593" selection-end-column="9" />
+          <folding>
+            <element signature="e#3750#7964#0#PHP" />
+            <element signature="e#7967#12002#0#PHP" />
+            <element signature="e#12005#15728#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/UserController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="2054" column="17" selection-start-line="2054" selection-start-column="17" selection-end-line="2054" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/User/skaccount.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="121" column="82" selection-start-line="121" selection-start-column="82" selection-end-line="121" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#2;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
