@@ -141,7 +141,7 @@
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>收款方式:</p>
 							<select id="skaccount" multiple="multiple">
 								<volist name="skaccountList" id="vo">
-									<option value="{$vo.id}">{$vo.name} | {$vo.account}</option>
+									<option value="{$vo.id}">{$vo.payname} | {$vo.name} | {$vo.account}</option>
 								</volist>
 							</select>
 						</div>
@@ -267,6 +267,7 @@
         var min_limit = $("#min_limit").val();
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
+        var pay_method = '';
         // var pay_method = $('#pay_method').val();
         // var pay_method='';
         // $('input[data-name="selectItempay_method"]:checked').each(function(){
@@ -282,8 +283,6 @@
             }
         });
 
-        alert(skaccount);return false;
-        // var skaccount = $("#skaccount").val();
         var message = $("#message").val();
         var safe_option =  $("input[name='safe_option']:checked").val();
         var trust_only = ($("input[name='trust_only']:checked").val()==1)?1:0;

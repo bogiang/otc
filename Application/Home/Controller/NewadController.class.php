@@ -70,6 +70,9 @@ class NewadController extends HomeController
 
 		//收款账号
         $skaccountList = M('user_skaccount')->where(array("user_id" => userid()))->select();
+        foreach ($skaccountList as $key => $value){
+            $skaccountList[$key]['payname'] = $pay_method[$value['pay_method_id'] - 1]['name'];
+        }
 
 		$this->assign('skaccountList',$skaccountList);
 		$this->assign('arr',$arr);
@@ -138,9 +141,9 @@ class NewadController extends HomeController
 			$this->error("参数错误！", $extra);
 		}
 		
-		if(!empty($skaccount) && !check($skaccount,'bcdw')){
-			$this->error("参数错误！", $extra);
-		}
+//		if(!empty($skaccount) && !check($skaccount,'bcdw')){
+//			$this->error("参数错误！", $extra);
+//		}
 		
 		$user_info = M('User')->where(array('id' => userid()))->find();
 		if ($user_info['paypassword'] == '') {
@@ -188,9 +191,9 @@ class NewadController extends HomeController
 //			$this->error('请选择支付方式！', $extra);
 //		}
 		
-		if(!check($pay_method,'a')){
-			$this->error("参数错误！", $extra);
-		}
+//		if(!check($pay_method,'a')){
+//			$this->error("参数错误！", $extra);
+//		}
 		
 		if(!check($open_time,'a')){
 			$this->error("参数错误！", $extra);
@@ -288,11 +291,12 @@ class NewadController extends HomeController
         $skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
 		$skaccount_arr = explode(",",$ad_info['skaccount']);
 		$skaccount_option = '';
-		foreach($skaccount as $sa){
+		foreach($skaccount as $key => $sa){
+            $skaccount[$key]['payname'] = $pay_method[$sa['pay_method_id'] - 1]['name'];
 		    if(in_array($sa['id'], $skaccount_arr)){
-                $skaccount_option .= '<option value="'.$sa['id'].'" selected="selected">'.$sa['name']. '|'. $sa['account'] .'</option>';
+                $skaccount_option .= '<option value="'.$sa['id'].'" selected="selected">'.$skaccount[$key]['payname']. '|' .$sa['name']. '|'. $sa['account'] .'</option>';
             } else {
-		        $skaccount_option .= '<option value="'.$sa['id'].'">'.$sa['name']. '|'. $sa['account'] .'</option>';
+		        $skaccount_option .= '<option value="'.$sa['id'].'">'. $skaccount[$key]['payname']. '|' .$sa['name']. '|'. $sa['account'] .'</option>';
             }
 		}
         $this->assign('skaccount_option', $skaccount_option);
@@ -394,9 +398,9 @@ class NewadController extends HomeController
 			$this->error("参数错误7！", $extra);
 		}
 		
-		if(!empty($skaccount) && !check($skaccount,'bcdw')){
-			$this->error("参数错误8！", $extra);
-		}
+//		if(!empty($skaccount) && !check($skaccount,'bcdw')){
+//			$this->error("参数错误8！", $extra);
+//		}
 
 		if (!check($margin, 'margin')) {
 			$this->error('溢价为-99.99 至 99.99 的数值', $extra);
@@ -426,9 +430,9 @@ class NewadController extends HomeController
 			$this->error('最大限额格式错误！', $extra);
 		}
 		
-		if(!check($pay_method,'a')){
-			$this->error("参数错误9！", $extra);
-		}
+//		if(!check($pay_method,'a')){
+//			$this->error("参数错误9！", $extra);
+//		}
 		
 		if(!check($open_time,'a')){
 			$this->error("参数错误10！", $extra);
