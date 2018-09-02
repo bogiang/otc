@@ -60,8 +60,8 @@
           <file leaf-file-name="OrderController.class.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Application/Home/Controller/OrderController.class.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1207">
-                  <caret line="521" column="9" selection-start-line="521" selection-start-column="9" selection-end-line="521" selection-end-column="9" />
+                <state relative-caret-position="278">
+                  <caret line="518" column="43" selection-start-line="518" selection-start-column="43" selection-end-line="518" selection-end-column="43" />
                 </state>
               </provider>
             </entry>
@@ -69,9 +69,11 @@
           <file leaf-file-name="orderinfo.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Application/Home/View/Order/orderinfo.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="456">
-                  <caret line="339" column="29" lean-forward="true" selection-start-line="339" selection-start-column="29" selection-end-line="339" selection-end-column="29" />
+                <state relative-caret-position="542">
+                  <caret line="356" column="49" selection-start-line="356" selection-start-column="49" selection-end-line="356" selection-end-column="49" />
                   <folding>
+                    <element signature="n#style#0;n#img#0;n#div#0;n#if#1;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#img#0;n#div#0;n#if#2;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -133,12 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>progress</find>
-      <find>PopLayer</find>
-      <find>idcard</find>
-      <find>position:</find>
-      <find>checkaccount</find>
-      <find>upskaccount</find>
       <find>user_skaccount</find>
       <find>showqrcode</find>
       <find>skaccount</find>
@@ -163,6 +159,12 @@
       <find>paym</find>
       <find>$paymethod</find>
       <find>$payd</find>
+      <find>$pays_method</find>
+      <find>$pay_method</find>
+      <find>val</find>
+      <find>value</find>
+      <find>pm</find>
+      <find>$key</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -230,9 +232,9 @@
       <path value="$PROJECT_DIR$/workermanchat/vendor/workerman/gateway-worker" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="8" />
-    <option name="y" value="74" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="366" />
+    <option name="y" value="49" />
     <option name="width" value="1857" />
     <option name="height" value="993" />
   </component>
@@ -349,18 +351,18 @@
       <workItem from="1535357315018" duration="8704000" />
       <workItem from="1535508086281" duration="26147000" />
       <workItem from="1535679205866" duration="33088000" />
-      <workItem from="1535856125679" duration="13791000" />
+      <workItem from="1535856125679" duration="17660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122232000" />
+    <option name="totallyTimeSpent" value="126101000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="359" y="54" width="1857" height="993" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17291667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18033677" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3295325" />
@@ -627,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="2531" column="32" lean-forward="true" selection-start-line="2531" selection-start-column="32" selection-end-line="2531" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Index/a/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -731,18 +726,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="2525" column="37" selection-start-line="2525" selection-start-column="37" selection-end-line="2525" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Controller/OrderController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="521" column="9" selection-start-line="521" selection-start-column="9" selection-end-line="521" selection-end-column="9" />
+        <state relative-caret-position="278">
+          <caret line="518" column="43" selection-start-line="518" selection-start-column="43" selection-end-line="518" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/Order/orderinfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="339" column="29" lean-forward="true" selection-start-line="339" selection-start-column="29" selection-end-line="339" selection-end-column="29" />
+        <state relative-caret-position="542">
+          <caret line="356" column="49" selection-start-line="356" selection-start-column="49" selection-end-line="356" selection-end-column="49" />
           <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#if#1;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#if#2;n#volist#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />

@@ -337,7 +337,29 @@
 							
 						</p>
       					<p class="p_new"><span class="span_new">交易条款</span><br/>{$adinfo['message']}</p>
-
+						<div>
+							<div class="p_new">
+								<span class="span_new">收款账号</span><br/>
+								<volist name="pays_method" id="pm">
+									<if condition="$pm.pay_method_id eq 2">
+										<div>银行收款：{$pm.name} | {$pm.account} | {$pm.bank}</div>
+									</if>
+									<if condition="$pm.pay_method_id eq 3">
+										<div>
+											<div>支付宝 | {$pm.name} | {$pm.account}</div>
+											<img src="{$pm.qrcode}" alt="" style="width: 200px;height: 300px;">
+										</div>
+									</if>
+									<if condition="$pm.pay_method_id eq 4">
+										<div>
+											<div>微信 | {$pm.name} | {$pm.account}</div>
+											<img src="{$pm.qrcode}" alt="" style="width: 200px;height: 300px;">
+											<div></div>
+										</div>
+									</if>
+								</volist>
+							</div>
+						</div>
 						<div>
 							<!-- 交易订单单子只有买家可以付款取消 -->
 							<if condition=" $orderinfo['status'] eq 0">
@@ -350,7 +372,6 @@
 									</p>
 									<button onclick="uptrade()" class="button1">标记已付款 </button>
 									<button onclick="cancle()" class="button1 button2">取消交易</button>
-
 								</if>
 							</if>
 

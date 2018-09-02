@@ -519,6 +519,10 @@ class OrderController extends HomeController
             $payd = implode(" ",$payd_arr);
         } else {
             $payd = skaccount_get_account($adinfo['skaccount']);
+            $pays_method = M('user_skaccount')->where("FIND_IN_SET(id,'".$adinfo['skaccount']."' )")->select();//支付方式
+            foreach ($pays_method as $key => $val){
+                $pays_method[$key]['qrcode'] = 'http://'.$_SERVER['HTTP_HOST'].'/'.$val['qrcode'];
+            }
         }
 
 
@@ -549,7 +553,8 @@ class OrderController extends HomeController
         $this->assign('buyname',$buyname);
         $this->assign('sellname',$sellname);
        	$this->assign('orderinfo',$orderinfo);
-		
+        $this->assign('pays_method',$pays_method);//支付方式
+
 		$truban_token = set_token('truban');
 		$this->assign('truban_token',$truban_token);
 		$this->assign('iftrust', $this->iftruban($otherid,1));
