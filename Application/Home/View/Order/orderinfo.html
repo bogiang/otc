@@ -341,20 +341,20 @@
 						<div>
 							<div class="p_new">
 								<span class="span_new">收款账号</span><br/>
-								<volist name="pays_method" id="pm">
-									<if condition="$pm.pay_method_id eq 2">
-										<div>银行收款：{$pm.name} | {$pm.account} | {$pm.bank}</div>
+								<volist name="skaccount_arr" id="ska">
+									<if condition="$ska.pay_method_id eq 2">
+										<div>银行收款：{$ska.name} | {$ska.account} | {$ska.bank}</div>
 									</if>
-									<if condition="$pm.pay_method_id eq 3">
+									<if condition="$ska.pay_method_id eq 3">
 										<div>
-											<div>支付宝 | {$pm.name} | {$pm.account}</div>
-											<img src="{$pm.qrcode}" alt="" style="width: 200px;height: 300px;">
+											<div>支付宝 | {$ska.name} | {$ska.account}</div>
+											<img src="{$ska.qrcode}" alt="" style="width: 200px;height: 300px;">
 										</div>
 									</if>
-									<if condition="$pm.pay_method_id eq 4">
+									<if condition="$ska.pay_method_id eq 4">
 										<div>
-											<div>微信 | {$pm.name} | {$pm.account}</div>
-											<img src="{$pm.qrcode}" alt="" style="width: 200px;height: 300px;">
+											<div>微信 | {$ska.name} | {$ska.account}</div>
+											<img src="{$ska.qrcode}" alt="" style="width: 200px;height: 300px;">
 											<div></div>
 										</div>
 									</if>

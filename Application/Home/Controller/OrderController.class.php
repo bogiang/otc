@@ -166,7 +166,7 @@ class OrderController extends HomeController
 		$this->display();
 	}
 
-	public function trade_ajax($type,$num,$tid,$tamount,$token,$baojia,$lmessage){
+	public function trade_ajax($type,$num,$tid,$tamount,$token,$baojia,$lmessage, $skaccount){
 		//type0买广告1卖广告 num用户要交易的数量 tid广告的id tamount用户要交易的价格
 		if(!userid()){
 			redirect("/Login/index.html");
@@ -394,6 +394,7 @@ class OrderController extends HomeController
         	$arr['order_no']=$this->getorderno(userid(),$orderinfo['userid']);
 			$arr['fee'] = $fee;
             $arr['id_num'] = $id_num;   //识别号
+            $arr['skaccount'] = $skaccount;   //收款账号
 			if($lmessage!="告诉ta您的要求"){
 				$arr['lmessage'] = $lmessage;
 			}
@@ -515,21 +516,28 @@ class OrderController extends HomeController
         		}
         }
 		$pay_method = explode(",",$adinfo['pay_method']);
-        if ($type == 0) {
+
+        if ($type == 2) {   //$type==2 别人卖给你（你购买）、$type==1 你卖给别人（你出售）
             $payd_arr=[];
             foreach($pay_method as $pm){
                 $pmname = M('pay_method')->where(array('id'=>$pm))->find();
                 $payd_arr[] = $pmname['name'];
             }
             $payd = implode(" ",$payd_arr);
+
+            //卖家收款账号，去对应order_sell表中的skaccount字段
+            $skaccount_arr = M('user_skaccount')->where("FIND_IN_SET(id,'".$orderinfo['skaccount']."' )")->select();//支付方式
+            foreach ($skaccount_arr as $key => $val){
+                $skaccount_arr[$key]['qrcode'] = 'http://'.$_SERVER['HTTP_HOST'].'/'.$val['qrcode'];
+            }
+
         } else {
             $payd = skaccount_get_account($adinfo['skaccount']);
-            $pays_method = M('user_skaccount')->where("FIND_IN_SET(id,'".$adinfo['skaccount']."' )")->select();//支付方式
-            foreach ($pays_method as $key => $val){
-                $pays_method[$key]['qrcode'] = 'http://'.$_SERVER['HTTP_HOST'].'/'.$val['qrcode'];
+            $skaccount_arr = M('user_skaccount')->where("FIND_IN_SET(id,'".$adinfo['skaccount']."' )")->select();//支付方式
+            foreach ($skaccount_arr as $key => $val){
+                $skaccount_arr[$key]['qrcode'] = 'http://'.$_SERVER['HTTP_HOST'].'/'.$val['qrcode'];
             }
         }
-
 
         //生成token
 		$mybj_token = set_token('mybj');
@@ -558,7 +566,7 @@ class OrderController extends HomeController
         $this->assign('buyname',$buyname);
         $this->assign('sellname',$sellname);
        	$this->assign('orderinfo',$orderinfo);
-        $this->assign('pays_method',$pays_method);//支付方式
+        $this->assign('skaccount_arr',$skaccount_arr);//收款账号
 
 		$truban_token = set_token('truban');
 		$this->assign('truban_token',$truban_token);

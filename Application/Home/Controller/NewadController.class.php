@@ -596,6 +596,15 @@ class NewadController extends HomeController
 		//付款方式
         if($type == 0){
             $paymethod = getpaymethod($record['pay_method']);// M('pay_method')->where(array('id'=>$record['pay_method']))->find();
+
+            $pay_method_arr = M('pay_method')->select();
+            //收款账号
+            $skaccountList = M('user_skaccount')->where(array("user_id" => userid()))->select();
+            foreach ($skaccountList as $key => $value){
+                $skaccountList[$key]['payname'] = $pay_method_arr[$value['pay_method_id'] - 1]['name'];
+            }
+            $this->assign('skaccountList',$skaccountList);
+
         } else {
             $paymethod = skaccount_get_account($record['skaccount']);
         }

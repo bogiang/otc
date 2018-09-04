@@ -3962,6 +3962,7 @@ CREATE TABLE `tw_znc_log` (
 //添加新的字段
 alter table tw_order_buy add id_num int(10) not null default 0 comment "识别号";
 alter table tw_order_sell add id_num int(10) not null default 0 comment "识别号";
+alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
 
 -- ----------------------------
 -- Records of tw_znc_log
