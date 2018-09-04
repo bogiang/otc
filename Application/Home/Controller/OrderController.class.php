@@ -216,6 +216,9 @@ class OrderController extends HomeController
 			$this->error('留言格式错误',$extra);
 		}
 
+		//识别号
+        $id_num = rand(100000,999999);
+
 		/**************我要购买*******************/
 		if($type==1){
 
@@ -290,6 +293,7 @@ class OrderController extends HomeController
         	$arr['ltime']= $ltime ;
         	$arr['order_no']=$this->getorderno(userid(),$orderinfo['userid']);
 			$arr['fee'] = $fee;
+			$arr['id_num'] = $id_num;   //识别号
 			if($lmessage!="告诉ta您的要求"){
 				$arr['lmessage'] = $lmessage;
 			}
@@ -389,6 +393,7 @@ class OrderController extends HomeController
         	$arr['ltime']=$orderinfo['due_time'] ;
         	$arr['order_no']=$this->getorderno(userid(),$orderinfo['userid']);
 			$arr['fee'] = $fee;
+            $arr['id_num'] = $id_num;   //识别号
 			if($lmessage!="告诉ta您的要求"){
 				$arr['lmessage'] = $lmessage;
 			}
