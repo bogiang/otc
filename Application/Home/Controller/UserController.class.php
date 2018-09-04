@@ -1884,14 +1884,12 @@ class UserController extends HomeController
 
         $myzr_token = set_token('myzr');
         $this->assign('myzr_token', $myzr_token);
-        $userSkaccountList = M('user_skaccount')->where(array('userid' => userid()))->select();
+        $userSkaccountList = M('user_skaccount')->where(array('user_id' => userid()))->select();
 
         foreach ($userSkaccountList as $ke => $val){
             $userSkaccountList[$ke]['pay_name'] = $payMethod[$val['pay_method_id'] - 1]['name'];
         }
         $this->assign('userSkaccountList', $userSkaccountList);
-//        print_r($userSkaccountList);exit();
-
 
         $this->display();
     }
@@ -1902,7 +1900,7 @@ class UserController extends HomeController
             redirect('/Login/index.html');
         }
 
-        $info = M('user_skaccount')->where(array('userid' => userid(), 'id' => $sk_id))->find();
+        $info = M('user_skaccount')->where(array('user_id' => userid(), 'id' => $sk_id))->find();
         if (!$info) {
             $this->error('非法访问！');
         }
@@ -1966,7 +1964,7 @@ class UserController extends HomeController
             }
         } else {
 
-            if (!M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->find()) {
+            if (!M('user_skaccount')->where(array('user_id' => userid(), 'id' => $id))->find()) {
                 $this->error('非法访问！');
             }
             //修改
@@ -2011,9 +2009,9 @@ class UserController extends HomeController
             $this->error('交易密码错误！');
         }
 
-        if (!M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->find()) {
+        if (!M('user_skaccount')->where(array('user_id' => userid(), 'id' => $id))->find()) {
             $this->error('非法访问！');
-        } else if (M('user_skaccount')->where(array('userid' => userid(), 'id' => $id))->delete()) {
+        } else if (M('user_skaccount')->where(array('user_id' => userid(), 'id' => $id))->delete()) {
             $this->success('删除成功！');
         } else {
             $this->error('删除失败！');
