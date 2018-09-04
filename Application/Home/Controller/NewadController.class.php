@@ -35,6 +35,13 @@ class NewadController extends HomeController
 		if (!check($coinid,'d')) {
 			$this->error('参数错误！');
 		}
+
+		//判断有没有收款账号
+        $has_skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
+        if (!count($has_skaccount)) {
+            $this->error("请先设置收款账号！", U('User/skaccount'));
+        }
+
 		$coin_info = M('Coin')->where(array('id'=>$coinid))->find();
 		$coinname = $coin_info['name'];
 
