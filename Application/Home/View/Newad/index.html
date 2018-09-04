@@ -17,6 +17,8 @@
 .ms-parent{width:572px!important;height:50px!important;color:rgba(0,0,0,.7)!important;border:1px solid #d9d9d9!important;border-radius:3px!important;}
 .ms-choice{border:none;height: 48px;line-height: 48px;}
 .ms-choice > div{top:10px;}
+.diy_tab{border-radius: 5px;border: 1px solid #F5BC00;padding: 5px 15px;border-bottom: 0;border-bottom-left-radius: 0;border-bottom-right-radius: 0;margin-bottom: 0;background-color: #F5BC00;color: #fff;}
+.diy_tab_clear{padding: 5px 15px;margin: 0;}
 </style>
 <div class="usernewout">
 	<div class="usncont">
@@ -37,6 +39,8 @@
 				<div class="rech_bd nmt">
 					<div class="rechmid">
 						<h4 class="h4_new">交易类型</h4>
+						<label class="input_new diy_tab"><input id="sell" name="type" type="radio" value="1" checked onclick="showBalance(1)" style="display:none;" />在线出售 </label>
+						<label class="input_new"><input id="buy" name="type" type="radio" value="0" onclick="showBalance(0)" style="display:none;" />在线购买 </label>
 						<p class="line"></p>
 						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>交易币种:  <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请选择你要发布广告的币种。</span></p>
@@ -52,13 +56,13 @@
 								</select>
 							</div>
 						</div>
-						<div>
-							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>选择广告类型: </p>
-							<div>
-								<label class="input_new"><input id="sell" name="type" type="radio" value="1" checked onclick="showBalance(1)" />在线出售 </label>
-								<label class="input_new"><input id="buy" name="type" type="radio" value="0" onclick="showBalance(0)" />在线购买 </label>
-							</div>
-						</div>
+						<!--<div>-->
+							<!--<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>选择广告类型: </p>-->
+							<!--<div>-->
+								<!--<label class="input_new"><input id="sell" name="type" type="radio" value="1" checked onclick="showBalance(1)" />在线出售 </label>-->
+								<!--<label class="input_new"><input id="buy" name="type" type="radio" value="0" onclick="showBalance(0)" />在线购买 </label>-->
+							<!--</div>-->
+						<!--</div>-->
 						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>所在地:  <span style="color:rgba(0,0,0,0.7);font-size: 14px;">请选择你要发布广告的国家。</span></p>
 							<div class="iptbox" style="width:600px;">
@@ -228,6 +232,9 @@
 		$("#skfs").show();
 		$("#zuidi").show();
 		$("#skacc").show();
+		$("#sell").parent().addClass("diy_tab");
+		$("#buy").parent().addClass("diy_tab_clear");
+		$("#buy").parent().removeClass("diy_tab");
 
     });
 	$("#buy").click(function(){
@@ -236,7 +243,9 @@
 		$("#skfs").hide();
 		$("#zuidi").hide();
 		$("#skacc").hide();
-
+        $("#sell").parent().removeClass("diy_tab");
+        $("#sell").parent().addClass("diy_tab_clear");
+        $("#buy").parent().addClass("diy_tab");
 	});
 
     var newad = "{$newad_token}";
