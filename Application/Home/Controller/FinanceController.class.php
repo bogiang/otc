@@ -886,6 +886,7 @@ class FinanceController extends HomeController
 	public function upmyzc($coin, $num, $addr, $paypassword, $mobile_verify, $token, $chkstyle, $email_verify,$guga)
 	{
 
+
 		$extra='';
 		
 		if(!session('myzctoken')) {
@@ -911,7 +912,7 @@ class FinanceController extends HomeController
 			if (!check($mobile_verify, 'd')) {
 				$this->error('短信验证码格式错误！',$extra);
 			}
-			
+
 			if ($user['mobile'] != session('chkmobile') ) {
 				$this->error('短信验证码错误！',$extra);
 			}
@@ -999,6 +1000,25 @@ class FinanceController extends HomeController
 		if ($user_coin[$coin] < $num) {
 			$this->error('可用余额不足',$extra);
 		}
+
+        //超出当日最大限额
+        $today_start = strtotime(date('Y-m-d 00:00:00', time()));
+        $today_end = $today_start + 86399;
+        $zcjl = M('myzc')->where(array('userid' => userid(), 'coinname' => $coin, 'status' => 1))->select();
+        $sum_num = 0;
+        foreach ($zcjl as $key => $val){
+            if ($val['addtime'] > $today_start && $val['addtime'] < $today_end){
+                $sum_num += $val['num'];
+            }
+        }
+        $all_sum = $sum_num + $num;
+        $coin_info = M("$coin")->where(array('short_name' => 'CNY'))->find();
+        $all_money = $all_sum * $coin_info['price'];
+        $day_withdraw = C('day_withdraw');
+        if ($all_money > $day_withdraw){
+            $this->error('超出当日提现金额',$extra);
+        }
+
 
 		if (!empty($Coins['zc_fee']) || !empty($Coins['zc_fee_bili'])) {
 			$fee = round($Coins['zc_fee'], 8) + round($num*$Coins['zc_fee_bili']/100, 8);

@@ -1,22 +1,3 @@
-
--- 用户收款账号
-CREATE TABLE `tw_user_skaccount` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
-  `pay_method_id` int(11) NOT NULL DEFAULT '0' COMMENT '支付方式ID',
-
-  `name` varchar(50) NOT NULL COMMENT '姓名',
-  `account` varchar(100) DEFAULT NULL COMMENT '账号',
-  `qrcode` varchar(255) DEFAULT NULL COMMENT '二维码',
-  `bank` varchar(100) DEFAULT NULL COMMENT '开户行',
-  `desc` varchar(400) DEFAULT NULL COMMENT '详细',
-
-  `addtime` int(10) NOT NULL COMMENT '添加时间',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
 DROP TABLE IF EXISTS `tw_chat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -3959,10 +3940,29 @@ CREATE TABLE `tw_znc_log` (
   KEY `operator` (`operator`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- 用户收款账号
+CREATE TABLE `tw_user_skaccount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `pay_method_id` int(11) NOT NULL DEFAULT '0' COMMENT '支付方式ID',
+
+  `name` varchar(50) NOT NULL COMMENT '姓名',
+  `account` varchar(100) DEFAULT NULL COMMENT '账号',
+  `qrcode` varchar(255) DEFAULT NULL COMMENT '二维码',
+  `bank` varchar(100) DEFAULT NULL COMMENT '开户行',
+  `desc` varchar(400) DEFAULT NULL COMMENT '详细',
+
+  `addtime` int(10) NOT NULL COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 //添加新的字段
 alter table tw_order_buy add id_num int(10) not null default 0 comment "识别号";
 alter table tw_order_sell add id_num int(10) not null default 0 comment "识别号";
 alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
+alter table tw_config add day_withdraw decimal(10,2) not null default '0.00' comment "当日提现最大限额";
 
 -- ----------------------------
 -- Records of tw_znc_log
