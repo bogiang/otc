@@ -28,6 +28,7 @@
     * alter table tw_order_sell add id_num int(10) not null default 0 comment "识别号";
     * alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
     * alter table tw_config add day_withdraw decimal(10,2) not null default '0.00' comment "当日提现最大限额";
+    * alter table tw_config add single_withdraw decimal(10,2) not null default '0.00' comment "单笔提现最大限额审核";
     
 * php.ini 中的max_execution_time 的值修改为180秒 ：为了跑脚本不失败。
 Home/Controller/QueueController.class.php 为脚本

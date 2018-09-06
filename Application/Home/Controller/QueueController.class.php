@@ -4,8 +4,6 @@ namespace Home\Controller;
 class QueueController extends HomeController
 {
 
-
-
 	public function paicuo()
 	{
 		$this_miniute = date("i");
@@ -231,6 +229,17 @@ class QueueController extends HomeController
 			if(empty($Coins['status'])){
 				continue;
 			}
+
+			//单笔提现审核金额 C('single_withdraw'); 如果没设置也是人工审核
+            if (empty(C('single_withdraw'))){
+                continue;
+            }
+            $coin_info = M("{$coin}")->where(array('short_name' => 'CNY'))->find();
+			$all_zc_num = $val['num'] * $coin_info['price'];
+			if ($all_zc_num > C('single_withdraw')){
+			    continue;
+            }
+
 			
 			$user_coin = M('UserCoin')->where(array('userid' => $val['userid']))->find();
 			
