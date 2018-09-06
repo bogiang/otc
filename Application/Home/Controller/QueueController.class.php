@@ -15,6 +15,7 @@ class QueueController extends HomeController
 		echo 'ok';
 	}
 
+    //币转入过来 每分钟执行一次
 	public function qianbao()
 	{
 		$coinList = M('Coin')->where(array('status' => 1,'type'=>'qbb','tp_qj'=>'btc','name'=>array('neq','usdt')))->select();
@@ -185,7 +186,8 @@ class QueueController extends HomeController
 			}
 		}
 	}
-	
+
+    //币转出 每分钟执行一次
 	public function myzcQueue()
 	{
 		if(!is_file("./Database/lastzc.txt")){
@@ -284,7 +286,8 @@ class QueueController extends HomeController
 			}
 		}
 	}
-	
+
+    //汇率更新 每小时执行一次
 	public function huilvgenxin(){
 		$time=time();
 		$currency = array('USD','CNY','AUD','JPY','KRW','CAD','CHF','INR','RUB','EUR','GBP','HKD','BRL','IDR','MXN','TWD','MYR','SGD');
@@ -308,7 +311,8 @@ class QueueController extends HomeController
 			usleep(2000000);
 		}
 	}
-	
+
+	//好评率 每小时执行一次
 	public function haopinglv(){
 		$order_buy = M('order_buy')->where(array('status'=>3,'finished_time'=>array('lt',(time()-24*60*60))))->select();
 		if(!empty($order_buy)){
@@ -474,7 +478,7 @@ class QueueController extends HomeController
 		}
 	}
 
-	//order_buy  超时不付款的自动取消  卖家冻结的币返还
+	//order_buy  超时不付款的自动取消  卖家冻结的币返还  每分钟执行一次
 	public function buydaojishi(){
 		$list=M('order_buy')->where("".time()."-ctime>ltime*60 and status=0 ")->select();
 		if(!$list){
@@ -504,7 +508,7 @@ class QueueController extends HomeController
 			}
 		}
 	}
-	//order_sell  超时不付款的自动取消  卖家冻结的币返还
+	//order_sell  超时不付款的自动取消  卖家冻结的币返还  每分钟执行一次
 	public function selldaojishi(){
 		$list=M('order_sell')->where("".time()."-ctime>ltime*60 and status=0 ")->select();
 		if(!$list){

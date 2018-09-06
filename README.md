@@ -32,3 +32,15 @@
     
 * php.ini 中的max_execution_time 的值修改为180秒 ：为了跑脚本不失败。
 Home/Controller/QueueController.class.php 为脚本
+
+* 在linux的crontab下填写     www.otc.com 改为对应的域名
+```
+*/1 * * * * curl http://www.otc.com/Queue/qianbao
+*/1 * * * * curl http://www.otc.com/Queue/myzcQueue
+*/1 * * * * curl http://www.otc.com/Queue/buydaojishi
+*/1 * * * * curl http://www.otc.com/Queue/selldaojishi
+0 * * * * * curl http://www.otc.com/Queue/huilvgenxin
+0 * * * * * curl http://www.otc.com/Queue/haopinglv
+```
+
+  

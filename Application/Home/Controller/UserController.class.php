@@ -120,7 +120,7 @@ class UserController extends HomeController
 			$new_coinlist[$v['name']]['zr_dz'] = $v['zr_dz'];
 		}
 		$this->assign('coin_list', $new_coinlist);
-		
+
 		if (!$coinname) {
             $coinname = $coinlist[0]['name'];
         }
@@ -128,12 +128,12 @@ class UserController extends HomeController
 
 		$table = "tw_".$coinname."_log";
 		$mo=M();
-		$res = $mo->query("select TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='txierwa' and TABLE_NAME='".$table."'");
-		if(empty($res)){
-            $this->display();
-            exit;
-			$this->error("数据不存在");
-		}
+//		$res = $mo->query("select TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='txierwa' and TABLE_NAME='".$table."'");
+//		if(empty($res)){
+//            $this->display();
+//            exit;
+//			$this->error("数据不存在");
+//		}
 		$where=array();
 		$where['userid'] = userid();
 		$count = $mo->table($table)->where($where)->count();
@@ -158,6 +158,7 @@ class UserController extends HomeController
 			}
 			$list[$k]['ctype'] = $v['ctype']==1 ? "可用".strtoupper($coinname) : "冻结".strtoupper($coinname);
 		}
+
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		$this->display();
