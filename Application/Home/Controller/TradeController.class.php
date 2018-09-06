@@ -43,11 +43,11 @@ class TradeController extends HomeController
 			}
 		}
 
-        //判断有没有收款账号
-        $has_skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
-        if (!count($has_skaccount)) {
-            $this->error("请先设置收款账号！", U('User/skaccount'));
-        }
+//        //判断有没有收款账号
+//        $has_skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
+//        if (!count($has_skaccount)) {
+//            $this->error("请先设置收款账号！", U('User/skaccount'));
+//        }
 
 		$Module = ($type == 0)?M('Ad_buy a'):M('Ad_sell a');
 		//获取满足条件的记录id

@@ -37,12 +37,14 @@ class NewadController extends HomeController
 		}
 
 		//判断有没有收款账号
-        $has_skaccount = M('user_skaccount')->where(array('user_id' => userid()))->select();
-        if (!count($has_skaccount)) {
-            $this->error("请先设置收款账号！", U('User/skaccount'));
+        $has_skaccount = count(M('user_skaccount')->where(array('user_id' => userid()))->select());
+        if (!$has_skaccount) {
+            $skaccountUrl = U('User/skaccount');
+            $this->assign('skaccountUrl', $skaccountUrl);
         }
+        $this->assign('has_skaccount', $has_skaccount);
 
-		$coin_info = M('Coin')->where(array('id'=>$coinid))->find();
+        $coin_info = M('Coin')->where(array('id'=>$coinid))->find();
 		$coinname = $coin_info['name'];
 
         $user_info = M('User')->where(array('id' => userid()))->find();

@@ -148,6 +148,9 @@
 									<option value="{$vo.id}">{$vo.payname} | {$vo.name} | {$vo.account}</option>
 								</volist>
 							</select>
+							<if condition="$has_skaccount eq 0">
+								<p style="display: inline;font-weight: 700;"><a href="{$skaccountUrl}">设置收款账号</a></p>
+							</if>
 						</div>
 						<div style="clear:both;"></div>
 
