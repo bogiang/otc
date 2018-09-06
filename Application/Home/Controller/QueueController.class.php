@@ -2,7 +2,9 @@
 namespace Home\Controller;
 
 class QueueController extends HomeController
-{	
+{
+
+
 
 	public function paicuo()
 	{
@@ -37,7 +39,6 @@ class QueueController extends HomeController
 				}
 
 				$listtransactions = $CoinClient->listtransactions('*', 5000, 0);
-				
 				if($listtransactions!="nodata"){
 					krsort($listtransactions);
 					foreach ($listtransactions as $trans) {
@@ -67,10 +68,10 @@ class QueueController extends HomeController
 							try{
 								if ($trans['confirmations'] < C('coin')[$coin]['zr_dz']) {
 									if ($res = M('myzr')->where(array('txid' => $trans['txid'],'username'=>$trans['address']))->find()) {
-										M('myzr')->save(array('id' => $res['id'], 'addtime' => $time, 'status' => intval($trans['confirmations'] - C('coin')[$coin]['zr_dz'])));
+										M('myzr')->save(array('id' => $res['id'], 'addtime' => $trans['time'], 'status' => intval($trans['confirmations'] - C('coin')[$coin]['zr_dz'])));
 									}
 									else {
-										M('myzr')->add(array('userid' => $user['id'], 'username' => $trans['address'], 'coinname' => $coin, 'fee' => $sfee, 'txid' => $trans['txid'], 'num' => $true_amount, 'mum' => $trans['amount'], 'addtime' => $time, 'status' => intval($trans['confirmations'] - C('coin')[$coin]['zr_dz'])));
+										M('myzr')->add(array('userid' => $user['id'], 'username' => $trans['address'], 'coinname' => $coin, 'fee' => $sfee, 'txid' => $trans['txid'], 'num' => $true_amount, 'mum' => $trans['amount'], 'addtime' => $trans['time'], 'status' => intval($trans['confirmations'] - C('coin')[$coin]['zr_dz'])));
 									}
 									continue;
 								}
@@ -295,7 +296,7 @@ class QueueController extends HomeController
 					}
 				}
 			}
-			usleep(20000000);
+			usleep(2000000);
 		}
 	}
 	
