@@ -53,6 +53,7 @@ CREATE TABLE `tw_ad_buy` (
   `margin` decimal(4,2) NOT NULL DEFAULT '0.00' COMMENT '溢价',
   `min_limit` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT '限额（最小）',
   `max_limit` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT '限额（最大）',
+  `need_coin` decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT '购买的币',
   `pay_method` varchar(50) NOT NULL COMMENT '支付方式 逗号分开来',
   `message` varchar(500) NOT NULL COMMENT '留言',
   `due_time` int(10) NOT NULL COMMENT '购买付款期限(分钟)',
@@ -95,6 +96,7 @@ CREATE TABLE `tw_ad_sell` (
   `min_price` decimal(12,2) DEFAULT '0.00',
   `min_limit` decimal(12,2) NOT NULL DEFAULT '0.00',
   `max_limit` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `need_coin` decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT '出售的币',
   `pay_method` varchar(50) NOT NULL COMMENT '支付方式',
   `message` varchar(500) NOT NULL COMMENT '留言',
   `safe_option` tinyint(1) NOT NULL DEFAULT '0' COMMENT '安全选项,0不开启,1开启',
@@ -3963,6 +3965,8 @@ alter table tw_order_buy add id_num int(10) not null default 0 comment "识别�
 alter table tw_order_sell add id_num int(10) not null default 0 comment "识别号";
 alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
 alter table tw_config add day_withdraw decimal(10,2) not null default '0.00' comment "当日提现最大限额";
+alter table tw_ad_buy add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "购买的币";
+alter table tw_ad_sell add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "出售的币";
 
 -- ----------------------------
 -- Records of tw_znc_log

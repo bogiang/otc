@@ -93,7 +93,7 @@ class NewadController extends HomeController
 		$this->display();
 	}
 
-	public function upad($type, $coin, $location, $currency, $margin, $min_price, $min_limit, $max_limit, $due_time, $message, $pay_method, $safe_option, $trust_only, $open_time, $skaccount,$token)
+	public function upad($type, $coin, $location, $currency, $margin, $min_price, $min_limit, $max_limit, $due_time, $message, $pay_method, $safe_option, $trust_only, $open_time, $skaccount, $token, $need_coin)
 	{
         if (!userid()) {
 			redirect('/login/index');
@@ -149,11 +149,23 @@ class NewadController extends HomeController
 		if(!check($message,'bcdw')){
 			$this->error("参数错误！", $extra);
 		}
+
+        if(!check($need_coin,'currency')){
+            $this->error("参数错误！", $extra);
+        }
 		
 //		if(!empty($skaccount) && !check($skaccount,'bcdw')){
 //			$this->error("参数错误！", $extra);
 //		}
-		
+
+        //出售币，检查币是否足够
+        if($type == 1){
+            $coin_num = $this->coin_balance($coin);
+		    if ($need_coin > $coin_num){
+                $this->error("你的币不够！", $extra);
+            }
+        }
+
 		$user_info = M('User')->where(array('id' => userid()))->find();
 		if ($user_info['paypassword'] == '') {
 			$this->error("请先设置交易密码！", $extra);
@@ -230,12 +242,12 @@ class NewadController extends HomeController
 		$pay_method =$pay_method;// implode(",",$pay_method);
 		//插入出售表
 		if($type == 1) {
-			$rs = M($table)->add(array('userid' => userid(), 'add_time' => time(), 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'min_price' => $min_price, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time, 'state' => 1,'ad_no' => $ad_no, 'fee'=>$coin_info['cs_ts'],'skaccount'=>$skaccount));
+			$rs = M($table)->add(array('userid' => userid(), 'add_time' => time(), 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'min_price' => $min_price, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time, 'state' => 1,'ad_no' => $ad_no, 'fee'=>$coin_info['cs_ts'],'skaccount'=>$skaccount, 'need_coin'=>$need_coin));
 		}
 
 		//插入购买表
 		if($type == 0){
-			$rs = M($table)->add(array('userid' => userid(), 'add_time' => time(), 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'due_time' => $due_time, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time, 'state' => 1,'ad_no' => $ad_no, 'fee'=>$coin_info['cs_ts']));
+			$rs = M($table)->add(array('userid' => userid(), 'add_time' => time(), 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'due_time' => $due_time, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time, 'state' => 1,'ad_no' => $ad_no, 'fee'=>$coin_info['cs_ts'], 'need_coin'=>$need_coin));
 		}
 
 		if ($rs) {
@@ -316,6 +328,10 @@ class NewadController extends HomeController
 		$coin = M('Coin')->field('id,title,js_yw,name')->where(array('status'=>1,'name'=>array('neq','cny')))->select();
 		$this->assign('coin', $coin);
 
+		//用户各个币种余额
+        $balanceAll = M('UserCoin')->where(array('userid' => userid()))->find();
+        $this->assign('balanceAll',$balanceAll);
+
 		$location = M('Location')->select();
 		$this->assign('location', $location);
 
@@ -339,7 +355,7 @@ class NewadController extends HomeController
 		$this->display();
 	}
 
-	public function upediad($type, $id, $coin, $location, $currency, $margin, $min_price, $min_limit, $max_limit, $due_time, $message, $pay_method, $safe_option, $trust_only, $open_time,$skaccount, $token)
+	public function upediad($type, $id, $coin, $location, $currency, $margin, $min_price, $min_limit, $max_limit, $due_time, $message, $pay_method, $safe_option, $trust_only, $open_time,$skaccount, $token, $need_coin)
 	{
 
 		if (!userid()) {
@@ -406,6 +422,10 @@ class NewadController extends HomeController
 		if(!check($message,'bcdw')){
 			$this->error("参数错误7！", $extra);
 		}
+
+        if(!check($need_coin,'currency')){
+            $this->error("参数错误！", $extra);
+        }
 		
 //		if(!empty($skaccount) && !check($skaccount,'bcdw')){
 //			$this->error("参数错误8！", $extra);
@@ -447,6 +467,14 @@ class NewadController extends HomeController
 			$this->error("参数错误10！", $extra);
 		}
 
+        //出售币，检查币是否足够
+        if($type == 1){
+            $coin_num = $this->coin_balance($coin);
+            if ($need_coin > $coin_num){
+                $this->error("你的币不够！", $extra);
+            }
+        }
+
 		//重组开放时间
 		$open_time_arr = explode(',',$open_time);
 		foreach ($open_time_arr as $k => $v){
@@ -465,12 +493,12 @@ class NewadController extends HomeController
 
 		//修改出售表
 		if($type == 1) {
-			$rs = M('AdSell')->save(array('id' => $id, 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'min_price' => $min_price, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time,"skaccount"=>$skaccount));
+			$rs = M('AdSell')->save(array('id' => $id, 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'min_price' => $min_price, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time,"skaccount"=>$skaccount, 'need_coin'=>$need_coin));
 		}
 
 		//修改购买表
 		if($type == 0){
-			$rs = M('AdBuy')->save(array('id' => $id, 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'due_time' => $due_time, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time));
+			$rs = M('AdBuy')->save(array('id' => $id, 'coin'=>$coin, 'location' => $location, 'currency' => $currency, 'margin' => $margin, 'due_time' => $due_time, 'min_limit' => $min_limit, 'max_limit' => $max_limit, 'pay_method' => $pay_method, 'message' => $message, 'safe_option' => $safe_option, 'trust_only' => $trust_only, 'open_time' => $open_time, 'need_coin'=>$need_coin));
 		}
 
 		if ($rs) {
@@ -1108,4 +1136,11 @@ class NewadController extends HomeController
 		$this->assign('pic_token',$pic_token);
 		$this->display();
 	}
+
+	//查询币种余额
+    private  function coin_balance($coin){
+        $coin_name = M('coin')->where(array('id' => $coin))->find();
+        $user_coin_all = M('user_coin')->where(array('userid' => userid()))->find();
+        return $coin_num = $user_coin_all[$coin_name['name']];
+    }
 }

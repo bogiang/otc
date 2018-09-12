@@ -90,6 +90,12 @@
 							</div>
 						</div>
 						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span> <span id="xgwz"> 出售数量:</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input id="need_coin" type="text" value="" class="rechipt" style="width: 572px;height: 48px;"/>
+							</div>
+						</div>
+						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>溢价:<span style="color:rgba(0,0,0,0.7);font-size: 14px;"> 您可以以高于市场价买入或低于市场价卖出的方式来并吸引更多的交易者。</span></p>
 							<div class="iptbox" style="width:600px;position:relative;">
 								<input id="margin" type="text" value="" class="rechipt" style="width: 572px;height: 48px;"/>
@@ -230,6 +236,7 @@
 	});
 
     $("#sell").click(function(){
+        $("#xgwz").html("出售数量:");
 		$("#qixian").hide();
 		$("#paymethod").hide();
 		$("#skfs").show();
@@ -241,6 +248,7 @@
 
     });
 	$("#buy").click(function(){
+        $("#xgwz").html("购买数量:");
 		$("#qixian").show();
 		$("#paymethod").show();
 		$("#skfs").hide();
@@ -284,6 +292,7 @@
         var min_limit = $("#min_limit").val();
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
+        var need_coin = $('#need_coin').val();
         // var pay_method = $('#pay_method').val();
         var pay_method='';
         $('input[data-name="selectItempay_method"]:checked').each(function(){
@@ -309,6 +318,11 @@
             $('#skaccount').focus();
             return false;
 		}
+        if(!need_coin){
+            layer.tips('请输入数量！', '#need_coin', {tips: 3});
+            $('#need_coin').focus();
+            return false;
+        }
     	if(!margin){
 	      layer.tips('请输入溢价！', '#margin', {tips: 3});
             $('#margin').focus();
@@ -362,7 +376,8 @@
             trust_only: trust_only,
             open_time: open_time,
 			skaccount:skaccount,
-			token: newad
+			token: newad,
+            need_coin: need_coin
         }, function (data) {
             if (data.status == 1) {
                 layer.msg(data.info, {icon: 1});

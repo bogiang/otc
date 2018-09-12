@@ -37,15 +37,15 @@
 									<volist name="coin" id="vo">
 										<empty name="Think.get.coinid">
 										<eq name="ad_info.coin" value="$vo.id">
-											<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}</option>
+											<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}<p>| {$balanceAll[$vo[name]]}</p></option>
 											<else/>
-											<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}</option>
+											<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}<p>| {$balanceAll[$vo[name]]}</p></option>
 										</eq>
 										<else/>
 											<eq name="Think.get.coinid" value="$vo.id">
-												<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}</option>
+												<option value="{$vo.id}" selected="selected">{$vo.name|strtoupper} {$vo.title}<p>| {$balanceAll[$vo[name]]}</p></option>
 												<else/>
-												<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}</option>
+												<option value="{$vo.id}">{$vo.name|strtoupper} {$vo.title}<p>| {$balanceAll[$vo[name]]}</p></option>
 											</eq>
 										</empty>
 									</volist>
@@ -80,6 +80,14 @@
 								</select>
 							</div>
 						</div>
+
+						<div class="rechipt_box">
+							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span> <span id="xgwz"> 出售数量:</span></p>
+							<div class="iptbox" style="width:600px;position:relative;">
+								<input id="need_coin" type="text" value="{$ad_info.need_coin}" class="rechipt" style="width: 572px;height: 48px;" readonly/>
+							</div>
+						</div>
+
 						<div class="rechipt_box">
 							<p class="p_new"><span style="color:#fd634f;margin-right: 4px;">*</span>溢价: <span style="color:rgba(0,0,0,0.7);font-size: 14px;">您可以以高于市场价买入或低于市场价卖出的方式来并吸引更多的交易者。</span></p>
 							<div class="iptbox" style="width:600px;position:relative;">
@@ -224,6 +232,7 @@
             $("#paymethod").hide();
             $("#skfs").show();
             $("#zuidi").show();
+            $("#xgwz").html("出售数量:");
 		}else{
             $("#buy").attr("checked","checked");
             $("#sell").attr("disabled","disabled");
@@ -231,6 +240,7 @@
             $("#paymethod").show();
             $("#skfs").hide();
             $("#zuidi").hide();
+            $("#xgwz").html("购买数量:");
 		}
         var margin = $('#margin').val();
         var sum = parseFloat(price)+parseFloat(price * margin/100);
@@ -285,6 +295,7 @@
         var min_limit = $("#min_limit").val();
     	var max_limit = $("#max_limit").val();
         var due_time = $('#due_time').val();
+        var need_coin = $('#need_coin').val();
         // var pay_method = $('#pay_method').val();
         var pay_method='';
         $('input[data-name="selectItempay_method"]:checked').each(function(){
@@ -300,6 +311,12 @@
         var safe_option =  $("input[name='safe_option']:checked").val();
         var trust_only = ($("input[name='trust_only']:checked").val()==1)?1:0;
         var open_time = $("select[name='mon_s']").val()+'-'+$("select[name='mon_e']").val()+','+$("select[name='tue_s']").val()+'-'+$("select[name='tue_e']").val()+','+$("select[name='wed_s']").val()+'-'+$("select[name='wed_e']").val()+','+$("select[name='thu_s']").val()+'-'+$("select[name='thu_e']").val()+','+$("select[name='fri_s']").val()+'-'+$("select[name='fri_e']").val()+','+$("select[name='sat_s']").val()+'-'+$("select[name='sat_e']").val()+','+$("select[name='sun_s']").val()+'-'+$("select[name='sun_e']").val();
+
+        if(!need_coin){
+            layer.tips('请输入数量！', '#need_coin', {tips: 3});
+            $('#need_coin').focus();
+            return false;
+        }
 
     	if(!margin){
 	      layer.tips('请输入溢价！', '#margin', {tips: 3});
@@ -371,7 +388,8 @@
             trust_only: trust_only,
             open_time: open_time,
             skaccount:skaccount,
-			token: newad
+			token: newad,
+            need_coin: need_coin
         }, function (data) {
 			newad = data.url;
             if (data.status == 1) {

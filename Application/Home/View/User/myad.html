@@ -21,6 +21,7 @@
 						<th width="130px">广告类型</th>
 						<th width="80px">国家</th>
 						<th width="150px">价格</th>
+						<th width="100px">数量</th>
 						<th width="200px">交易限额</th>
 						<th width="230px">创建时间</th>
 						<th width="110px">状态</th>
@@ -34,6 +35,7 @@
 					   </td>
 					   <td>{$vo.location}</td>
 					   <td>{$vo['price']} {$vo['currency_type']}</td>
+					   <td>{$vo.need_coin}</td>
 					   <td>{$vo['min_limit']}-{$vo['max_limit']}{$vo['currency_type']}</td>
 					   <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
 					   <td>

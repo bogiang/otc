@@ -152,6 +152,10 @@
 				 			<th>报 <span style="float: right;padding-right: 20px;">价</span></th>
 				 			<td class="price">{$adv['price']} {$currency}/{$coin['name']|strtoupper}</td>
 				 		</tr>
+						<tr>
+							<th>可<eq name="type" value="1">购<else />售</eq>数量</th>
+							<td>{$adv['need_coin']}</td>
+						</tr>
 				 		<tr>
 				 			<th>交易限额</th>
 				 			<td>{$adv['min_limit']|round=###,2}-{$adv['max_limit']|round=###,2} {$currency}</td>
@@ -365,6 +369,7 @@
 	function upChat(){
 		$("#subbuttom").click();
 	}
+	var need_coin = {$adv['need_coin']};
     var truban = "{$truban_token}";
 	var id = "{$adverinfo.id}";
     function closetanchu(){
@@ -476,6 +481,11 @@
 				layer.alert("您的{$coin['name']|strtoupper}余额不足，请先充值，再出售");
 				return false;
 			}
+			//超出可售数量
+			if(need_coin < tnum){
+                layer.tips('超出可售的数量', '#qty'+type, {tips: 3});
+                return false;
+			}
 			if(skaccount == ''){
                 alert('请选择收款账号');
                 return false;
@@ -490,7 +500,13 @@
 				layer.tips('请输入要购买的金额', '#amount'+type, {tips: 3});
 				return false;
 			}
+            //超出可售数量
+            if(need_coin < tnum){
+                layer.tips('超出可购的数量', '#qty'+type, {tips: 3});
+                return false;
+            }
 		}
+		return false;
 		if(tprice<=0){
 			layer.alert('金额必须大于0');
 			return false;

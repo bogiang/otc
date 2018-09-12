@@ -248,6 +248,11 @@ class OrderController extends HomeController
                     $this->error('你不是对方的信任用户',$extra);
                 }
         	}
+        	//是否超过可购买数量
+            if($num > $orderinfo['need_coin']){
+                $this->error('超出可购数量',$extra);
+            }
+
 			$coin_name = M('Coin')->where(array('id'=>$orderinfo['coin']))->getField('name');
 			$table = "tw_".$coin_name."_log";
             //搜索卖家的账户余额
@@ -303,6 +308,10 @@ class OrderController extends HomeController
                 $mo->startTrans();
         	    $rs[]=$id=$mo->table('tw_order_buy')->add($arr);
 
+        	    //修改销售表中的need_coin字段
+                $final_num = $orderinfo['need_coin']-$num;
+                $rs[]=$mo->table('tw_ad_sell')->save(array('id'=>$tid,'need_coin'=>$final_num));
+
                 //卖家的btc需要冻结起来
                 $rs[]=$mo->table('tw_user_coin')->where("userid=".$orderinfo['userid'])->setDec($coin_name,$realnum);
 				$rs[]=$mo->table($table)->add(array('username'=>$sellinfo['username'],'userid'=>$sellinfo['id'],'ctime'=>time(),'type'=>1,'plusminus'=>0,'amount'=>$realnum,'desc'=>'买家下单减可用'.strtoupper($coin_name).'，手续费'.$fee,'operator'=>userid(),'ctype'=>1,'action'=>1,'addip'=>get_client_ip()));
@@ -351,6 +360,11 @@ class OrderController extends HomeController
                     $this->error('你不是对方的信任用户',$extra);
                 }
         	}
+            //是否超过可出售数量
+            if($num > $orderinfo['need_coin']){
+                $this->error('超出可售数量',$extra);
+            }
+
 			$coin_name = M('Coin')->where(array('id'=>$orderinfo['coin']))->getField('name');
 			$table = "tw_".$coin_name."_log";
             //手机认证
@@ -403,8 +417,11 @@ class OrderController extends HomeController
                 $mo->startTrans();
                 $rs[]=$id=$mo->table('tw_order_sell')->add($arr);
 
+                //修改销售表中的need_coin字段
+                $final_num = $orderinfo['need_coin']-$num;
+                $rs[]=$mo->table('tw_ad_buy')->save(array('id'=>$tid,'need_coin'=>$final_num));
+
                 //卖家的btc需要冻结起来
-                
                 $rs[]=$mo->table('tw_user_coin')->where("userid=".userid())->setDec($coin_name,$num);
 				$rs[]=$mo->table($table)->add(array('username'=>$my['username'],'userid'=>$my['id'],'ctime'=>time(),'type'=>2,'plusminus'=>0,'amount'=>$num,'desc'=>'卖家下单减可用'.strtoupper($coin_name),'operator'=>userid(),'ctype'=>1,'action'=>2,'addip'=>get_client_ip()));
                 $rs[]=$mo->table('tw_user_coin')->where("userid=".userid())->setInc($coin_name.'d',$num);
@@ -616,9 +633,16 @@ class OrderController extends HomeController
         	}
 			$coin_name = M('Coin')->where(array('id'=>$orderinfo['deal_coin']))->getField('name');
 			$table = "tw_".$coin_name."_log";
+
+			//该订单对应的广告信息（出售）
+            $ad_info = M('ad_sell')->where(array('id'=>$orderinfo['sell_sid']))->find();
+            $final_num = $ad_info['need_coin'] + $orderinfo['deal_num'];
             try{
                 $mo = M();
                 $mo->startTrans();
+                //加币回广告表中(出售)
+                $rs[] = $mo->table('tw_ad_sell')->save(array('id'=>$orderinfo['sell_sid'], 'need_coin'=>$final_num));
+
         	    $rs[]=$mo->table('tw_order_buy')->where(array('id'=>$id,'buy_id'=>userid()))->save(array('status'=>5));
 				$real_number = $orderinfo['deal_num'] + $orderinfo['fee'];
                 $rs[] = $mo->table('tw_user_coin')->where(array('userid' =>$orderinfo['sell_id']))->setDec($coin_name.'d', $real_number);
@@ -654,10 +678,18 @@ class OrderController extends HomeController
         	}
 			$coin_name = M('Coin')->where(array('id'=>$orderinfo['deal_coin']))->getField('name');
 			$table = "tw_".$coin_name."_log";
+
+            //该订单对应的广告信息（购买）
+            $ad_info = M('ad_buy')->where(array('id'=>$orderinfo['buy_bid']))->find();
+            $final_num = $ad_info['need_coin'] + $orderinfo['deal_num'];
             try{
                 $mo = M();
                 $mo->startTrans();
-        	    $rs[]=$mo->table('tw_order_sell')->where(array('id'=>$id,'buy_id'=>userid()))->save(array('status'=>5));
+
+                //加币回广告表中（购买）
+                $rs[] = $mo->table('tw_ad_buy')->save(array('id'=>$orderinfo['buy_bid'], 'need_coin'=>$final_num));
+
+                $rs[]=$mo->table('tw_order_sell')->where(array('id'=>$id,'buy_id'=>userid()))->save(array('status'=>5));
                 //冻结中减去
                 $rs[] = $mo->table('tw_user_coin')->where(array('userid' =>$orderinfo['sell_id']))->setDec($coin_name.'d', $orderinfo['deal_num']);
 				$rs[]=$mo->table($table)->add(array('username'=>$seller['username'],'userid'=>$orderinfo['sell_id'],'ctime'=>time(),'type'=>2,'plusminus'=>0,'amount'=>$orderinfo['deal_num'],'desc'=>'买家取消订单减冻结'.strtoupper($coin_name),'operator'=>userid(),'ctype'=>2,'action'=>3,'addip'=>get_client_ip()));
@@ -678,6 +710,7 @@ class OrderController extends HomeController
 		}
 		
 	}
+
     //买家标记完之后买家取消订单
     public function orderbjcancle_ajax($type,$id,$token){
         $extra = '';
@@ -724,12 +757,19 @@ class OrderController extends HomeController
             }
             $coin_name = M('Coin')->where(array('id'=>$orderinfo['deal_coin']))->getField('name');
             $table = "tw_".$coin_name."_log";
+
+            //该订单对应的广告信息（出售）
+            $ad_info = M('ad_sell')->where(array('id'=>$orderinfo['sell_sid']))->find();
+            $final_num = $ad_info['need_coin'] + $orderinfo['deal_num'];
             try{
                 $mo = M();
                 $mo->startTrans();
 
                 $rs[]=$mo->table('tw_order_buy')->where(array('id'=>$id,'buy_id'=>userid()))->save(array('status'=>5));
                 $real_number = $orderinfo['deal_num'] + $orderinfo['fee'];
+
+                //加币回广告表中(出售)
+                $rs[] = $mo->table('tw_ad_sell')->save(array('id'=>$orderinfo['sell_sid'], 'need_coin'=>$final_num));
 
                 $rs[] = $mo->table('tw_user_coin')->where(array('userid' =>$orderinfo['sell_id']))->setDec($coin_name.'d', $real_number);
                 $rs[]=$mo->table($table)->add(array('username'=>$seller['username'],'userid'=>$orderinfo['sell_id'],'ctime'=>time(),'type'=>1,'plusminus'=>0,'amount'=>$real_number,'desc'=>'买家取消订单减冻结'.strtoupper($coin_name),'operator'=>userid(),'ctype'=>2,'action'=>3,'addip'=>get_client_ip()));
@@ -767,10 +807,18 @@ class OrderController extends HomeController
             }
             $coin_name = M('Coin')->where(array('id'=>$orderinfo['deal_coin']))->getField('name');
             $table = "tw_".$coin_name."_log";
+
+            //该订单对应的广告信息（购买）
+            $ad_info = M('ad_buy')->where(array('id'=>$orderinfo['buy_bid']))->find();
+            $final_num = $ad_info['need_coin'] + $orderinfo['deal_num'];
             try{
                 $mo = M();
                 $mo->startTrans();
                 $rs[]=$mo->table('tw_order_sell')->where(array('id'=>$id,'buy_id'=>userid()))->save(array('status'=>5));
+
+                //加币回广告表中（购买）
+                $rs[] = $mo->table('tw_ad_buy')->save(array('id'=>$orderinfo['buy_bid'], 'need_coin'=>$final_num));
+
                 //冻结中减去
                 $rs[] = $mo->table('tw_user_coin')->where(array('userid' =>$orderinfo['sell_id']))->setDec($coin_name.'d', $orderinfo['deal_num']);
                 $rs[]=$mo->table($table)->add(array('username'=>$seller['username'],'userid'=>$orderinfo['sell_id'],'ctime'=>time(),'type'=>2,'plusminus'=>0,'amount'=>$orderinfo['deal_num'],'desc'=>'买家取消订单减冻结'.strtoupper($coin_name),'operator'=>userid(),'ctype'=>2,'action'=>3,'addip'=>get_client_ip()));

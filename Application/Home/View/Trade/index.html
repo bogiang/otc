@@ -66,6 +66,7 @@
                     <tr>
                         <th width="180px" style="padding-left:40px;">用户名</th>
                         <th width="100px">币种</th>
+                        <th width="100px">数量</th>
                         <!-- <th width="100px">地区</th> -->
                         <th width="250px">信用</th>
                         <th width="250px">支付方式</th>
@@ -92,6 +93,7 @@
                              </span>
                              </td>
                             <td>{$vo.coin|strtoupper}</td>
+                            <td>{$vo.need_coin}</td>
 
                             <td>
                                 交易 {$vo.transact} |  好评度 {$vo.goodcomm}% | 信任 {$vo.trust}
