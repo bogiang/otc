@@ -29,6 +29,8 @@
     * alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
     * alter table tw_config add day_withdraw decimal(10,2) not null default '0.00' comment "当日提现最大限额";
     * alter table tw_config add single_withdraw decimal(10,2) not null default '0.00' comment "单笔提现最大限额审核";
+    * alter table tw_ad_buy add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "购买的币";
+    * alter table tw_ad_sell add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "出售的币";
     
 * php.ini 中的max_execution_time 的值修改为180秒 ：为了跑脚本不失败。
 Home/Controller/QueueController.class.php 为脚本
@@ -42,5 +44,5 @@ Home/Controller/QueueController.class.php 为脚本
 0 * * * * * curl http://www.otc.com/Queue/huilvgenxin
 0 * * * * * curl http://www.otc.com/Queue/haopinglv
 ```
-
+* run.php是脚本文件
   

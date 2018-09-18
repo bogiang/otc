@@ -3965,6 +3965,7 @@ alter table tw_order_buy add id_num int(10) not null default 0 comment "识别�
 alter table tw_order_sell add id_num int(10) not null default 0 comment "识别号";
 alter table tw_order_sell add skaccount varchar(50) not null default '' comment "收款账号 逗号分开来";
 alter table tw_config add day_withdraw decimal(10,2) not null default '0.00' comment "当日提现最大限额";
+alter table tw_config add single_withdraw decimal(10,2) not null default '0.00' comment "单笔提现最大限额审核"
 alter table tw_ad_buy add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "购买的币";
 alter table tw_ad_sell add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "出售的币";
 
