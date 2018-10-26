@@ -1,0 +1,54 @@
+<include file="Public:header_new"/>
+    <div class="usernewout">
+		<include file="User:top"/>
+        <div class="usncont">
+            <include file="User:left"/>
+            <div class="usnc_right">
+                <h1>登录日志</h1>
+                <div class="recharge_list">
+                    <table>
+                            <tr>
+                                <th>操作时间</th>
+                                <th>操作类型</th>
+                                <th>操作备注</th>
+                                <th>操作ip</th>
+                                <th>操作地址</th>
+                                <th style="padding-right: 20px;">状态</th>
+                            </tr>
+                            <volist name="list" id="vo">
+                                        <tr>
+                                            <td>{$vo.addtime|addtime}</td>
+                                            <td>{$vo.type}</td>
+                                            <td>{$vo.remark}</td>
+                                            <td>{$vo.addip}</td>
+                                            <td>{$vo.addr}</td>
+                                            <td style="padding-right: 20px;">
+                                                <eq name="vo.status" value="0">
+                                                    <font color="violet">出错</font>
+                                                </eq>
+                                                <eq name="vo.status" value="1"> 正常</eq>
+                                                <eq name="vo.status" value="2">
+                                                    <font color="red">异常</font>
+                                                </eq>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                        </table>
+                        <div class="pages">{$page}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $("#type-selectTest,#market-selectTest").change(function(){
+        var type=$("#type-selectTest option:selected").val();
+        var market=$("#market-selectTest option:selected").val();
+        window.location='/Finance/mycj/type/'+type+'/market/'+market+'.html';
+    });
+</script>
+<script>
+    $('#user_log').addClass('on');
+    $('#user_box').addClass('on');
+</script>
+</div>
+        <include file="Public:footer_new"/>

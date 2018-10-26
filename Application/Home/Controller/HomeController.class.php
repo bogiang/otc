@@ -5,7 +5,7 @@ class HomeController extends \Think\Controller
 {
 	protected function _initialize()
 	{
-		$allow_controller=array("Ajax","Article","Finance","Index","Login","Queue","Trade","User","Newad","Order");
+		$allow_controller=array("Ajax","Article","Finance","Index","Login","Queue","Trade","Test","User","Newad","Order");
 		if(!in_array(CONTROLLER_NAME,$allow_controller)){
 			$this->error("非法操作");
 		}

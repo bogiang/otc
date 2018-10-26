@@ -37,8 +37,8 @@ h5{font-size:14px;}
 .clear{clear:both;display:block;}
 .fl{float:left;}
 .fr{float:right;}
-::-moz-selection{background-color:#da251d;color:#fff;text-shadow:none;}
-::selection{background-color:#da251d;color:#fff;text-shadow:none;}
+::-moz-selection{background-color:#9e9e9e;color:#fff;text-shadow:none;}
+::selection{background-color:#9e9e9e;color:#fff;text-shadow:none;}
 .nml{margin-left:0!important;}
 .nmr{margin-right:0!important;}
 .nmt{margin-top:0!important;}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+	<meta content="width=device-width, initial-scale=0.1, maximum-scale=1.0, user-scalable=1" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="renderer" content="webkit">
+	<meta name="format-detection" content="telephone=no,email=no,address=no">
+    <title>{:C('web_title')}</title>
+    <link rel="shortcut icon" href="__PUBLIC__/images/favor.ico" type="image/x-icon" />
+    <meta name="Keywords" content="{:C('web_keywords')}">
+    <meta name="Description" content="{:C('web_description')}">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/dfc.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/news/style/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/news/style/style.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/news/style/fb.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/news/style/index.css">
+    <script type="text/javascript" src="__PUBLIC__/Home/news/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/news/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.cookies.2.2.0.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.flot.js"></script>
+    <style type="text/css">
+        .deal_list {
+                position: absolute;
+                left: -128px;
+                background: #fff;
+                z-index: 999999;
+                border-bottom: 2px solid #f6554b;
+                padding-bottom: 10px;
+            }
+        #menu_list_json img{vertical-align: middle;}
+        .deal_list dl {
+                width:360px;
+                margin: 0 auto;
+            }
+        .deal_list dd {
+                width: 150px;
+                padding-left: 10px;
+                height: 40px;
+                line-height: 40px;
+                float: left;
+                font-size: 14px;
+                color: #666;
+                margin:10px 10px 0 10px;
+            }
+        .deal_list dd:hover{background: #f6554b;}
+        .deal_list dd:hover a{color: #fff;}
+        .nocontent {
+                height: 34px;
+                width:80px;
+                position: absolute;
+                left: 0;
+                top: -34px;
+            }
+        .deal_list dd a {
+                float: left;
+                font-size: 12px;
+            }
+		.hdmenu ul li{font-size:16px;}
+        .hdmenu ul li a{display: block;height: 100%;position: relative;font-size: 15px;}
+		.logo{float:left;width:220px;height:64px;line-height:64px;}
+		.logo img{vertical-align:middle;}
+        .header_dz .dl_index.current_new{border:1px solid #ccc;}
+        .header_dz .dl_index.current_new a{color:#fff;}
+        .header_dz .zc_index.current_new2{background:#f5bc00;border:1px solid #f5bc00;}
+		.deal_list_pic_cny img{width:15px;height:15px;}
+		.hdmenu{float:left;width:680px;height:62px;text-align:left;}
+        .header_dz{float: right;height: 64px;position: relative;}
+        .select_index{display: inline-block;text-align: center;padding:0px 10px;border:1px solid #ccc;height: 26px;border-radius: 4px;margin-right: 10px;margin-top:19px;line-height:26px;position:relative;}
+        .select_index:hover{border:1px solid #f5bc00;cursor: pointer;}
+        .select_index:hover a{color: #f5bc00;}
+        .dl_index{display: inline-block;text-align: center;padding:0 7px;border:1px solid #ccc;height: 26px;border-radius: 4px;margin-right: 10px;margin-top:19px;line-height: 26px;font-size: 14px;}
+        .dl_index a{color:#fff;}
+        .dl_index:hover{border:1px solid #f5bc00;}
+        .dl_index:hover a{color:#f5bc00;}
+        .zc_index{display: inline-block;text-align: center;padding:0 7px;border:1px solid #f5bc00;height: 26px;border-radius: 4px;margin-right: 10px;margin-top:19px;line-height: 26px;font-size: 14px;width: 32px;background: #f5bc00;}
+        .zc_index a{color:#3d3d3d;}
+        .zc_index:hover{background:#f5bc00;border:1px solid #f5bc00;}
+        
+        .ts{width:50px;height:34px;line-height:34px;text-align: center;color: #fff;background: rgba(0, 0, 0, 0.75);border-radius: 4px;display:none;position: absolute;top:63px;right:4px;}
+        .dl_index_ts:hover .ts{display: block;}
+		#neworder{background-color: rgb(255, 0, 0);font-size: 12px;display: inline-block;width: 16px;height: 16px;text-align: center;line-height: 16px;vertical-align: middle;border-radius: 50%;margin-top: -3px;margin-left: 5px;display: none;color:#fff;}
+        .select_index_DD{width: auto;padding:0 10px;}
+        .select_index_DD a{color:#fff;}
+        a{text-decoration: none!important;}
+
+        .namecss{color: #fff;float: left;margin-top: 20px;margin-right: 15px;font-size: 16px;}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="otheader" style="height:64px;">
+            <div class="header" style="height:64px;">
+				<div class="logo">
+                    <a href="/">
+                        <img src="{:C('web_logo')}" style="width:116px;" />
+                    </a>
+                </div>
+                <div class="hdmenu">
+                    <ul>
+                        <li id="index_box"><a href="/">首页</a></li>
+                        <volist name="daohang" id="vo">
+                            <li id="{$vo['name']}_box"><a href="{$vo['url']}">{$vo['title']}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <gt name="Think.session.userId" value="0">
+
+					<div class="header_dz">
+                        <p class="namecss">{$enname}</p>
+						<span class="select_index select_index_DD">
+							<a href="{:U('Order/orderlist')}?status=0" style="font-size: 14px;">订单<span id="neworder"></span></a>
+						</span>
+                       <!--  语言选择 -->
+						<!-- <span class="select_index">
+							<img src="/Public/Home/news/images/zh_CN.png" alt="" style="width:16px;vertical-align: middle;margin-top: -3px;">
+							<span>▼</span>
+						</span> -->
+						<span class="dl_index">
+							<a href="{:U('User/index')}">个人中心</a>
+						</span>
+						<span class="dl_index dl_index_ts">
+							<a href="{:U('Login/loginout')}"><img src="/Public/Home/news/images/tc.png" style="vertical-align: middle;margin-top: -3px;"></a>
+						</span>
+						<div class="ts">
+							<span style="display:inline-block;position: absolute;top:-16px;right:16px;width:0;height: 0;border-width:8px;border-style: solid;border-color: #fff #fff rgba(0, 0, 0, 0.75) #fff;"></span>退出
+						</div>
+					</div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							chatNum("neworder",0,0,0);
+						});
+					</script>
+                <else/>
+                    <div class="header_dz">
+                     <!--  语言选择 -->
+						<!-- <span class="select_index">
+							<img src="/Public/Home/news/images/zh_CN.png" alt="" style="width:16px;vertical-align: middle;margin-top: -3px;">
+							<span>▼</span>
+						</span> -->
+						<span class="dl_index">
+							<a href="{:U('Login/index')}">登录</a>
+						</span>
+                        <span class="zc_index"><a href="{:U('Login/register')}">注册</a></span>
+                    </div>
+                </gt>
+            </div>
+        </div>
+        <script>
+			function chatNum(id,orderid,ordertype,status){
+				$.getJSON("/Ajax/chatNum?orderid="+orderid+"&ordertype="+ordertype+"&status="+status,function(data){
+					if(data>0){
+						$("#"+id).html(data);
+                        $("#neworder").css({"display":"inline-block"});
+					}else if(parseInt(data)==0 && id=='neworder'){
+						$("#neworder").html('');
+					}
+				});
+				if (orderid == ''){
+				    return 0;
+                }
+				setTimeout(function(){chatNum(id,orderid,ordertype,status)},3000);
+			}
+        </script>

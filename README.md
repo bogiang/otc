@@ -31,6 +31,7 @@
     * alter table tw_config add single_withdraw decimal(10,2) not null default '0.00' comment "单笔提现最大限额审核";
     * alter table tw_ad_buy add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "购买的币";
     * alter table tw_ad_sell add need_coin decimal(20,8) NOT NULL DEFAULT '0.00000000' COMMENT "出售的币";
+    * alter table tw_user add lang_type varchar(20) NOT NULL DEFAULT '' COMMENT "语言包";
     
 * php.ini 中的max_execution_time 的值修改为180秒 ：为了跑脚本不失败。
 Home/Controller/QueueController.class.php 为脚本

@@ -18,7 +18,18 @@ class IndexController extends HomeController
 	
 	public function index()
 	{
-		$num1 =0;
+	    $userid = userid();
+	    if ($userid != NULL){
+	        $usif = M('user')->where(array('id'=>$userid))->find();
+            if (!empty($usif['lang_type'])){
+                cookie('lang_type',$usif['lang_type']);
+            } else {
+                cookie('lang_type',C('DEFAULT_LANG'));
+            }
+        } else {
+            cookie('lang_type',C('DEFAULT_LANG'));
+        }
+        $num1 =0;
 		$num2 =0;
 
 		$where=array();

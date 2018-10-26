@@ -50,6 +50,7 @@ class CheckLangBehavior {
             if(false === stripos($langList,$langSet)) { // 非法语言参数
                 $langSet = C('DEFAULT_LANG');
             }
+//            $langSet = cookie('lang_type'); //通过用户来设置语言包，如果没有就是默认语言包
         }
         // 定义当前语言
         define('LANG_SET',strtolower($langSet));

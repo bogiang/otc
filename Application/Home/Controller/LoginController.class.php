@@ -170,9 +170,9 @@ class LoginController extends HomeController
         //     $this->error('邮箱验证码错误！');
         // }
 
-        // if ($password != $repassword) {
-        //     $this->error('两次输入的密码不一致');
-        // }
+         if ($password != $repassword) {
+             $this->error('两次输入的密码不一致');
+         }
             if ($reg_type == 'mobile' && $mobile != session('chkmobile')) {
             $this->error('短信验证码错误！');
         }
@@ -184,7 +184,6 @@ class LoginController extends HomeController
             $this->error('短信验证码错误！');
         }
         if (!$invit) {
-
             $invit = session('invit');
         }
         $invituser = M('User')->where(array('invit' => $invit))->find();

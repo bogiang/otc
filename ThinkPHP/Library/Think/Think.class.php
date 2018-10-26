@@ -46,6 +46,7 @@ class Think {
           $content =  '';
           // 读取应用模式
           $mode   =   include is_file(CONF_PATH.'core.php')?CONF_PATH.'core.php':MODE_PATH.APP_MODE.'.php';
+
           // 加载核心文件
           foreach ($mode['core'] as $file){
               if(is_file($file)) {
@@ -159,7 +160,8 @@ class Think {
               $namespace  =   C('AUTOLOAD_NAMESPACE');
               $path       =   isset($namespace[$name])? dirname($namespace[$name]).'/' : APP_PATH;
           }
-          $filename       =   $path . str_replace('\\', '/', $class) . EXT;
+
+            $filename       =   $path . str_replace('\\', '/', $class) . EXT;
           if(is_file($filename)) {
               // Win环境下面严格区分大小写
               if (IS_WIN && false === strpos(str_replace('/', '\\', realpath($filename)), $class . EXT)){
@@ -183,6 +185,7 @@ class Think {
                     return ;
             }
         }
+
     }
 
     /**

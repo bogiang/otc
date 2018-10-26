@@ -1,0 +1,150 @@
+<include file="Public:header_new"/>
+        <style type="text/css">
+            .dnwlist li{border-bottom: 1px solid #ddd;/*background: url(__PUBLIC__/Home/news/images/graysquare2.png) left center no-repeat;*/font-size: 16px;}
+            .dnwlist li a{color: #333;}
+            .dnwlist li .time{float: right;font-size: 14px;color: #333;font-family: "微软雅黑"}
+            /*.dnwlist li:hover a{color: #ff9900;}*/
+            /*.dnwlist li:hover{background: url(__PUBLIC__/Home/news/images/yellowgray2.png) left center no-repeat;}*/
+            .hero-inner{position: relative;top: 0%;transform: translateY(0%);width:100%;margin: 0 auto;margin-bottom: 10px;text-align:center;height:150px;background: url(__PUBLIC__/Home/news/images/help.jpg) no-repeat;padding-top: 150px;}
+            .blocks-list {display: flex;flex-wrap: wrap;justify-content: flex-start;list-style: none;padding: 0;}
+            .blocks-item {border: 1px solid #f5bc00;border-radius: 4px;box-sizing: border-box;color: #f5bc00;display: flex;flex: 1 0 340px;flex-direction: column;  justify-content: center;margin: 0 15px 30px;max-width: 100%;text-align: center;}
+            .blocks-item-link {color: #f5bc00;padding: 20px 30px;}
+            .blocks-item-title {margin-bottom: 0;font-weight: normal;}
+            .blocks-item-description {font-weight: 300;margin: 0;}
+            .blocks-item:hover{background: #f5bc00;}
+            .blocks-item:hover .blocks-item-link{color:#fff;}
+            .more_search:hover{text-decoration: underline;}
+        </style>
+        <div class="hero-inner">
+                <form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off" action="{:U('Article/listsousuo')}" method="get"><input type="search" name="query" id="query" placeholder="搜索" autocomplete="off" aria-label="搜索" / style="width: 600px;height:40px;border-radius: 20px;outline: none;border:none;text-indent: 40px;font-size: 14px;background: url(__PUBLIC__/Home/news/images/search.png) #fff no-repeat 10px 8px;">
+                </form>
+              </div>
+        <div class="newmain">
+            <!-- <div class="hero-inner">
+                <form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off" action="{:U('Article/listsousuo')}" method="get"><input type="search" name="query" id="query" placeholder="搜索" autocomplete="off" aria-label="搜索" />
+                </form>
+              </div> -->
+            <ul class="blocks-list">
+                <volist name="ArticleTypeList" id="vo">
+                <li class="blocks-item">
+                <neq name="vo.childnum" value="0">
+                    <a href="{:U('Article/type_index',array('id'=>$vo['id']))}" class="blocks-item-link">
+                <else />
+                    <a href="{:U('Article/type',array('id'=>$vo['id']))}" class="blocks-item-link">
+
+                </neq>
+                    <h4 class="blocks-item-title">{$vo.title}</h4>
+                    <p class="blocks-item-description"></p>
+                  </a>
+                </li>
+                </volist>
+            </ul>
+            <div class="nwmleft">
+                <h2>最近的文章</h2>
+                <ul class="dnwlist" id="list">
+                  <volist name="article_list" id="vo">
+                    <li style="border:none;padding:25px 0 5px;font-size: 18px;">
+                        <a href="{:U('Article/type','id='.$vo['type_id'])}">{$vo.type_title}</a>
+                    </li>
+                    <li style="padding:0 0 25px;">
+                        <a href="{:U('Article/detail','id='.$vo['id'])}">{$vo.title}</a>
+                        <span class="time">{$vo.addtime|addtime}</span>
+                    </li>
+                  </volist>
+                 </ul>
+                <ul class="dnwlist" id="more">
+                    <gt name="count" value="5">
+                    <li  style="border:none;padding-top:25px;">
+                        <a href="javascript:void(0)" onclick="jiazai();" class="more_search" style="color:#0072ef;font-size: 15px;">查看更多</a>
+                        <input type="hidden" name="addtime" id="addtime" value="{$addtime}" />
+                    </li>
+                    </gt>
+                </ul>
+                <!-- <div class="pages" style="margin-top:30px;">{$page}</div> -->
+                <div class="clear"></div>
+            </div>
+            <!-- <div class="nwmright">
+                <h3><img src="__PUBLIC__/Home/news/images/helpicon.png">帮助中心</h3>
+                <ul class="nwmenu">
+                <volist name="ArticleTypeList" id="vo">
+                <if condition="($vo['childnum'] eq '0')">
+                    <li class="topmenu semenu rightico_{$vo.id}" id="article_{$vo.id}">
+                        <a href="{:U('Article/index',array('id'=>$vo['id']))}">
+                            {$vo.title}
+                        </a>
+                    </li>
+                    <div class="botmenu" style="display: none;">
+                        <ul>
+                        <volist name="vo['child']" id="f">
+                            <li><a href="#">{$f.title}</a></li>
+                        </volist>
+                        </ul>
+                    </div>
+                <else/>
+                    <li class="topmenu semenu semenu1" id="article_{$vo.id}">
+                            <img src="__PUBLIC__/Home/news/images/closemenu.png" class="img1">
+                            <img src="__PUBLIC__/Home/news/images/openmenu.png" class="img2">
+                            <img src="__PUBLIC__/Home/news/images/closemenu2.png" class="img3">
+                            {$vo.title}
+                    </li>
+                    <div class="botmenu" style="display: none;">
+                        <ul>
+                        <volist name="vo['child']" id="f">
+                            <li id="article_{$f.id}"><a href="{:U('Article/index',array('id'=>$f['id']))}">{$f.title}</a></li>
+                        </volist>
+                        </ul>
+                    </div>
+                </if>
+                </volist>
+                </ul>
+            </div>
+            <script>
+                   $(".semenu").click(function() {
+                        if($(this).next(".botmenu").css("display")=="none"){
+                             $(this).siblings('.botmenu').slideUp();
+                             $(this).next(".botmenu").slideDown();
+                             $(this).siblings('.topmenu').removeClass("on");
+                             $(this).addClass('on');
+                        }else{
+                            $(this).next(".botmenu").slideUp();
+                            $(this).removeClass('on');
+                        }
+                    });
+                   window.onload=function(){
+                        $("#article_25 a").prepend('<img src="__PUBLIC__/Home/news/images/helpimg4.png" class="img1"><img src="__PUBLIC__/Home/news/images/helpimg42.png" class="img2">');
+                        $("#article_26 a").prepend('<img src="__PUBLIC__/Home/news/images/helpimg2.png" class="img1"><img src="__PUBLIC__/Home/news/images/helpimg22.png" class="img2">');
+                        $("#article_27 a").prepend('<img src="__PUBLIC__/Home/news/images/helpimg3.png" class="img1"><img src="__PUBLIC__/Home/news/images/helpimg32.png" class="img2">');
+                        $("#article_30 a").prepend('<img src="__PUBLIC__/Home/news/images/helpimg1.png" class="img1"><img src="__PUBLIC__/Home/news/images/helpimg12.png" class="img2">');
+                        $("#article_31 a").prepend('<img src="__PUBLIC__/Home/news/images/{$vo.img1}" class="img1"><img src="__PUBLIC__/Home/news/images/{$vo.img11}" class="img2">');
+                        $("#article_32 a").prepend('<img src="__PUBLIC__/Home/news/images/new.png" class="img1"><img src="__PUBLIC__/Home/news/images/new2.png" class="img2">');
+						$("#article_34 a").prepend('<img src="__PUBLIC__/Home/news/images/download.png" class="img1"><img src="__PUBLIC__/Home/news/images/download2.png" class="img2">');
+					}
+            </script> -->
+        </div>
+        <!-- <script>
+          var idss = {$idss};
+          //菜单高亮
+          $('#article_'+idss).addClass('on');
+        </script> -->
+        <script>
+          function jiazai(){
+            var addtime=$('#addtime').val();
+            $.getJSON("/Article/ajaxlist?addtime="+addtime,function(data){
+              if(data){
+                if(data['list']){
+                  for( var i in data['list']){
+                      $('#list').append("<li style='border:none;padding:25px 0 5px;font-size: 18px;'><a href='/Article/type/id/"+data['list'][i]['type_id']+".html'>"+data['list'][i]['type_title']+"</a></li><li style='padding:0 0 25px;'><a href='/Article/detail/id/"+data['list'][i]['id']+".html' style=''>"+data['list'][i]['title']+"</a><span class='time'>"+data['list'][i]['addtime']+"</span></li>");
+                  }
+                  if(data['list'].length<5){
+                    $('#more').hide();
+                  }
+                }
+                $('#addtime').val(data['addtime']);
+              }
+            });
+          }
+        </script>
+        <script type="text/javascript">
+        $('#article_box').addClass('on');
+        </script>
+<include file="Public:footer_new"/>

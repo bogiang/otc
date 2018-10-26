@@ -1,0 +1,160 @@
+        <!-- 底部 -->
+        <style type="text/css">
+            .bottom{margin-bottom: -2px;}
+            .noticeright{width: 350px;height: auto;overflow: hidden;float: right;border:1px dashed #e75600;font-size: 13px;text-align:left;padding:15px;color: #e75600;line-height: 23px;}
+            .noticeright h4{font-size: 16px;font-weight: 900;margin-bottom: 10px;text-align: center;}
+            .fxts{width:1200px;margin:20px auto 0;height:auto;color:#fff;border-bottom:1px solid rgba(255,255,255,0.1);padding: 0 0 20px;color:#e75600;}
+            .fxts h3{font-size: 18px;margin-bottom: 15px;color:#e75600;}
+            .fxts h3 .span1{display: inline-block;width:23px;height:23px;border:1px solid #e75600;border-radius: 20px;text-align: center;line-height: 23px;color:#e75600;margin-right:5px;}
+            .fxts p{font-size: 13px;line-height: 20px;color:#e75600;}
+            .ftmenu_new{width:300px;float:right;}
+            .ftmenu_new p{font-size: 13px;color:#fff;line-height: 30px;}
+            .ftmenu_new .phone{font-size:13px;color:#fff;line-height: 30px;}
+			.jyts{width:258px;height:168px;position:fixed;bottom:0;left:0;background:white;z-index:99;}
+			.jyts .jytstitle{height:34px;line-height:34px;text-align:left;font-size:16px;background-color: #2d2d2d;color: #f5bc00; position:relative;text-indent: 34px;}
+            .jyts .xbt{position: absolute;top: 7px;left: 10px;}
+			.jyts .jytstitle .closebut{width:18px;height:18px;position:absolute;right:40px;top:2px;cursor:pointer;}
+			.jyts .jytscontent{line-height:20px;font-size:14px;color:#666;height: 120px;padding-top: 14px;text-indent: 10px;background-image: url(/Public/Home/news/images/xxbg.png);background-size: cover;}
+			.jyts .jytscontent a{color:blue;}
+        </style>
+        <div class="bottom">
+            <div class="bottop">
+              
+                <div class="botcent">
+                    <php>$num = 0;</php>
+                    <volist name="footerArticleType" id="vo">
+                    <eq name="vo.child_lei" value="type">
+                        <php> $num++;</php>
+                        <div class="ftmenu">
+                            <h4>{$vo['title']}</h4>
+                            <ul>
+                                <volist name="vo['child']" id="vvo">
+                                    <li><a href="{:U('Article/type',array('id'=>$vvo['id']))}">{$vvo['title']}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <php> if($num >= 5){ break;}</php>
+                    <else />
+                        <php> $num++;</php>
+                        <div class="ftmenu">
+                            <h4><a href="{:U('Article/type',array('id'=>$vo['id']))}" style="color: #fff;font-size: 15px;line-height: 30px;">{$vo['title']}</a></h4>
+                            <ul>
+                                <volist name="vo['child']" id="vvo">
+                                    <li><a href="{:U('Article/detail',array('id'=>$vvo['id']))}">{$vvo['title']|msubstr=0,18,'utf-8'}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <php> if($num >= 4){ break;}</php>
+                    </eq>
+                    </volist>
+                </div>
+                 <div class="ftmenu_new">
+                        <h4 style="color:#ececec;font-size:13px;line-height:30px;font-weight:normal;font-size:15px;cursor:pointer;">联系我们</h4>
+                        <!-- <p class="kf_footer">客服热线：{:C('contact_tqq')}  (9:00-21:00) </p> -->
+                        <!-- <p>市场合作：QQ {$contact_qq}</p> -->
+                        <p>合作邮箱：{:C('contact_weibo')}</p>
+						{$qqqun}
+                </div>
+            </div>
+            
+            <div class="botbox">
+                <div class="inbot">
+                    <div class="inbotleft" style="text-align:center;">
+                        CopyRight© 2017-2018 dotstar.io All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!--Start of Zendesk Chat Script-->
+		
+		<!--End of Zendesk Chat Script-->
+    </div>	
+<div id="jyts" class="jyts" style="display: none;">
+	<div class="jytstitle">
+		<img class="xbt" src="/Public/Home/news/images/xxbz.png">
+        您有新的消息
+		<div class="closebut" id="closebut"><img src="/Public/Home/images/gb.png" /></div>
+	</div>
+	<div class="jytscontent" id="jytscontent"></div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/news/js/web_socket.js"></script>
+<script type="text/javascript">
+	if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    // 如果浏览器不支持websocket，会使用这个flash自动模拟websocket协议，此过程对开发者透明
+    WEB_SOCKET_SWF_LOCATION = "/Public/Home/js/WebSocketMain.swf";
+    // 开启flash的websocket debug
+    WEB_SOCKET_DEBUG = true;
+    var ws;
+	var myname = "{$enname}";
+
+    // 连接服务端
+    function connect() {
+       // 创建websocket
+       ws = new WebSocket("ws://"+document.domain+":45101");
+       // 当socket连接打开时，输入用户名
+       ws.onopen = onopen;
+       // 当有消息时根据消息类型显示不同信息
+       ws.onmessage = onmessage; 
+       ws.onclose = function() {
+    	  console.log("连接关闭，定时重连");
+          connect();
+       };
+       ws.onerror = function() {
+     	  console.log("出现错误");
+       };
+    }
+	
+	// 连接建立时发送登录信息
+    function onopen()
+    {
+		if(myname && myname.length>0){
+			// 登录
+			var login_data = '{"type":"login","client_name":"'+myname+'","room_id":"1"}';
+			ws.send(login_data);
+		}
+    }
+	
+	// 服务端发来消息时
+    function onmessage(e)
+    {
+        var data = JSON.parse(e.data);
+        switch(data['type']){
+            // 服务端ping客户端
+            case 'ping':
+                ws.send('{"type":"pong"}');
+                break;
+            // 登录 更新用户列表
+            case 'login':
+                break;
+            // 发言
+            case 'say':
+				showsay(data['content']);
+                break;
+            // 用户退出 更新用户列表
+            case 'logout':
+				break;
+        }
+    }
+	
+	function showsay(content){
+		var arr = content.split("-");
+		switch(arr[2]){
+			case 'neworder':
+				$("#jytscontent").html("您有新的订单。<a href='/Order/orderinfo?type="+arr[1]+"&id="+arr[0]+"'>点击这里</a>查看");
+				$("#jyts").show();
+				setTimeout(function(){$("#jyts").hide('slow');},10000);
+			break;
+		}
+	}
+	
+	$("#closebut").click(function(){
+		$("#jyts").hide('slow');
+	});
+	
+	// window.onload=function(){
+	// 	connect();
+	// }
+</script>
+</body>
+</html>

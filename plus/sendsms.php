@@ -17,8 +17,10 @@
 
 
     //此处需要替换成自己的AK信息
-    $accessKeyId = "LTAIboHXhYnEOqFO";
-    $accessKeySecret = "JswLGqpAAx4R84JFGuF20wvzaslYvp";
+//    $accessKeyId = "LTAIboHXhYnEOqFO";
+//    $accessKeySecret = "JswLGqpAAx4R84JFGuF20wvzaslYvp";
+    $accessKeyId = "LTAI7iWgNQrHTNWv";
+    $accessKeySecret = "kFOZtT8wyAmvYUryg31OhECutlf7kY";
     //短信API产品名
     $product = "Dysmsapi";
     //短信API产品域名

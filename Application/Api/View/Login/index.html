@@ -1,0 +1,167 @@
+<include file="Public:header_new"/>
+<div class="outlogbox">
+	<div class="logbox">
+		<!-- <h1>登录</h1>
+		<p class="desc">
+			提醒：用户名就是您注册时填写的手机号或电子邮箱账号。切勿泄露密码给任何人。
+		</p> -->
+		<form id="form-login" class="mask_wrap login-fb">
+			<div class="inbox">
+                <h1>登录账号</h1>
+				<div class="boxrow">
+					<label><span class="xx_new">*</span>手机号</label>
+					<div class="rightbox">
+						<input id="login_username" name="username" type="text" class="iptbox" onblur="usernames();" />
+					</div>
+				</div>
+				<div class="boxrow">
+					<label><span class="xx_new">*</span>登录密码</label>
+					<div class="rightbox">
+						<input id="login_password" name="password" type="password" class="iptbox" onkeyup="chkpwd();" maxlength="16" onblur="passwords()"/>
+					</div>
+				</div>
+				<eq name="C['login_verify']" value="1">
+					<div class="boxrow" id="ga-box-i">
+						<label><span class="xx_new">*</span>验证码</label>
+						<div class="rightbox">
+							<input type="text" class="iptbox yzm" id="login_verify" name="code" style="width: 190px; float: left;" onblur="verifys();" maxlength="4"/>
+							<span class="yzmimg">
+								<img id="codeImg reloadverifyindex" src="{:U('Verify/code')}" width="120" height="38" onclick="this.src=this.src+'?t='+Math.random()" style="margin-top: 1px; cursor: pointer;" title="换一张" class='codeImg'>
+							</span>
+						</div>
+					</div>
+				</eq>
+				<!--<div class="boxrow" id="ga" style="display:none">
+					<label><span class="xx_new">*</span>谷歌验证码</label>
+					<div class="rightbox">
+						<input id="foot_ga" type="text" class="iptbox"/>
+					</div>
+				</div>-->
+				<div class="boxrow">
+					<div class="rightbox nolabel">
+						<input type="button" name="index_submit" id="loginSubmin" onclick="upLogin();" class="iptbut" value="登录">
+						<p class="linkbox">
+                            还没账户，
+                            <a href="{:U('Login/register')}" class="yellow">由此注册</a>
+							<a href="{:U('Login/findpwd')}" style="float: right;">忘记密码？</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	//记住账号
+	var cookieValue=$.cookies.get('cookie_username');
+	if(cookieValue!=''&&cookieValue!=null){
+		$("#username").val(cookieValue);
+		$("#autoLogin").attr("checked",true);
+	}
+	// 检测用户名
+    function usernames(){
+        var username = $('#login_username').val();
+        if(username==""||username==null){
+            layer.tips('请输入手机号','#login_username',{tips:3});
+            return false;
+        }
+        $.post("{:U('Login/jiancega')}", {
+        	username:username,
+        	}, function (data) {
+        		if (data.status == 1) {
+        			$('#ga').show();
+        		}
+
+        	}, "json");
+
+
+    }
+
+    // 检测密码
+    function passwords(){
+        var password = $('#login_password').val();
+        if(password==""||password==null){
+            layer.tips('请输入登录密码','#login_password',{tips:3});
+            return false;
+        }
+    }
+	// 检测验证码
+    function verifys(){
+        var verify = $('#login_verify').val();
+        if(verify==""||verify==null){
+            layer.tips('请输入验证码','#login_verify',{tips:3});
+            return false;
+        }
+    }
+	function upLogin() {
+		var username = $("#login_username").val();
+		var password = $("#login_password").val();
+		var verify = $("#login_verify").val();
+		var foot_ga = $("#foot_ga").val();
+
+		if (username == "" || username == null) {
+			layer.tips('请输入手机号', '#login_username', {tips: 3});
+			return false;
+		}
+		if (password == "" || password == null) {
+			layer.tips('请输入登录密码', '#login_password', {tips: 3});
+			return false;
+		}
+
+		if (verify == "" || verify == null) {
+			layer.tips('请输入验证码', '#login_verify', {tips: 3});
+			return false;
+		}
+
+		$('#loginSubmin').css('background','#108ee9');
+
+
+		$.post("{:U('Login/submit')}", {
+			username: username,
+			password: password,
+			verify: verify,
+			ga: foot_ga
+		}, function (data) {
+			if (data.status == 1) {
+				$.cookies.set('cookie_username', username);
+				layer.msg(data.info, {icon: 1});
+				guga="{$Think.session.guga}";
+				window.location.href = '/User/index.html';
+				$('#loginSubmin').css('background','#108ee9');
+			} else {
+				//刷新验证码
+				//$(".reloadverifyindex").click();
+				var codeImg = $(".codeImg").attr("src");
+                if (codeImg.indexOf('?') > 0) {
+                    $(".codeImg").attr("src",
+                            codeImg + '&random=' + Math.random());
+                } else {
+                    $(".codeImg").attr(
+                            "src",
+                            codeImg.replace(/\?.*$/, '') + '?'
+                            + Math.random());
+                }
+				layer.msg(data.info, {icon: 2});
+				$('#loginSubmin').css('background','#108ee9');
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function chkpwd(){
+		var loginpassword = $("#login_password").val();
+		var patten =/^[a-zA-Z0-9]+$/;
+		var match = new RegExp(patten);
+		if (!match.test(loginpassword)) {
+			layer.tips('密码格式为6~16位，不含特殊符号！','#login_password',{tips:3});
+			var result = loginpassword.substring(0,loginpassword.length-1);
+			$("#login_password").val(result);
+		}
+	}
+	//顶部菜单高亮
+	$('#menu_top_index').addClass('current');
+    $('.dl_index').addClass('current_new');
+</script>
+<include file="Public:footer_new"/>

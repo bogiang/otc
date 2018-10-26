@@ -1,0 +1,57 @@
+<include file="Public:header_new"/>
+<style>
+    .newmain{margin: 0 auto;}
+    .title_help{color:#717b84;font-weight: 400;font-size:15px;}
+    .title_help a{color:#108ee9;}
+    .title_help a:hover{text-decoration: underline;}
+    .newmain .nwmleft{border: none;margin-top: 15px;width:900px;padding:10px 0;}
+    .newmain .nwmleft .h2_new{font-size: 32px;font-weight: 400;text-align: left;color:#42484d;margin-bottom: 10px;}
+</style>
+<div style="border-top:1px solid #ddd;padding:50px 0;">
+    <div class="newmain">
+        <div class="hero-inner" style="margin-bottom: 30px;">
+            <form role="search" class="search search-full" data-search="" data-instant="true" autocomplete="off" action="{:U('Article/listsousuo')}" method="get">
+                <span class="title_help">
+                    <a href="{:U('Article/index')}">帮助中心</a>
+                    <span>></span>
+                    <a href="{:U('Article/type',array('id'=>$breadid))}">{$breadtitle}</a>
+                    <span>></span>
+                    <span>{$data.title|msubstr=0,10,'utf-8'}</span>
+                </span>
+                <input type="search" name="query" id="query" placeholder="搜索" autocomplete="off" aria-label="搜索" style="width:300px;height:40px;float:right;border-radius: 20px;outline: none;border:1px solid #ddd;text-indent: 40px;font-size: 14px;background: url(__PUBLIC__/Home/news/images/search.png) #fff no-repeat 10px 8px;"/>
+			</form>
+        </div>
+		<div class="nwmleft" style="float:right;">
+			<h2 class="h2_new">{$data.title}</h2>
+			<p class="pubdate">
+				发布时间：{$data.addtime|date="Y-m-d H:i:s",###}   发布人：{:C('web_title')}
+			</p>
+			<div class="nwdtsbox">
+				{$data['content']}
+			</div>
+		</div>
+		<div class="nwmright" style="float:left;">
+			<h3>此组别内的文章</h3>
+			<ul class="nwmenu">
+			<volist name="article_list" id="vo">
+				<li class="topmenu semenu rightico_{$vo.id}"  id="article_{$vo.id}">
+					<a href="{:U('Article/detail',array('id'=>$vo['id']))}">
+						{$vo.title|msubstr=0,10,'utf-8'}
+					</a>
+				</li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+<script>
+var a_id = {$a_id};
+//菜单高亮
+$('#article_'+a_id).addClass('on');
+var helpid = {$_GET['id']};
+$('.rightico_'+helpid).addClass('on');
+</script>
+<script type="text/javascript">
+$('#article_box').addClass('on');
+</script>
+<include file="Public:footer_new"/>

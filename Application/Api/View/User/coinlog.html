@@ -1,0 +1,50 @@
+<include file="Public:header_new"/>
+<div class="usernewout">
+	<include file="User:top"/>
+	<div class="usncont">
+		<include file="User:left"/>
+		<div class="usnc_right">
+			<h1>
+				资金日志
+				<div class="xr" >
+					<volist name="coin_list" id="vo">
+						<a <if condition="$xnb eq $vo['name']">class="on"</if> href="{:U('User/coinlog')}?coinname={$vo['name']}">{$vo['title']}</a>
+					</volist>
+				</div>
+			</h1>
+			<div class="recharge_list">
+				<table>
+					<tr>
+						<th>操作时间</th>
+						<th>资金类型</th>
+						<th>金额</th>
+						<th>类型</th>
+						<th>操作人</th>
+						<th>描述</th>
+					</tr>
+					<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td>{$vo.ctime}</td>
+							<td>{$vo.ctype}</td>
+							<td>{$vo.amount}</td>
+							<td>{$vo.jiajian}</td>
+							<td>{$vo.operator}</td>
+							<td>{$vo.desc}</td>
+						</tr>
+					</volist>
+					<else />
+						<tr><td colspan="6" style="padding: 10px 0;text-align: center;text-indent: 0;">暂无记录</td></tr>
+					</notempty>
+					
+				</table>
+				<div class="pages">{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $('#coin_log').addClass('on');
+    $('#user_box').addClass('on');
+</script>
+<include file="Public:footer_new"/>

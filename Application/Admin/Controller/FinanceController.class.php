@@ -1116,7 +1116,6 @@ class FinanceController extends AdminController
 				if($Coins['name'] == 'usdt'){
 					$sendrs = $CoinClient->omni_send((string) C('usdtzcaddr'), (string) $myzc['username'], 1, (string) $myzc['mum']);
 				}else{
-                    $CoinClient->walletpassphrase("Pi3.53589793",60);
 					$sendrs = $CoinClient->sendtoaddress($myzc['username'], (double) $myzc['mum']);
 				}
 				if ($sendrs) {

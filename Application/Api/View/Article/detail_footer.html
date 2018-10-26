@@ -1,0 +1,29 @@
+<include file="Public:header_new"/>
+<style>
+    .newmain{margin: 0 auto;}
+    .title_help{color:#717b84;font-weight: 400;font-size:15px;}
+    .title_help a{color:#0072ef;}
+    .title_help a:hover{text-decoration: underline;}
+    .newmain .nwmleft{border: none;margin-top: 15px;width:960px;padding:10px 0;}
+    .newmain .nwmleft .h2_new{font-size: 24px;font-weight: 400;text-align: left;color:#42484d;margin-bottom: 10px;}
+</style>
+<div style="border-top:1px solid #ddd;padding:50px 0;background: #eceff1;">
+        <div class="newmain">
+            <div class="nwmleft" style="width: 900px;margin:30px auto;background: #fff;min-height:850px;padding:40px;border-radius: 4px;">
+                <h2 class="h2_new">{$data.title}</h2>
+                <p class="pubdate">
+                    发布时间：{$data.addtime|date="Y-m-d H:i:s",###}   发布人：{:C('web_title')}
+                </p>
+            </div>
+        </div>
+</div>
+        <script>
+          var a_id = {$a_id};
+          //菜单高亮
+          $('#article_'+a_id).addClass('on');
+        </script>
+        <script type="text/javascript">
+        $('#article_box').addClass('on');
+        </script>
+
+<include file="Public:footer_new"/>

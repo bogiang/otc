@@ -1,0 +1,444 @@
+<include file="Public:header_new"/>
+<script type="text/javascript" src="__PUBLIC__/Home/js/cityselect.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/js/webuploader.css">
+<script type="text/javascript" src="__PUBLIC__/Home/js/webuploader.js"></script>
+<style>
+    #withdrawCnyAddress{
+        padding: 0 20px;
+        background: #fff;
+        width: 400px;
+        height: auto;
+        overflow: auto;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+    .PopLayer li{
+        float: left;
+    }
+    #withdrawCnyAddress .PopLayer li span{
+        width: 70px;
+    }
+    textarea{
+        resize:none;
+        height: 60px;
+    }
+    .selpic{line-height:20px;float:left;}
+    .progress{background:rgb(0,183,238);opacity:0.5;filter:Alpha(opacity=50);margin-bottom:5px;height:5px;line-height:5px;border-radius:2px;}
+    .moban{
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+        float: left;
+        background-color:rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+</style>
+<div class="moban">
+    <div style="margin: 15% 50%;">
+        <img style="width: 200px;height: 300px" src="" alt="" id="showqrcode">
+    </div>
+</div>
+<div class="usernewout">
+    <include file="User:top"/>
+    <div class="usncont">
+        <!--左侧菜单-->
+        <include file="User:left"/>
+        <!--右侧内容-->
+        <style type="text/css">
+            .layui-layer-setwin .layui-layer-close1{width: 25px;height: 25px;background:url(__PUBLIC__/Home/news/images/closebut.png) center no-repeat!important;background-size: 18px!important; }
+            .layui-layer-setwin{right: 5px;top: 5px;}
+        </style>
+        <div class="usnc_right">
+            <h1>
+                收款账号管理
+            </h1>
+            <div class="recharge_list nmt">
+                <table>
+                    <tr>
+                        <th width="10%">收款类型</th>
+                        <th width="15%">收款人</th>
+                        <th width="15%">收款账号</th>
+                        <th width="30%">收款详情</th>
+                        <th width="15%">操作</th>
+                    </tr>
+                    <volist name="userSkaccountList" id="vo">
+                        <tr>
+                            <td>{$vo.pay_name}</td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.account}</td>
+                            <td>{$vo.desc}</td>
+                            <td>
+                                <if condition="($vo['pay_method_id'] == 3) OR ($vo['pay_method_id'] == 4) "><a class="cancel" href="javascript:void(0)" onclick="showqrcode('{$vo["qrcode"]}')">二维码</a></if>
+                                    <a class="cancel" href="javascript:void(0)" onclick="addAddress({$vo['id']})">编辑</a>
+                                <a class="cancel" href="javascript:void(0)" onclick="delDate({$vo['id']})">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+                <div class="pages">{$page}</div>
+                <div class="addbanks">
+                    <a href="javascript:void(0)" onclick="addAddress()">添加收款账号</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="okcoinPop" id="withdrawCnyAddress" style="display: none;">
+    <div class="tan_title">
+        <h4 style="font-size:14px;">添加钱包地址</h4>
+        <span class="closebut" onclick="closeCharge();"><img src="__PUBLIC__/Home/news/images/closebut.png"></span>
+    </div>
+    <div class="dialog_content" id="dialog_content_CnyAddress">
+        <div class="dialog_body center">
+            <div style="line-height: 35px; text-align: left; padding-left:10px;">
+                <ul class="PopLayer">
+                    <input name="name" id="sk_id" type="text" hidden>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan1">收款方式 </span>
+                        <select class="khname cztxinput" id="pay_method">
+                            <volist name="payMethod" id="vo">
+                                <option value="{$vo.id}">{$vo.name}</option>
+                            </volist>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan2">收款人名字 </span>
+                        <input name="name" id="name" type="text" class="cztxinput">
+                    </li>
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan4">收款账号 </span>
+                        <input name="account" id="account" type="text" class="cztxinput">
+                    </li>
+
+                    <li id="xuni">
+                        <span class="c2" id="lotteryAmountSpan5" style="float: left">二维码 </span>
+                        <div class="selpic">
+                            <!--用来存放item-->
+                            <div id="fileList" class="uploader-list">
+                                <img id="ajax_qrcode" src="" style="width: 120px;height: 90px">
+                            </div>
+                            <div id="filePicker">选择图片</div>
+                            <input type="hidden" name="qrcode" id="WU_FILE_0_1" />
+                        </div>
+                        <!--<input name="qrcode" id="qrcode" type="text" class="cztxinput">-->
+                    </li>
+
+                    <li id="yinhang">
+                        <span class="c2" id="lotteryAmountSpan6">开户行 </span>
+                        <input name="bank" id="bank" type="text" class="cztxinput">
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan7">详细 </span>
+                        <textarea name="desc" id="desc" type="text" class="cztxinput"></textarea>
+                    </li>
+
+                    <li>
+                        <span class="c2" id="lotteryAmountSpan8">交易密码 </span>
+                        <input name="qianbao_paypassword" id="qianbao_paypassword" type="password" class="cztxinput">
+                        <span style="display: block;text-align: left;width:340px;margin-left: 70px;">
+                        <if condition="empty($user['paypassword'])">
+							<a href="/User/paypassword.html" style="color:#108ee9;font-size: 13px;">请先设置交易密码</a>
+						<else />
+							<a href="/Login/findpaypwd.html" class="reg_floatr">忘记交易密码?</a>
+						</if>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="Update()" class="btn" id="btn" style="">立即添加</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialogBoxShadow" style="position: absolute; top: 0px; left: 0px; z-index: 100; background-color: rgb(0, 0, 0); opacity: 0.4; width: 100%; background-position: initial initial; background-repeat: initial initial; display: none;"></div>
+
+<script>
+    var myzc_token = "{$myzr_token}";
+    var coin = "{$xnb}";
+    $("#city_1").citySelect({
+        nodata: "none",
+        required: false
+    });
+
+    //改变收款方式
+    $(function () {
+        var pay_method = $('#pay_method').val();
+        showtime(pay_method);
+    });
+    $('#pay_method').on('change',function () {
+        var pay_method = $('#pay_method').val();
+        showtime(pay_method);
+    });
+    function showtime(pay_method){
+        if(pay_method == 1){
+            $('#xuni').hide();
+            $('#yinhang').hide();
+        } else if (pay_method == 2) {
+            $('#xuni').hide();
+            $('#yinhang').show();
+        } else {
+            $('#xuni').show();
+            $('#yinhang').hide();
+        }
+    }
+
+    $('#dialogBoxShadow').height($(document).height());
+    function closeAddress() {
+        $("#withdrawCnyAddress").hide();
+        $("#dialogBoxShadow").hide();
+    }
+    function showA() {
+        $("#withdrawCnyAddress").show();
+        $("#dialogBoxShadow").show();
+    }
+    function addAddress(sk_id){
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: 'autos',
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            content: $('#withdrawCnyAddress')
+        });
+        $("#sk_id").val(sk_id);
+
+
+        //显示值
+        if (sk_id != '' || sk_id != null) {
+            $.post("{:U('User/checkaccount')}", {
+                sk_id: sk_id,
+            }, function (data) {
+                // console.log(data);return false;
+                if (data.status == 1) {
+                    $("#pay_method").val(data.pay_method_id);
+                    $("#name").val(data.name);
+                    $("#account").val(data.account);
+                    $("#WU_FILE_0_1").val(data.qrcode);
+                    $("#bank").val(data.bank);
+                    $("#desc").val(data.desc);
+                    showtime(data.pay_method_id);
+                    $("#ajax_qrcode").attr('src','http://' + window.location.hostname + '/' + data.qrcode);
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                    if (data.url) {
+                        window.location = data.url;
+                    }
+                }
+            }, "json");
+        }
+
+        // //强行将上传图片按钮变大
+        $("#filePicker label").css({"width":"78px", "height":"40px"});
+        $("#filePicker div:eq(1)").css({"width":"78px", "height":"40px"});
+
+    }
+    function closeCharge(){
+        layer.closeAll();
+    }
+    function Update() {
+        var id = $('#sk_id').val();
+        var pay_method = $('#pay_method').val();
+        var name = $('#name').val();
+        var account = $('#account').val();
+        var qrcode = $('#WU_FILE_0_1').val();
+        var bank = $('#bank').val();
+        var desc = $('#desc').val();
+        var paypassword = $('#qianbao_paypassword').val();
+
+        if (name == "" || name == null) {
+            layer.tips('请输入收款人名字', '#name', {tips: 3});
+            return false;
+        }
+
+        if (account == "" || account == null) {
+            layer.tips('请输入收款账号', '#account', {tips: 3});
+            return false;
+        }
+
+        if (paypassword == "" || paypassword == null) {
+            layer.tips('请输入交易密码', '#qianbao_paypassword', {tips: 3});
+            return false;
+        }
+
+        $.post("{:U('User/upskaccount')}", {
+            id: id,
+            pay_method: pay_method,
+            name: name,
+            account: account,
+            qrcode: qrcode,
+            bank: bank,
+            desc: desc,
+            paypassword: paypassword,
+            token : myzc_token
+        }, function (data) {
+            // console.log(data); return false;
+            myzc_token = data.url;
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                window.location = "{:U('User/skaccount')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+                        location.reload();//页面刷新
+                    },2000);
+                }
+            }
+        }, "json");
+    }
+
+    function delDate(id) {
+        layer.config({
+            extend: 'extend/layer.ext.js'
+        });
+        layer.ready(function () {
+            //默认prompt
+            layer.prompt({
+                title: '输入交易密码，并确认',
+                formType: 1
+            }, function (val) {
+                if (val) {
+                    //需要执行的方法
+                    $.post("{:U('User/delskaccount')}", {
+                        id: id,
+                        paypassword: val
+                    }, function (data) {
+                        if (data.status == 1) {
+                            layer.msg(data.info, {icon: 1});
+                            window.location = "{:U('User/skaccount')}";
+                        } else {
+                            layer.msg(data.info, {icon: 2});
+                            if (data.url) {
+                                window.location = data.url;
+                            }
+                        }
+                    }, "json");
+                }
+                ;
+            });
+        });
+    }
+    //菜单高亮
+    $('#user_box').addClass('on');
+    $('#skaccount').addClass('on');
+
+    // 图片上传demo
+    function idcard(sel,pic){
+        var $ = jQuery,
+            $list = $('#'+sel),
+            // 优化retina, 在retina下这个值是2
+            ratio = window.devicePixelRatio || 1,
+
+            // 缩略图大小
+            thumbnailWidth = 120 * ratio,
+            thumbnailHeight = 90 * ratio,
+
+            // Web Uploader实例
+            uploader;
+
+        // 初始化Web Uploader
+        uploader = WebUploader.create({
+
+            // 自动上传。
+            auto: true,
+
+            // swf文件路径
+            swf: '/Public/Home/js/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/User/skqrcode',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#'+pic,
+
+            // 只允许选择文件，可选。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+
+        // 当有文件添加进来的时候
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '</div>'
+                ),
+                $img = $li.find('img');
+
+            $list.html( $li );
+
+            // 创建缩略图
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                $img.attr( 'src', src );
+            }, thumbnailWidth, thumbnailHeight );
+        });
+
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress span');
+
+            // 避免重复创建
+            if ( !$percent.length ) {
+                $percent = $('<p class="progress"><span></span></p>')
+                    .appendTo( $li )
+                    .find('span');
+            }
+
+            $percent.css( 'width', percentage * 100 + '%' );
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function( file,response ) {
+            $('#'+file.id+'_1').val(response.name);
+            $( '#'+file.id ).addClass('upload-state-done');
+        });
+
+        // 文件上传失败，现实上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        });
+
+        // 完成上传完了，成功或者失败，先删除进度条。
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').remove();
+        });
+    }
+
+    //加载上传图片
+    idcard("fileList","filePicker");
+
+    //显示二维码
+    function showqrcode(qrcode) {
+        $(".moban").show();
+        qrcode = 'http://' + window.location.hostname + '/' + qrcode;
+        $("#showqrcode").attr("src",qrcode);
+    }
+    $(".moban").on('click',function () {
+        $(".moban").hide();
+    });
+</script>
+<include file="Public:footer_new"/>
